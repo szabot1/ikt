@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 
@@ -19,7 +18,7 @@ export default function Productpage() {
   );
 }
 
-export const loader = async ({ params }) => {
+export const loader = async ({ params }: { params: any }) => {
   const res = await fetch(`https://dummyjson.com/product/${params.id}`);
   return await res.json();
 };
