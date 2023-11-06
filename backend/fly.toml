@@ -1,3 +1,8 @@
+# fly.toml app configuration file generated for cool-resonance-2794 on 2023-11-06T11:25:05+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
 app = "cool-resonance-2794"
 primary_region = "ams"
 
