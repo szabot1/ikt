@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 
 import ErrorPage from "./error-page";
 import Root from "./routes/root";
-import Products, { loader as productsLoader } from "./routes/products";
+import Weather, { loader as weatherLoader } from "./routes/weather";
 import Product, { loader as productLoader } from "./routes/product";
 
 import "./index.css";
@@ -16,9 +16,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/products",
-    element: <Products />,
-    loader: productsLoader,
+    path: "/weather",
+    element: <Weather />,
+    loader: weatherLoader,
     errorElement: <ErrorPage />,
   },
   {
