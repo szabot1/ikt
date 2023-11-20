@@ -1,5 +1,3 @@
-set AUTOCOMMIT on;
-
 create database gamestore;
 
 -- Users
