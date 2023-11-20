@@ -35,3 +35,9 @@ chmod +x /home/ikt/server/watchtower.sh
 ```bash
 docker compose -f /home/ikt/db/docker-compose.yaml up -d
 ```
+
+7. Run migrations:
+```bash
+chmod +x /home/ikt/db/migrate.sh
+/home/ikt/db/migrate.sh
+```
