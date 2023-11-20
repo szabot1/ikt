@@ -1,6 +1,6 @@
 #!/bin/bash
 
-uri="postgresql://postgres:2X3xKmt50FPnROL4mlz9nb@localhost:5432/gamestore"
+uri="postgresql://postgres:2X3xKmt50FPnROL4mlz9nb@localhost:5432/postgres"
 
 initial_id="00"
 

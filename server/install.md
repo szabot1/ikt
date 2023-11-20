@@ -3,7 +3,7 @@
 0. Install the required packages:
 ```bash
 apt update && apt upgrade
-apt install curl git
+apt install curl git postgresql-client
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
