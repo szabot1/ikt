@@ -27,6 +27,7 @@ git clone git@github.com:szabot1/ikt.git /home/ikt -b master --depth 1
 
 5. Start watchtower:
 ```bash
+chmod +x /home/ikt/server/watchtower.sh
 /home/ikt/server/watchtower.sh
 ```
 
