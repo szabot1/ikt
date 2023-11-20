@@ -33,5 +33,5 @@ chmod +x /home/ikt/server/watchtower.sh
 
 6. Start postgres and redis:
 ```bash
-docker compose -f /home/ikt/db/docker-compose.yml up -d
+docker compose -f /home/ikt/db/docker-compose.yaml up -d
 ```
