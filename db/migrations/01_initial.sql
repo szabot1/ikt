@@ -76,6 +76,20 @@ create index sellers_user_id_idx on sellers (user_id);
 create index sellers_slug_idx on sellers (slug);
 create index sellers_display_name_idx on sellers (display_name);
 
+-- Offer Type
+create table offer_types (
+    id text not null primary key,
+    slug text not null unique,
+    name text not null unique,
+    description text not null,
+    claim_instructions text not null,
+    created_at timestamp not null default current_timestamp
+);
+
+create index offer_types_id_idx on offer_types (id);
+create index offer_types_slug_idx on offer_types (slug);
+create index offer_types_name_idx on offer_types (name);
+
 -- Offers
 create table offers (
     id text not null primary key,
@@ -83,6 +97,7 @@ create table offers (
     seller_id text not null references sellers (id) on delete cascade,
     price integer not null,
     is_active boolean not null default true,
+    type text not null references offer_types (id) on delete cascade,
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp
 );
@@ -91,6 +106,9 @@ create index offers_game_id_idx on offers (game_id);
 create index offers_seller_id_idx on offers (seller_id);
 create index offers_price_idx on offers (price);
 
+-- Order Status
+create enum order_status as ('validating', 'payment_pending', 'payment_failed', 'payment_succeeded', 'fulfilled', 'refunded', 'cancelled');
+
 -- Orders
 create table orders (
     id text not null primary key,
@@ -98,7 +116,7 @@ create table orders (
     game_id text not null references games (id) on delete cascade,
     offer_id text not null references offers (id) on delete cascade,
     stripe_payment_intent_id text not null,
-    status text not null default 'pending',
+    status order_status not null default 'validating',
     created_at timestamp not null default current_timestamp
 );
 
