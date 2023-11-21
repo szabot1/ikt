@@ -25,12 +25,12 @@ for file in $files; do
     if [[ $id > $initial_id ]]; then
         echo "Running migration: $file"
         
-        if [[ $id == "00" ]]; then
+        if [[ $id == "01" ]]; then
             uri="postgresql://$db_user:$db_password@$db_host:$db_port/postgres"
-        else
-            uri="postgresql://$db_user:$db_password@$db_host:$db_port/$db_name"
+            psql $uri -c "CREATE DATABASE $db_name;"
         fi
 
+        uri="postgresql://$db_user:$db_password@$db_host:$db_port/$db_name"
         psql $uri -f $file
 
         echo $id > .migration
