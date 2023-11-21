@@ -22,3 +22,5 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+select create_database('game_store');

@@ -24,10 +24,11 @@ for file in $files; do
     id=$(echo $file | sed -n 's|migrations/\([0-9]*\)_[a-zA-Z]*.sql|\1|p')
     if [[ $id > $initial_id ]]; then
         echo "Running migration: $file"
-        
-        if [[ $id == "02" ]]; then
+
+        if [[ $id == "01" ]]; then
             uri="postgresql://$db_user:$db_password@$db_host:$db_port/postgres"
-            psql $uri -c "select create_database('$db_name');"
+            psql $uri -f $file
+            continue
         fi
 
         uri="postgresql://$db_user:$db_password@$db_host:$db_port/$db_name"
