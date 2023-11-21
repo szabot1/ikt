@@ -1,11 +1,9 @@
-drop database if exists gamestore;
-
-drop table if exists games;
-drop table if exists game_images;
-drop table if exists game_tags;
-drop table if exists offers;
-drop type if exists order_status;
-drop table if exists orders;
-drop table if exists sellers;
-drop table if exists tags;
-drop table if exists users;
+drop table if exists games cascade;
+drop table if exists game_images cascade;
+drop table if exists game_tags cascade;
+drop table if exists offers cascade;
+drop type if exists order_status cascade;
+drop table if exists orders cascade;
+drop table if exists sellers cascade;
+drop table if exists tags cascade;
+drop table if exists users cascade;
