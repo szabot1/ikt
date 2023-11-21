@@ -25,6 +25,20 @@ create table user_experience (
 
 create index user_experience_user_id_idx on user_experience (user_id);
 
+-- User Social
+create table user_social (
+    user_id text primary key not null references users (id) on delete cascade,
+    discord text,
+    steam text,
+    ubisoft text,
+    epic text,
+    origin text,
+    created_at timestamp not null default current_timestamp,
+    updated_at timestamp not null default current_timestamp
+);
+
+create index user_social_user_id_idx on user_social (user_id);
+
 -- Tags
 create table tags (
     id text not null primary key,
