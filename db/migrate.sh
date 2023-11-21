@@ -4,7 +4,7 @@ db_user="postgres"
 db_password="2X3xKmt50FPnROL4mlz9nb"
 db_host="localhost"
 db_port="5432"
-db_name="gamestore"
+db_name="game_store"
 
 initial_id="00"
 
@@ -28,6 +28,8 @@ for file in $files; do
         if [[ $id == "01" ]]; then
             uri="postgresql://$db_user:$db_password@$db_host:$db_port/postgres"
             psql $uri -f $file
+            psql $uri -c "DROP DATABASE IF EXISTS $db_name"
+            psql $uri -c "CREATE DATABASE $db_name"
             continue
         fi
 
