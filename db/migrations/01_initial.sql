@@ -105,7 +105,7 @@ create index offers_seller_id_idx on offers (seller_id);
 create index offers_price_idx on offers (price);
 
 -- Order Status
-create enum order_status as ('validating', 'payment_pending', 'payment_failed', 'payment_succeeded', 'fulfilled', 'refunded', 'cancelled');
+create type order_status as enum ('validating', 'payment_pending', 'payment_failed', 'payment_succeeded', 'fulfilled', 'refunded', 'cancelled');
 
 -- Orders
 create table orders (
