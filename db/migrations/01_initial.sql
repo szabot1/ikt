@@ -1,5 +1,3 @@
-create database gamestore;
-
 -- Users
 create table users (
     id text not null primary key,
