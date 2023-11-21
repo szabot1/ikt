@@ -21,7 +21,7 @@ create index users_stripe_customer_id_idx on users (stripe_customer_id);
 create table user_experience (
     user_id text primary key not null references users (id) on delete cascade,
     experience integer not null default 0,
-)
+);
 
 create index user_experience_user_id_idx on user_experience (user_id);
 
