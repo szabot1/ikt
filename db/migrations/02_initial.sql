@@ -1,10 +1,13 @@
+-- User Role
+create type user_role as enum ('user', 'support', 'admin');
+
 -- Users
 create table users (
     id text not null primary key,
     email text not null unique,
     username text not null unique,
     password text not null,
-    is_admin boolean not null default false,
+    role user_role not null default 'user',
     stripe_customer_id text,
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp
@@ -13,6 +16,14 @@ create table users (
 create index users_email_idx on users (email);
 create index users_username_idx on users (username);
 create index users_stripe_customer_id_idx on users (stripe_customer_id);
+
+-- User Experience
+create table user_experience (
+    user_id text primary key not null references users (id) on delete cascade,
+    experience integer not null default 0,
+)
+
+create index user_experience_user_id_idx on user_experience (user_id);
 
 -- Tags
 create table tags (
