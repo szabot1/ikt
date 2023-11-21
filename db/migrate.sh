@@ -27,7 +27,7 @@ for file in $files; do
         
         if [[ $id == "02" ]]; then
             uri="postgresql://$db_user:$db_password@$db_host:$db_port/postgres"
-            psql $uri -c "CREATE DATABASE IF NOT EXISTS $db_name;"
+            psql $uri -c "select create_database('$db_name');"
         fi
 
         uri="postgresql://$db_user:$db_password@$db_host:$db_port/$db_name"
