@@ -1,3 +1,6 @@
+using backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
@@ -8,6 +11,9 @@ builder.Services.AddCors(options =>
             policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
         });
 });
+
+builder.Services.AddDbContext<GameStoreContext>(options =>
+    options.UseNpgsql("host=168.119.125.205;database=game_store;username=postgres;password=2X3xKmt50FPnROL4mlz9nb"));
 
 builder.Services.AddControllers();
 
