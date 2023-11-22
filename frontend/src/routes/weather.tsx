@@ -8,7 +8,7 @@ type Forecast = {
   summary: string;
 };
 
-export default function ProductsPage() {
+export default function WeatherPage() {
   const data = useLoaderData() as Forecast[];
 
   return (

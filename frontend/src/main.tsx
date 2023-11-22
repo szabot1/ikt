@@ -6,6 +6,7 @@ import ErrorPage from "./error-page";
 import Root from "./routes/root";
 import Weather, { loader as weatherLoader } from "./routes/weather";
 import Product, { loader as productLoader } from "./routes/product";
+import Test, { loader as testLoader } from "./routes/test";
 
 import "./index.css";
 
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
     path: "/products/:id",
     element: <Product />,
     loader: productLoader,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/test",
+    element: <Test />,
+    loader: testLoader,
     errorElement: <ErrorPage />,
   },
 ]);
