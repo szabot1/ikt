@@ -1,43 +1,36 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import ErrorPage from "./error-page";
-import Root from "./routes/root";
-import Weather, { loader as weatherLoader } from "./routes/weather";
-import Product, { loader as productLoader } from "./routes/product";
-import Test, { loader as testLoader } from "./routes/test";
+import ErrorPage from "@/error-page";
+import MainLayout from "@/layouts/main-layout";
+
+import Root from "@/routes/root";
 
 import "./index.css";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <MainLayout />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: "/weather",
-    element: <Weather />,
-    loader: weatherLoader,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/products/:id",
-    element: <Product />,
-    loader: productLoader,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/test",
-    element: <Test />,
-    loader: testLoader,
-    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Root />,
+        errorElement: <ErrorPage />,
+      },
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );

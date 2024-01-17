@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/tags")]
 [ApiController]
 public class TagsController : ControllerBase
 {
