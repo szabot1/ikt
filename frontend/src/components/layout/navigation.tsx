@@ -6,10 +6,10 @@ export default function MainNavigation() {
       </div>
 
       <div className="flex flex-row gap-4 place-items-center justify-center">
-        <a className="cursor-pointer text-gray-100 hover:text-blue-400 transition-all duration-100">
+        <a className="cursor-pointer text-gray-100 hover:text-green-500 transition-all duration-100">
           Sign In
         </a>
-        <a className="cursor-pointer text-gray-100 hover:text-blue-400 transition-all duration-100">
+        <a className="cursor-pointer text-gray-100 hover:text-green-500 transition-all duration-100">
           Register
         </a>
       </div>
