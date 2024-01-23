@@ -1,5 +1,5 @@
 import GameList from "@/components/routes/index/game-list";
-import Search from "@/components/routes/index/search";
+import SearchForm from "@/components/routes/index/search-form";
 import ErrorPage from "@/error-page";
 import { FileRoute } from "@tanstack/react-router";
 
@@ -12,7 +12,7 @@ function Index() {
   return (
     <section className="flex flex-col gap-16 p-4 place-items-center">
       <section className="w-full max-w-full lg:max-w-2xl">
-        <Search />
+        <SearchForm />
       </section>
       <section className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-full lg:max-w-5xl">
         <PopularGames />
