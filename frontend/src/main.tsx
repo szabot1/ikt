@@ -1,20 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RouterProvider, Router } from "@tanstack/react-router";
+import { RouterProvider } from "@tanstack/react-router";
 
-import { routeTree } from "./routeTree.gen";
-
-const router = new Router({ routeTree });
 const queryClient = new QueryClient();
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
 import "./index.css";
+import { router } from "./router";
+import { AuthState } from "./lib/auth";
+
+function InnerApp() {
+  const auth: AuthState = { isAuthenticated: false };
+  return <RouterProvider router={router} context={{ auth }} />;
+}
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
@@ -22,7 +20,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <InnerApp />
       </QueryClientProvider>
     </React.StrictMode>
   );

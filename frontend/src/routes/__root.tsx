@@ -1,5 +1,10 @@
 import MainNavigation from "@/layouts/navigation";
-import { RootRoute, Outlet } from "@tanstack/react-router";
+import { AuthState } from "@/lib/auth";
+import {
+  rootRouteWithContext,
+  Outlet,
+  ScrollRestoration,
+} from "@tanstack/react-router";
 import React, { Suspense } from "react";
 
 const TanStackRouterDevtools =
@@ -20,10 +25,15 @@ const ReactQueryDevtools =
         }))
       );
 
-export const Route = new RootRoute({
+interface RouterContext {
+  auth: AuthState;
+}
+
+export const Route = rootRouteWithContext<RouterContext>()({
   component: () => (
     <main className="flex flex-col gap-16 w-full h-full">
       <MainNavigation />
+      <ScrollRestoration />
       <Outlet />
       <Suspense fallback={null}>
         <TanStackRouterDevtools />
