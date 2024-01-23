@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from "vite";
+import { TanStackRouterVite } from "@tanstack/router-vite-plugin";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
@@ -14,6 +15,6 @@ export default defineConfig(({ command, mode }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-    plugins: [react()],
+    plugins: [react(), TanStackRouterVite()],
   };
 });

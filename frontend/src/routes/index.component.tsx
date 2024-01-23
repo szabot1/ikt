@@ -1,7 +1,7 @@
 import GameList from "@/components/root/game-list";
 import Search from "@/components/root/search";
 
-export default function RootPage() {
+export const component = function Index() {
   return (
     <section className="flex flex-col gap-16 p-4 place-items-center">
       <section className="w-full max-w-full lg:max-w-2xl">
@@ -14,7 +14,7 @@ export default function RootPage() {
       </section>
     </section>
   );
-}
+};
 
 const PopularGames = () => {
   return (
