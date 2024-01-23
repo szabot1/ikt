@@ -1,4 +1,4 @@
-import MainNavigation from "@/components/layout/navigation";
+import MainNavigation from "@/layouts/navigation";
 import { RootRoute, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
 

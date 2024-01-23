@@ -1,7 +1,14 @@
-import GameList from "@/components/root/game-list";
-import Search from "@/components/root/search";
+import GameList from "@/components/routes/index/game-list";
+import Search from "@/components/routes/index/search";
+import ErrorPage from "@/error-page";
+import { FileRoute } from "@tanstack/react-router";
 
-export const component = function Index() {
+export const Route = new FileRoute("/").createRoute({
+  component: Index,
+  errorComponent: ErrorPage,
+});
+
+function Index() {
   return (
     <section className="flex flex-col gap-16 p-4 place-items-center">
       <section className="w-full max-w-full lg:max-w-2xl">
@@ -14,7 +21,7 @@ export const component = function Index() {
       </section>
     </section>
   );
-};
+}
 
 const PopularGames = () => {
   return (
