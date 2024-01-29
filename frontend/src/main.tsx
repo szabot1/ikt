@@ -7,10 +7,10 @@ const queryClient = new QueryClient();
 
 import "./index.css";
 import { router } from "./router";
-import { AuthState } from "./lib/auth";
+import { AuthProvider, useAuth } from "./lib/auth";
 
 function InnerApp() {
-  const auth: AuthState = { isAuthenticated: false };
+  const auth = useAuth();
   return <RouterProvider router={router} context={{ auth }} />;
 }
 
@@ -20,7 +20,9 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <InnerApp />
+        <AuthProvider>
+          <InnerApp />
+        </AuthProvider>
       </QueryClientProvider>
     </React.StrictMode>
   );
