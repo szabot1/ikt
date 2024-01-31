@@ -59,4 +59,25 @@ public class GamesController : ControllerBase
         [FromQuery] int page = 1,
         [FromQuery] int size = 20)
         => Ok(new List<Game>());
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Game>> GetGameById(
+        GameStoreContext context,
+        string id)
+    {
+        var game = await context.Games
+        .Where(game => game.Id == id)
+        .Include(game => game.GameImages)
+        .Include(game => game.GameTags)
+        .ThenInclude(gameTag => gameTag.Tag)
+        .Select(game => game.NormalizeForJson())
+        .FirstOrDefaultAsync();
+
+        if (game == null)
+        {
+            return NotFound();
+        }
+
+        return game;
+    }
 }

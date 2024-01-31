@@ -12,7 +12,7 @@ import { seoPath } from "@/lib/seo-path";
 
 export default function TagsDropdown() {
   const navigate = useNavigate();
-  const { data, isLoading, isError, error } = useQuery(tagsQuery);
+  const { data, isLoading } = useQuery(tagsQuery);
 
   return (
     <DropdownMenu>
@@ -22,8 +22,9 @@ export default function TagsDropdown() {
         </p>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {data &&
-          [...data, ...data].map((tag) => (
+        {!isLoading &&
+          data &&
+          data.map((tag) => (
             <DropdownMenuItem
               className="group cursor-pointer"
               key={tag.id}

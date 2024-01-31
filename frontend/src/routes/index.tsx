@@ -1,6 +1,14 @@
-import GameList from "@/components/routes/index/game-list";
+import GameList, {
+  gameToListedGame,
+} from "@/components/routes/index/game-list";
 import SearchForm from "@/components/routes/index/search-form";
 import ErrorPage from "@/error-page";
+import {
+  discountedGamesQuery,
+  featuredGamesQuery,
+  recentlyUpdatedGamesQuery,
+} from "@/lib/query/games";
+import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/").createRoute({
@@ -14,7 +22,7 @@ function Index() {
       <section className="w-full max-w-full lg:max-w-2xl">
         <SearchForm />
       </section>
-      <section className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-full lg:max-w-5xl">
+      <section className="w-full flex flex-col lg:flex-row gap-8 max-w-full lg:max-w-5xl">
         <FeaturedGames />
         <RecentlyUpdatedGames />
         <DiscountedGames />
@@ -24,55 +32,37 @@ function Index() {
 }
 
 const FeaturedGames = () => {
+  const { data, isLoading } = useQuery(featuredGamesQuery());
+
   return (
     <GameList
       title="Featured Games"
-      games={[
-        {
-          id: "fcfmf9p8szc7bvtirbv6mspn",
-          displayName: "Counter-Strike 2",
-          description:
-            "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2. A free upgrade to CS:GO, Counter-Strike 2 marks the largest technical leap in Counter-Strike’s history. Built on the Source 2 engine, Counter-Strike 2 is modernized with realistic physically-based rendering, state of the art networking, and upgraded Community Workshop tools.",
-          imageUrl:
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1627994920",
-        },
-      ]}
+      isLoaded={!isLoading && data ? true : false}
+      games={!isLoading && data ? data.map(gameToListedGame) : []}
     />
   );
 };
 
 const RecentlyUpdatedGames = () => {
+  const { data, isLoading } = useQuery(recentlyUpdatedGamesQuery());
+
   return (
     <GameList
       title="Recently Updated Games"
-      games={[
-        {
-          id: "fcfmf9p8szc7bvtirbv6mspn",
-          displayName: "Counter-Strike 2",
-          description:
-            "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2. A free upgrade to CS:GO, Counter-Strike 2 marks the largest technical leap in Counter-Strike’s history. Built on the Source 2 engine, Counter-Strike 2 is modernized with realistic physically-based rendering, state of the art networking, and upgraded Community Workshop tools.",
-          imageUrl:
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1627994920",
-        },
-      ]}
+      isLoaded={!isLoading && data ? true : false}
+      games={!isLoading && data ? data.map(gameToListedGame) : []}
     />
   );
 };
 
 const DiscountedGames = () => {
+  const { data, isLoading } = useQuery(discountedGamesQuery());
+
   return (
     <GameList
       title="Discounted Games"
-      games={[
-        {
-          id: "fcfmf9p8szc7bvtirbv6mspn",
-          displayName: "Counter-Strike 2",
-          description:
-            "For over two decades, Counter-Strike has offered an elite competitive experience, one shaped by millions of players from across the globe. And now the next chapter in the CS story is about to begin. This is Counter-Strike 2. A free upgrade to CS:GO, Counter-Strike 2 marks the largest technical leap in Counter-Strike’s history. Built on the Source 2 engine, Counter-Strike 2 is modernized with realistic physically-based rendering, state of the art networking, and upgraded Community Workshop tools.",
-          imageUrl:
-            "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg?t=1627994920",
-        },
-      ]}
+      isLoaded={!isLoading && data ? true : false}
+      games={!isLoading && data ? data.map(gameToListedGame) : []}
     />
   );
 };
