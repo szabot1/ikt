@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models;
@@ -39,14 +38,18 @@ public partial class Game
     public DateTime UpdatedAt { get; set; }
 
     [InverseProperty("Game")]
+    [JsonPropertyName("images")]
     public virtual ICollection<GameImage> GameImages { get; set; } = new List<GameImage>();
 
     [InverseProperty("Game")]
+    [JsonPropertyName("tags")]
     public virtual ICollection<GameTag> GameTags { get; set; } = new List<GameTag>();
 
     [InverseProperty("Game")]
+    [JsonIgnore]
     public virtual ICollection<Offer> Offers { get; set; } = new List<Offer>();
 
     [InverseProperty("Game")]
+    [JsonIgnore]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

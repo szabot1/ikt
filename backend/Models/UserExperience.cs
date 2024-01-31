@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models;
@@ -19,5 +20,6 @@ public partial class UserExperience
 
     [ForeignKey("UserId")]
     [InverseProperty("UserExperience")]
+    [JsonIgnore]
     public virtual User User { get; set; } = null!;
 }

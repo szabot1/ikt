@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models;
@@ -21,5 +20,6 @@ public partial class Tag
     public DateTime CreatedAt { get; set; }
 
     [InverseProperty("Tag")]
+    [JsonIgnore]
     public virtual ICollection<GameTag> GameTags { get; set; } = new List<GameTag>();
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models;
@@ -37,9 +38,11 @@ public partial class User
     public DateTime UpdatedAt { get; set; }
 
     [InverseProperty("User")]
+    [JsonIgnore]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     [InverseProperty("User")]
+    [JsonIgnore]
     public virtual ICollection<Seller> Sellers { get; set; } = new List<Seller>();
 
     [InverseProperty("User")]

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Models;
@@ -43,6 +42,7 @@ public partial class Offer
     public virtual Game Game { get; set; } = null!;
 
     [InverseProperty("Offer")]
+    [JsonIgnore]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     [ForeignKey("SellerId")]
