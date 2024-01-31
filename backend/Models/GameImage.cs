@@ -29,4 +29,10 @@ public partial class GameImage
     [ForeignKey("GameId")]
     [InverseProperty("GameImages")]
     public virtual Game Game { get; set; } = null!;
+
+    public GameImage WithoutGame()
+    {
+        Game = null!;
+        return this;
+    }
 }

@@ -30,4 +30,10 @@ public partial class GameTag
     [ForeignKey("TagId")]
     [InverseProperty("GameTags")]
     public virtual Tag Tag { get; set; } = null!;
+
+    public GameTag WithoutGame()
+    {
+        Game = null!;
+        return this;
+    }
 }

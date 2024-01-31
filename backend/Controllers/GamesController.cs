@@ -20,5 +20,6 @@ public class GamesController : ControllerBase
             .Include(game => game.GameImages)
             .Include(game => game.GameTags)
             .ThenInclude(gameTag => gameTag.Tag)
+            .Select(game => game.NormalizeForJson())
             .ToListAsync();
 }

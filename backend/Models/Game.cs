@@ -52,4 +52,19 @@ public partial class Game
     [InverseProperty("Game")]
     [JsonIgnore]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public Game NormalizeForJson()
+    {
+        if (GameImages != null)
+        {
+            GameImages = GameImages.Select(gameImage => gameImage.WithoutGame()).ToList();
+        }
+
+        if (GameTags != null)
+        {
+            GameTags = GameTags.Select(gameTag => gameTag.WithoutGame()).ToList();
+        }
+
+        return this;
+    }
 }
