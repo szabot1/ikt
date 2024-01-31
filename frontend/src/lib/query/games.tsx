@@ -1,5 +1,5 @@
-import { get } from "../fetch";
 import { Tag } from "./tags";
+import { makeQuery } from "./util";
 
 export interface Game {
   id: string;
@@ -28,23 +28,6 @@ interface GameTag {
   tagId: string;
   createdAt: string;
   tag: Tag;
-}
-
-function makeQuery(key: string[], url: string) {
-  return {
-    queryKey: key,
-    queryFn: async () => {
-      const res = await get(url);
-
-      if (res.result === "success") {
-        return res.data as Game[];
-      } else {
-        throw new Error(
-          `Backend fetch failed: status=${res.status}, error=${res.error}`
-        );
-      }
-    },
-  };
 }
 
 export function gameQuery(gameId: string) {

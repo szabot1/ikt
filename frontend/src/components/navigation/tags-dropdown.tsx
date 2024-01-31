@@ -1,4 +1,4 @@
-import { tagsQuery } from "@/lib/query/tags";
+import { Tag, tagsQuery } from "@/lib/query/tags";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -12,7 +12,9 @@ import { seoPath } from "@/lib/seo-path";
 
 export default function TagsDropdown() {
   const navigate = useNavigate();
+
   const { data, isLoading } = useQuery(tagsQuery);
+  const tags = data as Tag[] | undefined;
 
   return (
     <DropdownMenu>
@@ -23,8 +25,8 @@ export default function TagsDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {!isLoading &&
-          data &&
-          data.map((tag) => (
+          tags &&
+          tags.map((tag) => (
             <DropdownMenuItem
               className="group cursor-pointer"
               key={tag.id}

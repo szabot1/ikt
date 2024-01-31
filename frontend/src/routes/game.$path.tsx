@@ -1,19 +1,20 @@
 import ErrorPage from "@/error-page";
-import { gameQuery } from "@/lib/query/games";
+import { Game, gameQuery } from "@/lib/query/games";
 import { seoPathKey } from "@/lib/seo-path";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/game/$path").createRoute({
-  component: Game,
+  component: GameComponent,
   errorComponent: ErrorPage,
 });
 
-function Game() {
+function GameComponent() {
   const { path } = Route.useParams();
   const gameId = seoPathKey(path);
 
   const { data, isLoading } = useQuery(gameQuery(gameId));
+  const game = data as Game | undefined;
 
   return (
     <div>
@@ -22,8 +23,10 @@ function Game() {
 
       {isLoading && <p>Loading...</p>}
 
-      {!isLoading && data && (
-        <code>{JSON.stringify({ data, isLoading }, null, 2)}</code>
+      {!isLoading && game && (
+        <code className="bg-orange-400">
+          {JSON.stringify({ game, isLoading }, null, 2)}
+        </code>
       )}
     </div>
   );

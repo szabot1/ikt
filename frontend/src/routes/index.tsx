@@ -4,6 +4,7 @@ import GameList, {
 import SearchForm from "@/components/routes/index/search-form";
 import ErrorPage from "@/error-page";
 import {
+  Game,
   discountedGamesQuery,
   featuredGamesQuery,
   recentlyUpdatedGamesQuery,
@@ -33,36 +34,39 @@ function Index() {
 
 const FeaturedGames = () => {
   const { data, isLoading } = useQuery(featuredGamesQuery());
+  const games = data as Game[] | undefined;
 
   return (
     <GameList
       title="Featured Games"
-      isLoaded={!isLoading && data ? true : false}
-      games={!isLoading && data ? data.map(gameToListedGame) : []}
+      isLoaded={!isLoading && games ? true : false}
+      games={!isLoading && games ? games.map(gameToListedGame) : []}
     />
   );
 };
 
 const RecentlyUpdatedGames = () => {
   const { data, isLoading } = useQuery(recentlyUpdatedGamesQuery());
+  const games = data as Game[] | undefined;
 
   return (
     <GameList
       title="Recently Updated Games"
-      isLoaded={!isLoading && data ? true : false}
-      games={!isLoading && data ? data.map(gameToListedGame) : []}
+      isLoaded={!isLoading && games ? true : false}
+      games={!isLoading && games ? games.map(gameToListedGame) : []}
     />
   );
 };
 
 const DiscountedGames = () => {
   const { data, isLoading } = useQuery(discountedGamesQuery());
+  const games = data as Game[] | undefined;
 
   return (
     <GameList
       title="Discounted Games"
-      isLoaded={!isLoading && data ? true : false}
-      games={!isLoading && data ? data.map(gameToListedGame) : []}
+      isLoaded={!isLoading && games ? true : false}
+      games={!isLoading && games ? games.map(gameToListedGame) : []}
     />
   );
 };
