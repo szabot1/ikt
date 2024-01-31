@@ -15,7 +15,7 @@ function Index() {
         <SearchForm />
       </section>
       <section className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-full lg:max-w-5xl">
-        <PopularGames />
+        <FeaturedGames />
         <RecentlyUpdatedGames />
         <DiscountedGames />
       </section>
@@ -23,10 +23,10 @@ function Index() {
   );
 }
 
-const PopularGames = () => {
+const FeaturedGames = () => {
   return (
     <GameList
-      title="Popular Games"
+      title="Featured Games"
       games={[
         {
           id: "fcfmf9p8szc7bvtirbv6mspn",

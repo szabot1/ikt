@@ -20,7 +20,10 @@ export default function GameList({ title, games }: Props) {
       <Table>
         <TableBody>
           {games.map((game) => (
-            <TableRow className="hover:bg-transparent cursor-pointer hover:text-green-500">
+            <TableRow
+              className="hover:bg-transparent cursor-pointer hover:text-green-500"
+              key={game.id}
+            >
               <TableCell>
                 <img src={game.imageUrl} />
               </TableCell>

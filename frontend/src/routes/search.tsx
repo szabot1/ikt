@@ -10,19 +10,11 @@ export const Route = new FileRoute("/search").createRoute({
   component: Search,
   errorComponent: ErrorPage,
   validateSearch: (search) => searchSchema.parse(search),
-  beforeLoad: async ({ search }) => {
-    if (search.q.length === 0) {
-      throw redirect({ to: "/" });
-    }
-  },
 });
 
 function Search() {
   const { q } = Route.useSearch();
+  const showResults = q.length > 0;
 
-  return (
-    <>
-      <p>Input: {q}</p>
-    </>
-  );
+  return <>{showResults && <p>Input: {q}</p>}</>;
 }
