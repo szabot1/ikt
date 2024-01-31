@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set appsettings.json
         run: echo $DOTNET_APP_SETTINGS > backend/appsettings.json
+        env:
+          DOTNET_APP_SETTINGS: ${{ secrets.DOTNET_APP_SETTINGS }}
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         working-directory: backend
