@@ -30,7 +30,7 @@ function TagComponent() {
       {isTagLoading && <p>Tag loading...</p>}
 
       {!isTagLoading && tag && (
-        <code className="bg-red-400">
+        <code className="bg-red-400 whitespace-pre-wrap">
           {JSON.stringify({ tag, isTagLoading }, null, 2)}
         </code>
       )}
@@ -38,7 +38,7 @@ function TagComponent() {
       {isGamesLoading && <p>Games loading...</p>}
 
       {!isGamesLoading && games && (
-        <code className="bg-green-400">
+        <code className="bg-green-400 whitespace-pre-wrap">
           {JSON.stringify({ games, isGamesLoading }, null, 2)}
         </code>
       )}

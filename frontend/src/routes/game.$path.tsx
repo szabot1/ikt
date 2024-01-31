@@ -24,7 +24,7 @@ function GameComponent() {
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && game && (
-        <code className="bg-orange-400">
+        <code className="bg-orange-400 whitespace-pre-wrap">
           {JSON.stringify({ game, isLoading }, null, 2)}
         </code>
       )}
