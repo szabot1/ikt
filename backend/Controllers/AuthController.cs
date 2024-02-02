@@ -104,7 +104,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(
         [FromServices] GameStoreContext context,
-        [FromServices] JwtConfig jwtConfig,
+        JwtConfig jwtConfig,
         [FromBody] LoginRequest request)
     {
         var user = await context.Users.FirstOrDefaultAsync(user => user.Email == request.Email);
@@ -165,7 +165,7 @@ public class AuthController : ControllerBase
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh(
         [FromServices] GameStoreContext context,
-        [FromServices] JwtConfig jwtConfig,
+        JwtConfig jwtConfig,
         [FromBody] RefreshRequest request)
     {
         var token = await context.UserRefreshTokens
