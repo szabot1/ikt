@@ -16,13 +16,11 @@ public class AuthController : ControllerBase
 {
     private static readonly List<IValidator> EmailValidators = new()
     {
-        Required,
         Email
     };
 
     private static readonly List<IValidator> UsernameValidators = new()
     {
-        Required,
         MinLength(3),
         MaxLength(32),
         Matches("^[a-zA-Z0-9_]+$", "Username can only contain letters, numbers, and underscores")
@@ -30,7 +28,6 @@ public class AuthController : ControllerBase
 
     private static readonly List<IValidator> PasswordValidators = new()
     {
-        Required,
         MinLength(8),
         MaxLength(64),
         HasLowercase,
