@@ -21,39 +21,39 @@ public class Validation
             .ToList();
     }
 
-    public static IValidator MinLength(int length) => new ProxyingValidator(
+    public static IValidator MinLength(int length, string field = "Value") => new ProxyingValidator(
         value => value.Length >= length,
-        $"Value must be at least {length} characters long"
+        $"{field} must be at least {length} characters long"
         );
 
-    public static IValidator MaxLength(int length) => new ProxyingValidator(
+    public static IValidator MaxLength(int length, string field = "Value") => new ProxyingValidator(
         value => value.Length <= length,
-        $"Value must be at most {length} characters long"
+        $"{field} must be at most {length} characters long"
         );
 
     public static readonly IValidator Email = new ProxyingValidator(
         value => new EmailAddressAttribute().IsValid(value),
         "Invalid email");
 
-    public static readonly IValidator Required = new ProxyingValidator(
+    public static IValidator Required(string field = "Value") => new ProxyingValidator(
         value => !string.IsNullOrWhiteSpace(value),
-        "Value is required");
+        $"{field} is required");
 
-    public static readonly IValidator HasLowercase = new ProxyingValidator(
+    public static IValidator HasLowercase(string field = "Value") => new ProxyingValidator(
         value => value.Any(char.IsLower),
-        "Value must contain at least one lowercase letter");
+        $"{field} must contain at least one lowercase letter");
 
-    public static readonly IValidator HasUppercase = new ProxyingValidator(
+    public static IValidator HasUppercase(string field = "Value") => new ProxyingValidator(
         value => value.Any(char.IsUpper),
-        "Value must contain at least one uppercase letter");
+        $"{field} must contain at least one uppercase letter");
 
-    public static readonly IValidator HasDigit = new ProxyingValidator(
+    public static IValidator HasDigit(string field = "Value") => new ProxyingValidator(
         value => value.Any(char.IsDigit),
-        "Value must contain at least one digit");
+        $"{field} must contain at least one digit");
 
-    public static readonly IValidator HasSpecial = new ProxyingValidator(
+    public static IValidator HasSpecial(string field = "Value") => new ProxyingValidator(
         value => value.Any(char.IsPunctuation) || value.Any(char.IsSymbol),
-        "Value must contain at least one special character");
+        $"{field} must contain at least one special character");
 
     public static IValidator Matches(string pattern, string errorMessage) => new ProxyingValidator(
         value => Regex.IsMatch(value, pattern),

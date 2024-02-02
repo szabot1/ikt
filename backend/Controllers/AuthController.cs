@@ -21,19 +21,19 @@ public class AuthController : ControllerBase
 
     private static readonly List<IValidator> UsernameValidators = new()
     {
-        MinLength(3),
-        MaxLength(32),
+        MinLength(3, "Username"),
+        MaxLength(32, "Username"),
         Matches("^[a-zA-Z0-9_]+$", "Username can only contain letters, numbers, and underscores")
     };
 
     private static readonly List<IValidator> PasswordValidators = new()
     {
-        MinLength(8),
-        MaxLength(64),
-        HasLowercase,
-        HasUppercase,
-        HasDigit,
-        HasSpecial
+        MinLength(8, "Password"),
+        MaxLength(64, "Password"),
+        HasLowercase("Password"),
+        HasUppercase("Password"),
+        HasDigit("Password"),
+        HasSpecial("Password")
     };
 
     private readonly JwtConfig _jwtConfig;
