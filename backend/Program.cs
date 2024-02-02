@@ -15,6 +15,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<GameStoreContext>(options =>
     options.UseNpgsql("host=168.119.125.205;database=game_store;username=postgres;password=2X3xKmt50FPnROL4mlz9nb"));
 
+builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();

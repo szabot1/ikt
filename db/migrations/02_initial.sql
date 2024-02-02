@@ -17,6 +17,15 @@ create index users_email_idx on users (email);
 create index users_username_idx on users (username);
 create index users_stripe_customer_id_idx on users (stripe_customer_id);
 
+-- User Refresh Tokens
+create table user_refresh_tokens (
+    token text not null primary key,
+    user_id text not null references users (id) on delete cascade,
+    created_at timestamp not null default current_timestamp
+);
+
+create index user_refresh_tokens_user_id_idx on user_refresh_tokens (user_id);
+
 -- User Experience
 create table user_experience (
     user_id text primary key not null references users (id) on delete cascade,

@@ -46,6 +46,10 @@ public partial class User
     public virtual ICollection<Seller> Sellers { get; set; } = new List<Seller>();
 
     [InverseProperty("User")]
+    [JsonIgnore]
+    public virtual ICollection<UserRefreshToken> UserRefreshTokens { get; set; } = new List<UserRefreshToken>();
+
+    [InverseProperty("User")]
     public virtual UserExperience? UserExperience { get; set; }
 
     [InverseProperty("User")]

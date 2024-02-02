@@ -32,6 +32,8 @@ public partial class GameStoreContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+
     public virtual DbSet<UserExperience> UserExperiences { get; set; }
 
     public virtual DbSet<UserSocial> UserSocials { get; set; }
@@ -129,6 +131,15 @@ public partial class GameStoreContext : DbContext
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+        });
+
+        modelBuilder.Entity<UserRefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Token).HasName("user_refresh_tokens_pkey");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserRefreshTokens).HasConstraintName("user_refresh_tokens_user_id_fkey");
         });
 
         modelBuilder.Entity<UserExperience>(entity =>
