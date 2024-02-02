@@ -4,6 +4,7 @@ using backend.Utils;
 using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Visus.Cuid;
 using static backend.Utils.Validation;
 
@@ -40,9 +41,9 @@ public class AuthController : ControllerBase
 
     private readonly JwtConfig _jwtConfig;
 
-    public AuthController(JwtConfig jwtConfig)
+    public AuthController(IOptions<JwtConfig> jwtConfig)
     {
-        _jwtConfig = jwtConfig;
+        _jwtConfig = jwtConfig.Value;
     }
 
     [HttpPost("register")]
