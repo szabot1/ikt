@@ -38,6 +38,13 @@ public class AuthController : ControllerBase
         HasSpecial
     };
 
+    private readonly JwtConfig _jwtConfig;
+
+    public AuthController(JwtConfig jwtConfig)
+    {
+        _jwtConfig = jwtConfig;
+    }
+
     [HttpPost("register")]
     public async Task<IActionResult> Register(
         [FromServices] GameStoreContext context,
@@ -104,7 +111,6 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(
         [FromServices] GameStoreContext context,
-        JwtConfig jwtConfig,
         [FromBody] LoginRequest request)
     {
         var user = await context.Users.FirstOrDefaultAsync(user => user.Email == request.Email);
@@ -138,7 +144,7 @@ public class AuthController : ControllerBase
             });
             await context.SaveChangesAsync();
 
-            var accessToken = Token.GenerateAccessToken(jwtConfig, user);
+            var accessToken = Token.GenerateAccessToken(_jwtConfig, user);
 
             return Ok(new
             {
@@ -165,7 +171,6 @@ public class AuthController : ControllerBase
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh(
         [FromServices] GameStoreContext context,
-        JwtConfig jwtConfig,
         [FromBody] RefreshRequest request)
     {
         var token = await context.UserRefreshTokens
@@ -186,7 +191,7 @@ public class AuthController : ControllerBase
 
         try
         {
-            var accessToken = Token.GenerateAccessToken(jwtConfig, token.User);
+            var accessToken = Token.GenerateAccessToken(_jwtConfig, token.User);
 
             return Ok(new
             {
