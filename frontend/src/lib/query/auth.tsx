@@ -5,6 +5,33 @@ import {
   UseFormSetError,
 } from "react-hook-form";
 import { post } from "../fetch";
+import { makeQuery } from "./util";
+
+export async function logout() {
+  await post(`${import.meta.env.VITE_BACKEND_PROD_URL}/api/auth/logout`, {
+    accessToken: localStorage.getItem("accessToken"),
+    refreshToken: localStorage.getItem("refreshToken"),
+  });
+
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+}
+
+export type UserRole = "user" | "support" | "admin";
+
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+  role: UserRole;
+};
+
+export function userInfoQuery() {
+  return makeQuery(
+    ["userInfo"],
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/auth/user-info`
+  );
+}
 
 export type ErrorMap = {
   [key: string]: string[];

@@ -46,6 +46,61 @@ public class AuthController : ControllerBase
     }
 
     [Authorize]
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout(
+        [FromServices] GameStoreContext context,
+        [FromBody] LogoutRequest request)
+    {
+        var token = await context.UserRefreshTokens
+            .FirstOrDefaultAsync(token => token.Token == request.RefreshToken);
+
+        if (token == null)
+        {
+            return Unauthorized(new
+            {
+                success = false,
+                errors = new Dictionary<string, List<string>>
+                {
+                    { "refreshToken", new List<string> { "Invalid refresh token" } }
+                }
+            });
+        }
+
+        if (token.UserId != ((User)HttpContext.Items["User"]!).Id)
+        {
+            return Unauthorized(new
+            {
+                success = false,
+                errors = new Dictionary<string, List<string>>
+                {
+                    { "refreshToken", new List<string> { "Invalid refresh token" } }
+                }
+            });
+        }
+
+        try
+        {
+            context.UserRefreshTokens.Remove(token);
+            await context.SaveChangesAsync();
+
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, new
+            {
+                success = false,
+                errors = new Dictionary<string, List<string>>
+                {
+                    { "server", new List<string> { e.Message } }
+                }
+            });
+        }
+    }
+
+    public record LogoutRequest(string AccessToken, string RefreshToken);
+
+    [Authorize]
     [HttpGet("user-info")]
     public IActionResult UserInfo()
     {
