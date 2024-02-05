@@ -82,8 +82,8 @@ public class AuthController : ControllerBase
                 Email = request.Email,
                 Username = request.Username,
                 Password = Argon2.Hash(request.Password),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified),
+                UpdatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified)
             };
 
             context.Users.Add(user);
@@ -138,7 +138,7 @@ public class AuthController : ControllerBase
             {
                 Token = refreshToken,
                 UserId = user.Id,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified)
             });
             await context.SaveChangesAsync();
 

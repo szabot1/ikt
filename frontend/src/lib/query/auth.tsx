@@ -70,6 +70,32 @@ export async function login(login: Login): Promise<LoginResult> {
   }
 }
 
+export type Refresh = {
+  refreshToken: string;
+};
+
+export type RefreshResult =
+  | { success: true; accessToken: string }
+  | { success: false; errors: ErrorMap };
+
+export async function refresh(refresh: Refresh): Promise<RefreshResult> {
+  const res = await post(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/auth/refresh`,
+    refresh
+  );
+
+  if (res.result === "success") {
+    return { success: true, accessToken: (res.data as any).accessToken };
+  } else if (res.jsonError) {
+    return { success: false, errors: (res.error as any).errors };
+  } else {
+    return {
+      success: false,
+      errors: { general: ["An unknown error occurred"] },
+    };
+  }
+}
+
 export function setFormError<T extends FieldValues>(
   setError: UseFormSetError<T>,
   clearErrors: UseFormClearErrors<T>,

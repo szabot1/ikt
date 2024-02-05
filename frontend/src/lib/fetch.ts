@@ -1,3 +1,6 @@
+import { setSession } from "./auth";
+import { Refresh, refresh } from "./query/auth";
+
 export type FetchResponse<T> =
   | { result: "success"; data: T }
   | { result: "error"; status: number; jsonError: true; error: any }
@@ -43,6 +46,10 @@ export async function fetch<T>(
   const accessToken =
     typeof window !== "undefined" && window.localStorage.getItem("accessToken");
 
+  const refreshToken =
+    typeof window !== "undefined" &&
+    window.localStorage.getItem("refreshToken");
+
   const headers = {
     "Content-Type": "application/json",
     ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
@@ -54,15 +61,25 @@ export async function fetch<T>(
     if (response.ok) {
       const data = await response.json();
       return { result: "success", data };
-    } else {
-      const error = await response.json();
-      return {
-        result: "error",
-        status: response.status,
-        jsonError: true,
-        error,
-      };
+    } else if (response.status === 401 && accessToken && refreshToken) {
+      const response = await refresh({
+        refreshToken,
+      } as Refresh);
+
+      if (response.success) {
+        setSession(response.accessToken, refreshToken);
+        return fetch(url, options);
+      }
     }
+
+    const error = await response.json();
+
+    return {
+      result: "error",
+      status: response.status,
+      jsonError: true,
+      error,
+    };
   } catch (error) {
     return {
       result: "error",
