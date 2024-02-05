@@ -130,20 +130,26 @@ public class AuthController : ControllerBase
     {
         var user = await context.Users.FirstOrDefaultAsync(user => user.Email == request.Email);
 
-        if (user == null || !Argon2.Verify(user.Password, request.Password))
+        if (user == null)
         {
-            if (user == null)
-                // This is to prevent user enumeration attacks by making sure
-                //  the request takes the same amount of time regardless of whether the user exists.
-                Argon2.Verify("password", "password");
-
             return Unauthorized(new
             {
                 success = false,
                 errors = new Dictionary<string, List<string>>
                 {
-                    { "email", new List<string> { "Invalid email or password" } },
-                    { "password", new List<string> { "Invalid email or password" } }
+                    { "email", new List<string> { "User not found" } }
+                }
+            });
+        }
+
+        if (!Argon2.Verify(user.Password, request.Password))
+        {
+            return Unauthorized(new
+            {
+                success = false,
+                errors = new Dictionary<string, List<string>>
+                {
+                    { "password", new List<string> { "Invalid password" } }
                 }
             });
         }

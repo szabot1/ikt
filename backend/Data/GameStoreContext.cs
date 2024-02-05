@@ -303,6 +303,7 @@ public partial class GameStoreContext : DbContext
                 .HasColumnName("created_at");
             entity.Property(e => e.Email).HasColumnName("email");
             entity.Property(e => e.Password).HasColumnName("password");
+            entity.Property(e => e.Role).HasColumnName("role");
             entity.Property(e => e.StripeCustomerId).HasColumnName("stripe_customer_id");
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
