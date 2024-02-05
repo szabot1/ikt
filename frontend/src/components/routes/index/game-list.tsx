@@ -35,14 +35,14 @@ export default function GameList({ title, isLoaded, games }: Props) {
 
   return (
     <div
-      className={`basis-1/3 grow rounded-xl bg-transparent border-2 border-gray-700 px-4 py-2 text-center space-y-4 ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
+      className={`basis-1/3 grow rounded-xl bg-transparent border-2 border-zinc-700 px-4 py-2 text-center space-y-4 ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
     >
       <span className="font-semibold">{title}</span>
 
       {!isLoaded ? (
-        <span className="text-gray-400">Loading...</span>
+        <span className="text-zinc-400">Loading...</span>
       ) : games.length === 0 ? (
-        <span className="text-gray-400">No games found.</span>
+        <span className="text-zinc-400">No games found.</span>
       ) : (
         <Table>
           <TableBody>
