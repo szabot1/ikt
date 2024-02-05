@@ -56,7 +56,7 @@ public class AuthController : ControllerBase
             id = user.Id,
             email = user.Email,
             username = user.Username,
-            role = user.Role
+            role = user.Role.ToString()
         });
     }
 

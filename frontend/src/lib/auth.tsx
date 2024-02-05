@@ -21,14 +21,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     load("refreshToken")
   );
 
-  const isAuthenticated = !!accessToken;
-
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated,
+        get ["isAuthenticated"]() {
+          return !!accessToken;
+        },
+
         setAccessToken: wrapSetter("accessToken", setAccessToken),
         accessToken,
+
         setRefreshToken: wrapSetter("refreshToken", setRefreshToken),
         refreshToken,
       }}

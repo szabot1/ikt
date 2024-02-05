@@ -29,6 +29,7 @@ type LoginInputs = {
 };
 
 function SignIn() {
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const { redirect } = Route.useSearch();
@@ -54,6 +55,10 @@ function SignIn() {
     } as Login).then((res) => {
       if (res.success) {
         setSession(res.accessToken, res.refreshToken);
+
+        auth.setAccessToken(res.accessToken);
+        auth.setRefreshToken(res.refreshToken);
+
         navigate({
           to: redirect || "/",
         });
