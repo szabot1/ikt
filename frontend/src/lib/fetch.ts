@@ -1,4 +1,4 @@
-import { setSession } from "./auth";
+import { clearSession, setSession } from "./auth";
 import { Refresh, refresh } from "./query/auth";
 
 export type FetchResponse<T> =
@@ -70,6 +70,8 @@ export async function fetch<T>(
         setSession(response.accessToken, refreshToken);
 
         return fetch(url, options);
+      } else {
+        clearSession();
       }
     }
 

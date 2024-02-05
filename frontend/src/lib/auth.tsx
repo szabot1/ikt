@@ -50,6 +50,11 @@ export function setSession(accessToken: string, refreshToken: string) {
   persist("refreshToken", refreshToken);
 }
 
+export function clearSession() {
+  persist("accessToken", null);
+  persist("refreshToken", null);
+}
+
 function wrapSetter(key: string, setter: (value: string | null) => void) {
   return (value: string | null) => {
     persist(key, value);

@@ -56,7 +56,29 @@ export default function TagsDropdown() {
             Settings
           </span>
         </DropdownMenuItem>
+
+        {(userInfo.role === "support" || userInfo.role === "admin") && (
+          <>
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem className="group cursor-pointer">
+              <span className="text-blue-500 group-hover:text-blue-400 transition-all duration-100">
+                Tickets
+              </span>
+            </DropdownMenuItem>
+          </>
+        )}
+
+        {userInfo.role === "admin" && (
+          <DropdownMenuItem className="group cursor-pointer">
+            <span className="text-blue-500 group-hover:text-blue-400 transition-all duration-100">
+              Admin
+            </span>
+          </DropdownMenuItem>
+        )}
+
         <DropdownMenuSeparator />
+
         <DropdownMenuItem
           className="group cursor-pointer"
           onClick={() => {
