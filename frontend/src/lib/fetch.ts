@@ -68,6 +68,7 @@ export async function fetch<T>(
 
       if (response.success) {
         setSession(response.accessToken, refreshToken);
+
         return fetch(url, options);
       }
     }

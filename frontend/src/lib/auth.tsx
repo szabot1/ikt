@@ -2,37 +2,28 @@ import React, { useContext } from "react";
 import { createContext, useState } from "react";
 
 export type AuthState = {
-  isAuthenticated: boolean;
-
-  setAccessToken: (accessToken: string | null) => void;
   accessToken: string | null;
-
-  setRefreshToken: (refreshToken: string | null) => void;
   refreshToken: string | null;
+  isAuthenticated: boolean;
 };
 
 const AuthContext = createContext<AuthState | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [accessToken, setAccessToken] = useState<string | null>(
-    load("accessToken")
-  );
-  const [refreshToken, setRefreshToken] = useState<string | null>(
-    load("refreshToken")
-  );
-
   return (
     <AuthContext.Provider
       value={{
-        get ["isAuthenticated"]() {
-          return !!accessToken;
+        get ["accessToken"]() {
+          return load("accessToken");
         },
 
-        setAccessToken: wrapSetter("accessToken", setAccessToken),
-        accessToken,
+        get ["refreshToken"]() {
+          return load("refreshToken");
+        },
 
-        setRefreshToken: wrapSetter("refreshToken", setRefreshToken),
-        refreshToken,
+        get ["isAuthenticated"]() {
+          return !!load("accessToken");
+        },
       }}
     >
       {children}
@@ -57,15 +48,6 @@ export function useAuth() {
 export function setSession(accessToken: string, refreshToken: string) {
   persist("accessToken", accessToken);
   persist("refreshToken", refreshToken);
-
-  try {
-    const auth = useOptionalAuth();
-
-    if (auth) {
-      auth.setAccessToken(accessToken);
-      auth.setRefreshToken(refreshToken);
-    }
-  } catch {}
 }
 
 function wrapSetter(key: string, setter: (value: string | null) => void) {

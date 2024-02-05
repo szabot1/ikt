@@ -5,14 +5,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuth } from "@/lib/auth";
 import { User as UserInfo, logout, userInfoQuery } from "@/lib/query/auth";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import md5 from "md5";
 
 export default function TagsDropdown() {
-  const auth = useAuth();
   const navigate = useNavigate();
 
   const { data, isLoading } = useQuery(userInfoQuery());
@@ -63,9 +61,6 @@ export default function TagsDropdown() {
           className="group cursor-pointer"
           onClick={() => {
             logout().then(() => {
-              auth.setAccessToken(null);
-              auth.setRefreshToken(null);
-
               navigate({
                 to: "/",
               });
