@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using backend.Data;
 using backend.Models;
 using backend.Utils;
@@ -41,6 +42,17 @@ public class AuthController : ControllerBase
     public AuthController(IOptions<JwtConfig> jwtConfig)
     {
         _jwtConfig = jwtConfig.Value;
+    }
+
+    [HttpGet("user-info")]
+    public IActionResult UserInfo([FromHeader] string authorization)
+    {
+        if (AuthenticationHeaderValue.TryParse(authorization, out var headerValue))
+        {
+
+        }
+
+        return Ok();
     }
 
     [HttpPost("register")]
