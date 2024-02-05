@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import md5 from "md5";
 
-export default function TagsDropdown() {
+export default function ProfileDropdown() {
   const navigate = useNavigate();
 
   const { data, isLoading } = useQuery(userInfoQuery());
