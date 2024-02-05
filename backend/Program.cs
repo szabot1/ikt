@@ -18,7 +18,9 @@ builder.Services.AddCors(options =>
 
 var dbBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
 dbBuilder.MapEnum<UserRole>();
-builder.Services.AddDbContext<GameStoreContext>(options => options.UseNpgsql(dbBuilder.Build()));
+var db = dbBuilder.Build();
+
+builder.Services.AddDbContext<GameStoreContext>(options => options.UseNpgsql(db));
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
 
