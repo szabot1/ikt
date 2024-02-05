@@ -1,10 +1,12 @@
 import ErrorPage from "@/error-page";
-import { useAuth } from "@/lib/auth";
+import { setSession, useAuth } from "@/lib/auth";
 import { FileRoute, Link, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { cn } from "@/lib/style";
+import { Loader2 } from "lucide-react";
+import { Login, login, setFormError } from "@/lib/query/auth";
 
 const signInSchema = z.object({
   redirect: z.string().optional(),
@@ -27,7 +29,6 @@ type LoginInputs = {
 };
 
 function SignIn() {
-  const auth = useAuth();
   const navigate = useNavigate();
 
   const { redirect } = Route.useSearch();
@@ -38,10 +39,34 @@ function SignIn() {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm<LoginInputs>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const [generalError, setGeneralError] = useState<string | null>(null);
+
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
+    setIsSubmitting(true);
+
+    login({
+      email: data.email,
+      password: data.password,
+    } as Login).then((res) => {
+      if (res.success) {
+        setSession(res.accessToken, res.refreshToken);
+        navigate({
+          to: redirect || "/",
+        });
+      } else {
+        setGeneralError(res.errors.general?.[0]);
+
+        setFormError(setError, clearErrors, "email", res.errors.email);
+        setFormError(setError, clearErrors, "password", res.errors.password);
+
+        setIsSubmitting(false);
+      }
+    });
+  };
 
   return (
     <section className="grow flex items-center justify-center">
@@ -90,11 +115,19 @@ function SignIn() {
 
           <button
             type="submit"
-            className="py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200"
+            className="py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:hover:bg-green-700 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
+            {isSubmitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             Continue
           </button>
         </form>
+
+        {generalError && (
+          <div className="text-red-500 text-sm my-4 text-center px-4 py-2 border-2 border-red-500 rounded-md">
+            {generalError}
+          </div>
+        )}
 
         <div className="flex flex-row gap-2 mt-4">
           <span>Don't have an account?</span>

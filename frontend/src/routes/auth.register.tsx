@@ -5,6 +5,12 @@ import { useState } from "react";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { cn } from "@/lib/style";
+import { Loader2 } from "lucide-react";
+import {
+  setFormError,
+  register as registerFn,
+  Register as TRegister,
+} from "@/lib/query/auth";
 
 const registerSchema = z.object({
   redirect: z.string().optional(),
@@ -41,10 +47,44 @@ function Register() {
     handleSubmit,
     watch,
     setError,
+    clearErrors,
     formState: { errors },
   } = useForm<RegisterInputs>();
 
-  const onSubmit: SubmitHandler<RegisterInputs> = (data) => console.log(data);
+  const [generalError, setGeneralError] = useState<string | null>(null);
+
+  const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
+    setIsSubmitting(true);
+
+    registerFn({
+      email: data.email,
+      username: data.username,
+      password: data.password,
+    } as TRegister).then((res) => {
+      if (res.success) {
+        navigate({
+          to: "/auth/signin",
+          search: {
+            redirect,
+          },
+        });
+      } else {
+        setGeneralError(res.errors.server?.[0]);
+
+        setFormError(setError, clearErrors, "email", res.errors.email);
+        setFormError(setError, clearErrors, "username", res.errors.username);
+        setFormError(setError, clearErrors, "password", res.errors.password);
+        setFormError(
+          setError,
+          clearErrors,
+          "confirmPassword",
+          res.errors.confirmPassword
+        );
+
+        setIsSubmitting(false);
+      }
+    });
+  };
 
   return (
     <section className="grow flex items-center justify-center">
@@ -117,7 +157,7 @@ function Register() {
                 errors.confirmPassword && "!border-red-500",
                 "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
               )}
-              type="confirmPassword"
+              type="password"
               placeholder="Confirm Password"
               {...register("confirmPassword", {
                 required: true,
@@ -136,11 +176,19 @@ function Register() {
 
           <button
             type="submit"
-            className="py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200"
+            className="py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center disabled:opacity-50 disabled:hover:bg-green-700 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
+            {isSubmitting && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             Continue
           </button>
         </form>
+
+        {generalError && (
+          <div className="text-red-500 text-sm my-4 text-center px-4 py-2 border-2 border-red-500 rounded-md">
+            {generalError}
+          </div>
+        )}
 
         <div className="flex flex-row gap-2 mt-4">
           <span>Already have an account?</span>

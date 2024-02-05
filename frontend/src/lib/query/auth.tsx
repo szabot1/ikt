@@ -1,3 +1,9 @@
+import {
+  FieldValues,
+  Path,
+  UseFormClearErrors,
+  UseFormSetError,
+} from "react-hook-form";
 import { post } from "../fetch";
 
 export type ErrorMap = {
@@ -24,7 +30,7 @@ export async function register(register: Register): Promise<RegisterResult> {
   if (res.result === "success") {
     return { success: true, errors: {} };
   } else if (res.jsonError) {
-    return { success: false, errors: (res as any).errors };
+    return { success: false, errors: (res.error as any).errors };
   } else {
     return {
       success: false,
@@ -38,10 +44,9 @@ export type Login = {
   password: string;
 };
 
-export type LoginResult = {
-  success: boolean;
-  errors: ErrorMap;
-};
+export type LoginResult =
+  | { success: true; accessToken: string; refreshToken: string }
+  | { success: false; errors: ErrorMap };
 
 export async function login(login: Login): Promise<LoginResult> {
   const res = await post(
@@ -50,13 +55,31 @@ export async function login(login: Login): Promise<LoginResult> {
   );
 
   if (res.result === "success") {
-    return { success: true, errors: {} };
+    return {
+      success: true,
+      accessToken: (res.data as any).accessToken,
+      refreshToken: (res.data as any).refreshToken,
+    };
   } else if (res.jsonError) {
-    return { success: false, errors: (res as any).errors };
+    return { success: false, errors: (res.error as any).errors };
   } else {
     return {
       success: false,
       errors: { general: ["An unknown error occurred"] },
     };
   }
+}
+
+export function setFormError<T extends FieldValues>(
+  setError: UseFormSetError<T>,
+  clearErrors: UseFormClearErrors<T>,
+  name: Path<T>,
+  errors: string[] | undefined
+) {
+  if (!errors || errors.length === 0) {
+    clearErrors(name);
+    return;
+  }
+
+  setError(name, { message: errors[0] });
 }

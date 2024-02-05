@@ -52,6 +52,18 @@ export function useAuth() {
   return auth;
 }
 
+export function setSession(accessToken: string, refreshToken: string) {
+  persist("accessToken", accessToken);
+  persist("refreshToken", refreshToken);
+
+  const auth = useOptionalAuth();
+
+  if (auth) {
+    auth.setAccessToken(accessToken);
+    auth.setRefreshToken(refreshToken);
+  }
+}
+
 function wrapSetter(key: string, setter: (value: string | null) => void) {
   return (value: string | null) => {
     persist(key, value);
