@@ -159,6 +159,24 @@ public class AuthController : ControllerBase
             };
 
             context.Users.Add(user);
+
+            var experience = new UserExperience
+            {
+                UserId = user.Id,
+                Experience = 0
+            };
+
+            context.UserExperiences.Add(experience);
+
+            var social = new UserSocial
+            {
+                UserId = user.Id,
+                CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified),
+                UpdatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified)
+            };
+
+            context.UserSocials.Add(social);
+
             await context.SaveChangesAsync();
 
             return Ok();
@@ -170,7 +188,8 @@ public class AuthController : ControllerBase
                 success = false,
                 errors = new Dictionary<string, List<string>>
                 {
-                    { "server", new List<string> { e.Message } }
+                    { "server", new List<string> { e.Message
+} }
                 }
             });
         }
