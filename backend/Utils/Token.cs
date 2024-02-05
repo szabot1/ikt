@@ -21,7 +21,7 @@ public class Token
         return JwtBuilder.Create()
             .WithAlgorithm(new HMACSHA256Algorithm())
             .WithSecret(jwtConfig.Key)
-            .AddClaim("exp", DateTimeOffset.UtcNow.AddHours(15).ToUnixTimeSeconds())
+            .AddClaim("exp", DateTimeOffset.UtcNow.AddMinutes(15).ToUnixTimeSeconds())
             .AddClaim("sub", user.Id)
             .AddClaim("username", user.Username)
             .AddClaim("email", user.Email)

@@ -56,12 +56,14 @@ export function setSession(accessToken: string, refreshToken: string) {
   persist("accessToken", accessToken);
   persist("refreshToken", refreshToken);
 
-  const auth = useOptionalAuth();
+  try {
+    const auth = useOptionalAuth();
 
-  if (auth) {
-    auth.setAccessToken(accessToken);
-    auth.setRefreshToken(refreshToken);
-  }
+    if (auth) {
+      auth.setAccessToken(accessToken);
+      auth.setRefreshToken(refreshToken);
+    }
+  } catch {}
 }
 
 function wrapSetter(key: string, setter: (value: string | null) => void) {
