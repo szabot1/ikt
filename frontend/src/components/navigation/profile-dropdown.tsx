@@ -61,9 +61,7 @@ export default function TagsDropdown() {
           className="group cursor-pointer"
           onClick={() => {
             logout().then(() => {
-              navigate({
-                to: "/",
-              });
+              window.location.reload();
             });
           }}
         >
