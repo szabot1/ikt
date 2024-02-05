@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using backend.Models;
 
 namespace backend.Data;
@@ -279,6 +277,8 @@ public partial class GameStoreContext : DbContext
                 .HasColumnName("created_at");
             entity.Property(e => e.Name).HasColumnName("name");
         });
+
+        modelBuilder.HasPostgresEnum<UserRole>();
 
         modelBuilder.Entity<User>(entity =>
         {

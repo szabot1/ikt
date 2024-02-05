@@ -3,6 +3,7 @@ using backend.Data;
 using backend.Models;
 using backend.Utils;
 using Isopoh.Cryptography.Argon2;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -44,15 +45,19 @@ public class AuthController : ControllerBase
         _jwtConfig = jwtConfig.Value;
     }
 
+    [Authorize]
     [HttpGet("user-info")]
-    public IActionResult UserInfo([FromHeader] string authorization)
+    public IActionResult UserInfo()
     {
-        if (AuthenticationHeaderValue.TryParse(authorization, out var headerValue))
+        var user = (User)HttpContext.Items["User"]!;
+
+        return Ok(new
         {
-
-        }
-
-        return Ok();
+            id = user.Id,
+            email = user.Email,
+            username = user.Username,
+            role = user.Role
+        });
     }
 
     [HttpPost("register")]

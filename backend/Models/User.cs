@@ -14,6 +14,8 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
+    public UserRole Role { get; set; } = UserRole.user;
+
     public string? StripeCustomerId { get; set; }
 
     public DateTime CreatedAt { get; set; }

@@ -1,5 +1,9 @@
+using backend.Auth;
 using backend.Data;
+using backend.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +16,14 @@ builder.Services.AddCors(options =>
         });
 });
 
-builder.Services.AddDbContext<GameStoreContext>(options =>
-    options.UseNpgsql("host=168.119.125.205;database=game_store;username=postgres;password=2X3xKmt50FPnROL4mlz9nb"));
+var dbBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
+dbBuilder.MapEnum<UserRole>();
+builder.Services.AddDbContext<GameStoreContext>(options => options.UseNpgsql(dbBuilder.Build()));
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddScheme<JwtBearerOptions, JwtAuthorization>(JwtBearerDefaults.AuthenticationScheme, options => { }); ;
 
 builder.Services.AddControllers();
 

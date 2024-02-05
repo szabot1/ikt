@@ -8,6 +8,17 @@ namespace backend.Utils;
 
 public class Token
 {
+    public static string GetUserIdFromAccessToken(JwtConfig jwtConfig, string accessToken)
+    {
+        var payload = JwtBuilder.Create()
+            .WithAlgorithm(new HMACSHA256Algorithm())
+            .WithSecret(jwtConfig.Key)
+            .MustVerifySignature()
+            .Decode<IDictionary<string, object>>(accessToken);
+
+        return payload["sub"].ToString()!;
+    }
+
     public static string GenerateRefreshToken()
     {
         var bytes = new byte[32];
