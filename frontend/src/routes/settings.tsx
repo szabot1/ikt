@@ -1,5 +1,8 @@
 import ErrorPage from "@/error-page";
+import { getCustomerPortalUrl } from "@/lib/query/billing";
 import { FileRoute, Link } from "@tanstack/react-router";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 
 export const Route = new FileRoute("/settings").createRoute({
   component: Settings,
@@ -7,6 +10,8 @@ export const Route = new FileRoute("/settings").createRoute({
 });
 
 function Settings() {
+  const [isOpeningPortal, setIsOpeningPortal] = useState(false);
+
   return (
     <section className="grow flex flex-col lg:flex-row gap-4 lg:gap-12 items-center justify-center">
       <div className="px-6 py-3 border-2 border-zinc-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
@@ -37,14 +42,24 @@ function Settings() {
       <div className="px-6 py-3 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
         <h1 className="text-xl font-semibold mb-4">Billing</h1>
 
-        <a
-          href="https://stripe.com"
-          target="_blank"
-          rel="noreferrer"
+        <button
+          onClick={() => {
+            setIsOpeningPortal(true);
+
+            getCustomerPortalUrl().then((url) => {
+              if (url) {
+                window.open(url, "_blank");
+              }
+
+              setIsOpeningPortal(false);
+            });
+          }}
+          disabled={isOpeningPortal}
           className="py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center"
         >
+          {isOpeningPortal && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
           Manage billing
-        </a>
+        </button>
 
         <span className="text-zinc-400 text-sm text-justify">
           Billing information is handled and secured by Stripe. Click the button
