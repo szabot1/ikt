@@ -1,12 +1,22 @@
 import ErrorPage from "@/error-page";
 import { getCustomerPortalUrl } from "@/lib/query/billing";
-import { FileRoute, Link } from "@tanstack/react-router";
+import { FileRoute, Link, redirect } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export const Route = new FileRoute("/settings").createRoute({
   component: Settings,
   errorComponent: ErrorPage,
+  beforeLoad: async ({ context: { auth } }) => {
+    if (!auth.isAuthenticated) {
+      throw redirect({
+        to: "/auth/signin",
+        search: {
+          redirect: "/settings",
+        },
+      });
+    }
+  },
 });
 
 function Settings() {

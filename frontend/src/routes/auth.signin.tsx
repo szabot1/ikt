@@ -32,6 +32,9 @@ function SignIn() {
   const navigate = useNavigate();
 
   const { redirect } = Route.useSearch();
+  const secureRedirect = (redirect || "/").startsWith("http")
+    ? "/"
+    : redirect || "/";
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -56,7 +59,7 @@ function SignIn() {
         setSession(res.accessToken, res.refreshToken);
 
         navigate({
-          to: redirect || "/",
+          to: secureRedirect,
         });
       } else {
         setGeneralError(res.errors.general?.[0]);

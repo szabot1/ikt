@@ -39,6 +39,9 @@ function Register() {
   const navigate = useNavigate();
 
   const { redirect } = Route.useSearch();
+  const secureRedirect = (redirect || "/").startsWith("http")
+    ? "/"
+    : redirect || "/";
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -65,7 +68,7 @@ function Register() {
         navigate({
           to: "/auth/signin",
           search: {
-            redirect,
+            redirect: secureRedirect,
           },
         });
       } else {

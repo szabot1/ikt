@@ -1,9 +1,19 @@
 import ErrorPage from "@/error-page";
-import { FileRoute, Link } from "@tanstack/react-router";
+import { FileRoute, Link, redirect } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/cart").createRoute({
   component: Cart,
   errorComponent: ErrorPage,
+  beforeLoad: async ({ context: { auth } }) => {
+    if (!auth.isAuthenticated) {
+      throw redirect({
+        to: "/auth/signin",
+        search: {
+          redirect: "/cart",
+        },
+      });
+    }
+  },
 });
 
 function Cart() {
