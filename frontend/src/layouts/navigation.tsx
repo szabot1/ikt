@@ -15,7 +15,7 @@ export default function MainNavigation() {
           Game Key Store
         </Link>
 
-        <div className="flex flex-row gap-4 place-items-center justify-start">
+        <div className="hidden lg:flex flex-row gap-4 place-items-center justify-start">
           <Link
             to="/search"
             search={{ q: "" }}

@@ -130,7 +130,7 @@ function SignIn() {
           </div>
         )}
 
-        <div className="flex flex-row gap-2 mt-4">
+        <div className="flex flex-col md:flex-row md:gap-2 mt-4">
           <span>Don't have an account?</span>
           <Link to="/auth/register" className="text-green-500">
             Register here
