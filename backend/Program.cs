@@ -4,6 +4,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,12 @@ var db = dbBuilder.Build();
 builder.Services.AddDbContext<GameStoreContext>(options => options.UseNpgsql(db));
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
+builder.Services.Configure<StripeConfig>(builder.Configuration.GetSection("Stripe"));
+
+var stripeConfig = builder.Configuration.Get<StripeConfig>()!;
+StripeConfiguration.ApiKey = stripeConfig.ActiveKey == "Live"
+    ? stripeConfig.LiveSecretKey
+    : stripeConfig.TestSecretKey;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddScheme<JwtBearerOptions, JwtAuthorization>(JwtBearerDefaults.AuthenticationScheme, options => { }); ;

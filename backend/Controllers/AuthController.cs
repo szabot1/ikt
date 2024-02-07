@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Stripe;
 using Visus.Cuid;
 using static backend.Utils.Validation;
 
@@ -37,6 +38,8 @@ public class AuthController : ControllerBase
         HasDigit("Password"),
         HasSpecial("Password")
     };
+
+    private static readonly CustomerService _customerService = new();
 
     private readonly JwtConfig _jwtConfig;
 
@@ -148,6 +151,15 @@ public class AuthController : ControllerBase
 
         try
         {
+            var customerOptions = new CustomerCreateOptions
+            {
+                Email = request.Email,
+                Description = "IKT Project Customer",
+                Name = request.Username
+            };
+
+            var stripeCustomer = await _customerService.CreateAsync(customerOptions);
+
             var user = new User
             {
                 Id = new Cuid2().ToString(),
@@ -155,7 +167,8 @@ public class AuthController : ControllerBase
                 Username = request.Username,
                 Password = Argon2.Hash(request.Password),
                 CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified),
-                UpdatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified)
+                UpdatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified),
+                StripeCustomerId = stripeCustomer.Id
             };
 
             context.Users.Add(user);
@@ -230,7 +243,7 @@ public class AuthController : ControllerBase
 
         try
         {
-            var refreshToken = Token.GenerateRefreshToken();
+            var refreshToken = Utils.Token.GenerateRefreshToken();
             await context.UserRefreshTokens.AddAsync(new UserRefreshToken
             {
                 Token = refreshToken,
@@ -239,7 +252,7 @@ public class AuthController : ControllerBase
             });
             await context.SaveChangesAsync();
 
-            var accessToken = Token.GenerateAccessToken(_jwtConfig, user);
+            var accessToken = Utils.Token.GenerateAccessToken(_jwtConfig, user);
 
             return Ok(new
             {
@@ -286,7 +299,7 @@ public class AuthController : ControllerBase
 
         try
         {
-            var accessToken = Token.GenerateAccessToken(_jwtConfig, token.User);
+            var accessToken = Utils.Token.GenerateAccessToken(_jwtConfig, token.User);
 
             return Ok(new
             {
