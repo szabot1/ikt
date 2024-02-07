@@ -155,12 +155,16 @@ public class AuthController : ControllerBase
 
         try
         {
+            var userId = new Cuid2().ToString();
+
             var customerOptions = new CustomerCreateOptions
             {
                 Email = request.Email,
                 Description = "IKT Project Customer",
                 Name = request.Username
             };
+
+            customerOptions.Metadata.Add("user_id", userId);
 
             var requestOptions = new RequestOptions
             {
@@ -171,7 +175,7 @@ public class AuthController : ControllerBase
 
             var user = new User
             {
-                Id = new Cuid2().ToString(),
+                Id = userId,
                 Email = request.Email,
                 Username = request.Username,
                 Password = Argon2.Hash(request.Password),
