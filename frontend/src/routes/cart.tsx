@@ -1,5 +1,5 @@
 import ErrorPage from "@/error-page";
-import { FileRoute } from "@tanstack/react-router";
+import { FileRoute, Link } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/cart").createRoute({
   component: Cart,
@@ -31,14 +31,14 @@ function Cart() {
         <span className="text-zinc-400 text-sm text-justify">
           Payments are handled and secured by Stripe. By clicking "Checkout",
           you agree to our{" "}
-          <a
-            href="/terms"
+          <Link
+            to="/terms"
             target="_blank"
             rel="noreferrer"
             className="text-green-500 hover:underline transition-all duration-200 hover:text-green-400"
           >
             terms and conditions
-          </a>
+          </Link>
           . We do not store any of your payment information, visit{" "}
           <a
             href="https://stripe.com"

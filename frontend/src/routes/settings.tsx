@@ -1,5 +1,5 @@
 import ErrorPage from "@/error-page";
-import { FileRoute } from "@tanstack/react-router";
+import { FileRoute, Link } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/settings").createRoute({
   component: Settings,
@@ -21,14 +21,14 @@ function Settings() {
             Click the button to delete your account. This action is irreversible
             and will delete all your data. If you would like to export your data
             first, please{" "}
-            <a
-              href="/tickets"
+            <Link
+              to="/tickets"
               target="_blank"
               rel="noreferrer"
               className="text-green-500 hover:underline transition-all duration-200 hover:text-green-400"
             >
               contact support
-            </a>
+            </Link>
             .
           </span>
         </div>
