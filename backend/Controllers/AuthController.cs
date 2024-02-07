@@ -42,10 +42,14 @@ public class AuthController : ControllerBase
     private static readonly CustomerService _customerService = new();
 
     private readonly JwtConfig _jwtConfig;
+    private readonly StripeConfig _stripeConfig;
 
-    public AuthController(IOptions<JwtConfig> jwtConfig)
+    public AuthController(IOptions<JwtConfig> jwtConfig, IOptions<StripeConfig> stripeConfig)
     {
         _jwtConfig = jwtConfig.Value;
+        _stripeConfig = stripeConfig.Value;
+
+        StripeConfiguration.ApiKey = _stripeConfig.SecretKey;
     }
 
     [Authorize]
@@ -158,7 +162,12 @@ public class AuthController : ControllerBase
                 Name = request.Username
             };
 
-            var stripeCustomer = await _customerService.CreateAsync(customerOptions);
+            var requestOptions = new RequestOptions
+            {
+                ApiKey = _stripeConfig.SecretKey
+            };
+
+            var stripeCustomer = await _customerService.CreateAsync(customerOptions, requestOptions);
 
             var user = new User
             {

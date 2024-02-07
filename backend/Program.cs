@@ -27,9 +27,7 @@ builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
 builder.Services.Configure<StripeConfig>(builder.Configuration.GetSection("Stripe"));
 
 var stripeConfig = builder.Configuration.Get<StripeConfig>()!;
-StripeConfiguration.ApiKey = stripeConfig.ActiveKey == "Live"
-    ? stripeConfig.LiveSecretKey
-    : stripeConfig.TestSecretKey;
+StripeConfiguration.ApiKey = stripeConfig.SecretKey;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddScheme<JwtBearerOptions, JwtAuthorization>(JwtBearerDefaults.AuthenticationScheme, options => { }); ;
