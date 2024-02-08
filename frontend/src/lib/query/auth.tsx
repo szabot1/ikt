@@ -65,6 +65,7 @@ export type Register = {
 export type RegisterResult = {
   success: boolean;
   emailCodeRequired: boolean;
+  statusCode: number;
   errors: ErrorMap;
 };
 
@@ -75,17 +76,24 @@ export async function register(register: Register): Promise<RegisterResult> {
   );
 
   if (res.result === "success") {
-    return { success: true, emailCodeRequired: false, errors: {} };
+    return {
+      success: true,
+      emailCodeRequired: false,
+      statusCode: 200,
+      errors: {},
+    };
   } else if (res.jsonError) {
     return {
       success: false,
       emailCodeRequired: res.status === 418,
+      statusCode: res.status,
       errors: (res.error as any).errors,
     };
   } else {
     return {
       success: false,
       emailCodeRequired: res.status === 418,
+      statusCode: res.status,
       errors: { general: ["An unknown error occurred"] },
     };
   }

@@ -92,7 +92,7 @@ public class AuthController : ControllerBase
             context.UserRefreshTokens.Remove(token);
             await context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new { success = true });
         }
         catch (Exception e)
         {
@@ -294,7 +294,7 @@ public class AuthController : ControllerBase
 
             await context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new { success = true });
         }
         catch (Exception e)
         {

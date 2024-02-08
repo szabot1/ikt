@@ -87,19 +87,41 @@ function Register() {
 
         setIsSubmitting(false);
       } else {
-        setGeneralError(res.errors.server?.[0]);
-        setGeneralSuccess(null);
+        if (res.statusCode >= 400 && res.statusCode < 500) {
+          setGeneralError(res.errors.server?.[0]);
+          setGeneralSuccess(null);
 
-        setFormError(setError, clearErrors, "email", res.errors.email);
-        setFormError(setError, clearErrors, "emailCode", res.errors.emailCode);
-        setFormError(setError, clearErrors, "username", res.errors.username);
-        setFormError(setError, clearErrors, "password", res.errors.password);
-        setFormError(
-          setError,
-          clearErrors,
-          "confirmPassword",
-          res.errors.confirmPassword
-        );
+          setFormError(setError, clearErrors, "email", res.errors.email);
+          setFormError(
+            setError,
+            clearErrors,
+            "emailCode",
+            res.errors.emailCode
+          );
+          setFormError(setError, clearErrors, "username", res.errors.username);
+          setFormError(setError, clearErrors, "password", res.errors.password);
+          setFormError(
+            setError,
+            clearErrors,
+            "confirmPassword",
+            res.errors.confirmPassword
+          );
+        } else {
+          setGeneralError(
+            "Backend request failed (status: " +
+              res.statusCode +
+              "), please try again."
+          );
+          setGeneralSuccess(null);
+
+          clearErrors([
+            "email",
+            "emailCode",
+            "username",
+            "password",
+            "confirmPassword",
+          ]);
+        }
 
         setIsSubmitting(false);
       }
