@@ -12,4 +12,10 @@ public partial class UserExperience
 
     [JsonIgnore]
     public virtual User User { get; set; } = null!;
+
+    public UserExperience NormalizeForJson()
+    {
+        User = null!;
+        return this;
+    }
 }

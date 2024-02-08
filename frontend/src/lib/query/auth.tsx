@@ -24,6 +24,24 @@ export type User = {
   email: string;
   username: string;
   role: UserRole;
+  experience: UserExperience;
+  social: UserSocial;
+};
+
+export type UserExperience = {
+  userId: string;
+  experience: number;
+};
+
+export type UserSocial = {
+  userId: string;
+  discord: string;
+  steam: string;
+  ubisoft: string;
+  epic: string;
+  origin: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export function userInfoQuery() {

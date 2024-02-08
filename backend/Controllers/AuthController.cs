@@ -111,16 +111,24 @@ public class AuthController : ControllerBase
 
     [Authorize]
     [HttpGet("user-info")]
-    public IActionResult UserInfo()
+    public async Task<IActionResult> UserInfo([FromServices] GameStoreContext context)
     {
         var user = (User)HttpContext.Items["User"]!;
+
+        var experience = await context.UserExperiences
+            .FirstOrDefaultAsync(experience => experience.UserId == user.Id);
+
+        var social = await context.UserSocials
+            .FirstOrDefaultAsync(social => social.UserId == user.Id);
 
         return Ok(new
         {
             id = user.Id,
             email = user.Email,
             username = user.Username,
-            role = user.Role.ToString()
+            role = user.Role.ToString(),
+            experience = experience!.NormalizeForJson(),
+            social = social!.NormalizeForJson()
         });
     }
 

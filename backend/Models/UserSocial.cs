@@ -24,4 +24,10 @@ public partial class UserSocial
 
     [JsonIgnore]
     public virtual User User { get; set; } = null!;
+
+    public UserSocial NormalizeForJson()
+    {
+        User = null!;
+        return this;
+    }
 }
