@@ -35,11 +35,11 @@ export type UserExperience = {
 
 export type UserSocial = {
   userId: string;
-  discord: string;
-  steam: string;
-  ubisoft: string;
-  epic: string;
-  origin: string;
+  discord: string | null;
+  steam: string | null;
+  ubisoft: string | null;
+  epic: string | null;
+  origin: string | null;
   createdAt: string;
   updatedAt: string;
 };

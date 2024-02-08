@@ -84,6 +84,7 @@ function Register() {
         setGeneralSuccess(
           "We sent you an email with a confirmation code. Please enter it below."
         );
+
         setIsSubmitting(false);
       } else {
         setGeneralError(res.errors.server?.[0]);
