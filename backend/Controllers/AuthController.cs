@@ -184,7 +184,7 @@ public class AuthController : ControllerBase
                 context.EmailTokens.Add(token);
                 await context.SaveChangesAsync();
 
-                return Ok();
+                return StatusCode(418);
             }
             catch (Exception e)
             {

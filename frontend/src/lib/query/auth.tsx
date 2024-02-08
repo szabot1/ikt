@@ -39,12 +39,14 @@ export type ErrorMap = {
 
 export type Register = {
   email: string;
+  emailCode: string;
   username: string;
   password: string;
 };
 
 export type RegisterResult = {
   success: boolean;
+  emailCodeRequired: boolean;
   errors: ErrorMap;
 };
 
@@ -55,12 +57,17 @@ export async function register(register: Register): Promise<RegisterResult> {
   );
 
   if (res.result === "success") {
-    return { success: true, errors: {} };
+    return { success: true, emailCodeRequired: false, errors: {} };
   } else if (res.jsonError) {
-    return { success: false, errors: (res.error as any).errors };
+    return {
+      success: false,
+      emailCodeRequired: res.status === 418,
+      errors: (res.error as any).errors,
+    };
   } else {
     return {
       success: false,
+      emailCodeRequired: res.status === 418,
       errors: { general: ["An unknown error occurred"] },
     };
   }
