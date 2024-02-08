@@ -29,6 +29,7 @@ export const Route = new FileRoute("/auth/register").createRoute({
 
 type RegisterInputs = {
   email: string;
+  emailCode: string;
   username: string;
   password: string;
   confirmPassword: string;
@@ -55,24 +56,38 @@ function Register() {
   } = useForm<RegisterInputs>();
 
   const [generalError, setGeneralError] = useState<string | null>(null);
+  const [generalSuccess, setGeneralSuccess] = useState<string | null>(null);
+  const [codeInputVisible, setCodeInputVisible] = useState(false);
 
   const onSubmit: SubmitHandler<RegisterInputs> = (data) => {
     setIsSubmitting(true);
 
     registerFn({
       email: data.email,
+      emailCode: data.emailCode || "",
       username: data.username,
       password: data.password,
     } as TRegister).then((res) => {
       if (res.success) {
+        setGeneralError(null);
+        setGeneralSuccess(null);
+
         navigate({
           to: "/auth/signin",
           search: {
             redirect: secureRedirect,
           },
         });
+      } else if (res.emailCodeRequired) {
+        setCodeInputVisible(true);
+        setGeneralError(null);
+        setGeneralSuccess(
+          "We sent you an email with a confirmation code. Please enter it below."
+        );
+        setIsSubmitting(false);
       } else {
         setGeneralError(res.errors.server?.[0]);
+        setGeneralSuccess(null);
 
         setFormError(setError, clearErrors, "email", res.errors.email);
         setFormError(setError, clearErrors, "username", res.errors.username);
@@ -94,6 +109,12 @@ function Register() {
       <div className="px-12 py-6 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12">
         <h1 className="text-2xl mb-6">Register</h1>
 
+        {generalSuccess && (
+          <div className="text-green-500 text-sm my-4 text-center px-4 py-2 border-2 border-green-500 rounded-md">
+            {generalSuccess}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <input
@@ -113,6 +134,28 @@ function Register() {
               </span>
             )}
           </div>
+
+          {codeInputVisible && (
+            <div className="flex flex-col gap-1">
+              <input
+                className={cn(
+                  errors.emailCode && "!border-red-500",
+                  "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
+                )}
+                type="text"
+                placeholder="Email code"
+                {...register("emailCode", { required: true })}
+              />
+              {errors.emailCode && (
+                <span className="text-red-500">
+                  {errors.emailCode.message ||
+                    (errors.emailCode.type === "required" &&
+                      "Email code is required") ||
+                    "Invalid email code"}
+                </span>
+              )}
+            </div>
+          )}
 
           <div className="flex flex-col gap-1">
             <input
@@ -195,7 +238,11 @@ function Register() {
 
         <div className="flex flex-col md:flex-row md:gap-2 mt-4">
           <span>Already have an account?</span>
-          <Link to="/auth/signin" className="text-green-500">
+          <Link
+            to="/auth/signin"
+            search={{ redirect: secureRedirect }}
+            className="text-green-500"
+          >
             Sign in here
           </Link>
         </div>

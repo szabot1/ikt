@@ -172,10 +172,10 @@ public class AuthController : ControllerBase
                     _emailConfig,
                     request.Email,
                     "Game Key Store Email Verification",
-                    $@"<h1>Hello!</h1><br>
-                <p>Someone (hopefully you) has requested to register an account on our store.</p><br>
-                <p>If this was you, please use the following code to verify your email address:</p><br>
-                <h2>{token.Token}</h2><br>
+                    $@"<h1>Hello!</h1>
+                <p>Someone (hopefully you) has requested to register an account on our store.</p>
+                <p>If this was you, please use the following code to verify your email address:</p>
+                <h2>{token.Token}</h2>
                 <p>If this wasn't you, please ignore this email.</p>
                 ",
                     Utils.Email.EmailType.Accounts);
@@ -188,6 +188,7 @@ public class AuthController : ControllerBase
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 return StatusCode(500, new
                 {
                     success = false,
@@ -286,6 +287,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception e)
         {
+            Console.WriteLine(e.ToString());
             return StatusCode(500, new
             {
                 success = false,

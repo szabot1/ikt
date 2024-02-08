@@ -135,7 +135,11 @@ function SignIn() {
 
         <div className="flex flex-col md:flex-row md:gap-2 mt-4">
           <span>Don't have an account?</span>
-          <Link to="/auth/register" className="text-green-500">
+          <Link
+            to="/auth/register"
+            search={{ redirect: secureRedirect }}
+            className="text-green-500"
+          >
             Register here
           </Link>
         </div>
