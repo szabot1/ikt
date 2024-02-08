@@ -19,7 +19,7 @@ export const Route = new FileRoute("/").createRoute({
 
 function Index() {
   return (
-    <section className="flex flex-col gap-16 p-4 place-items-center">
+    <section className="flex flex-col gap-16 p-4 place-items-center mt-16">
       <section className="w-full max-w-full lg:max-w-2xl">
         <SearchForm />
       </section>

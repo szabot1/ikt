@@ -24,7 +24,7 @@ function Search() {
   const games = data as Game[] | undefined;
 
   return (
-    <section className="grow flex flex-col gap-16 p-4 items-center">
+    <section className="grow flex flex-col gap-16 p-4 items-center mt-16">
       <div className="w-full max-w-full lg:max-w-2xl">
         <form
           onSubmit={(e) => {

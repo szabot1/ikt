@@ -129,7 +129,7 @@ function Register() {
   };
 
   return (
-    <section className="grow flex items-center justify-center">
+    <section className="grow flex items-center justify-center mt-16">
       <div className="px-12 py-6 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12">
         <h1 className="text-2xl mb-6">Register</h1>
 

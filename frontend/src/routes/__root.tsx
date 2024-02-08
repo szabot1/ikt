@@ -31,7 +31,7 @@ interface RouterContext {
 
 export const Route = rootRouteWithContext<RouterContext>()({
   component: () => (
-    <main className="flex flex-col gap-16 w-full h-full min-h-screen">
+    <main className="flex flex-col w-full h-full min-h-screen">
       <MainNavigation />
       <ScrollRestoration />
       <Outlet />

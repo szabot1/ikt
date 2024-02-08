@@ -35,7 +35,7 @@ function GameComponent() {
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && game && (
-        <section className="grow flex items-center justify-center">
+        <section className="grow flex items-center justify-center mt-8">
           <div className="max-w-sm border-2 rounded-2xl border-zinc-700 overflow-hidden shadow-lg">
             <img
               className="w-full rounded-t-2xl"
