@@ -62,10 +62,20 @@ function SignIn() {
           to: secureRedirect,
         });
       } else {
-        setGeneralError(res.errors.general?.[0]);
+        if (res.statusCode >= 400 && res.statusCode < 500) {
+          setGeneralError(res.errors.general?.[0]);
 
-        setFormError(setError, clearErrors, "email", res.errors.email);
-        setFormError(setError, clearErrors, "password", res.errors.password);
+          setFormError(setError, clearErrors, "email", res.errors.email);
+          setFormError(setError, clearErrors, "password", res.errors.password);
+        } else {
+          setGeneralError(
+            "Backend request failed (status: " +
+              res.statusCode +
+              "), please try again."
+          );
+
+          clearErrors(["email", "password"]);
+        }
 
         setIsSubmitting(false);
       }

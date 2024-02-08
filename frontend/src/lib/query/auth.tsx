@@ -106,7 +106,7 @@ export type Login = {
 
 export type LoginResult =
   | { success: true; accessToken: string; refreshToken: string }
-  | { success: false; errors: ErrorMap };
+  | { success: false; statusCode: number; errors: ErrorMap };
 
 export async function login(login: Login): Promise<LoginResult> {
   const res = await post(
@@ -121,10 +121,15 @@ export async function login(login: Login): Promise<LoginResult> {
       refreshToken: (res.data as any).refreshToken,
     };
   } else if (res.jsonError) {
-    return { success: false, errors: (res.error as any).errors };
+    return {
+      success: false,
+      statusCode: res.status,
+      errors: (res.error as any).errors,
+    };
   } else {
     return {
       success: false,
+      statusCode: res.status,
       errors: { general: ["An unknown error occurred"] },
     };
   }
