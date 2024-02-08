@@ -90,6 +90,7 @@ function Register() {
         setGeneralSuccess(null);
 
         setFormError(setError, clearErrors, "email", res.errors.email);
+        setFormError(setError, clearErrors, "emailCode", res.errors.emailCode);
         setFormError(setError, clearErrors, "username", res.errors.username);
         setFormError(setError, clearErrors, "password", res.errors.password);
         setFormError(
@@ -120,10 +121,11 @@ function Register() {
             <input
               className={cn(
                 errors.email && "!border-red-500",
-                "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
+                "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none disabled:bg-zinc-800/25 disabled:border-zinc-700 disabled:text-zinc-500 disabled:cursor-not-allowed"
               )}
               type="email"
               placeholder="Email address"
+              disabled={codeInputVisible}
               {...register("email", { required: true })}
             />
             {errors.email && (
@@ -157,68 +159,72 @@ function Register() {
             </div>
           )}
 
-          <div className="flex flex-col gap-1">
-            <input
-              className={cn(
-                errors.username && "!border-red-500",
-                "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
-              )}
-              type="username"
-              placeholder="Username"
-              {...register("username", { required: true })}
-            />
-            {errors.username && (
-              <span className="text-red-500">
-                {errors.username.message ||
-                  (errors.username.type === "required" &&
-                    "Username is required") ||
-                  "Invalid username"}
-              </span>
-            )}
-          </div>
+          {!codeInputVisible && (
+            <>
+              <div className="flex flex-col gap-1">
+                <input
+                  className={cn(
+                    errors.username && "!border-red-500",
+                    "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
+                  )}
+                  type="username"
+                  placeholder="Username"
+                  {...register("username", { required: true })}
+                />
+                {errors.username && (
+                  <span className="text-red-500">
+                    {errors.username.message ||
+                      (errors.username.type === "required" &&
+                        "Username is required") ||
+                      "Invalid username"}
+                  </span>
+                )}
+              </div>
 
-          <div className="flex flex-col gap-1">
-            <input
-              className={cn(
-                errors.password && "!border-red-500",
-                "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
-              )}
-              type="password"
-              placeholder="Password"
-              {...register("password", { required: true })}
-            />
-            {errors.password && (
-              <span className="text-red-500">
-                {errors.password.message ||
-                  (errors.password.type === "required" &&
-                    "Password is required") ||
-                  "Invalid password"}
-              </span>
-            )}
-          </div>
+              <div className="flex flex-col gap-1">
+                <input
+                  className={cn(
+                    errors.password && "!border-red-500",
+                    "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
+                  )}
+                  type="password"
+                  placeholder="Password"
+                  {...register("password", { required: true })}
+                />
+                {errors.password && (
+                  <span className="text-red-500">
+                    {errors.password.message ||
+                      (errors.password.type === "required" &&
+                        "Password is required") ||
+                      "Invalid password"}
+                  </span>
+                )}
+              </div>
 
-          <div className="flex flex-col gap-1">
-            <input
-              className={cn(
-                errors.confirmPassword && "!border-red-500",
-                "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
-              )}
-              type="password"
-              placeholder="Confirm Password"
-              {...register("confirmPassword", {
-                required: true,
-                validate: (value) => value === watch("password"),
-              })}
-            />
-            {errors.confirmPassword && (
-              <span className="text-red-500">
-                {errors.confirmPassword.message ||
-                  (errors.confirmPassword.type === "required" &&
-                    "Password confirmation is required") ||
-                  "Invalid password confirmation"}
-              </span>
-            )}
-          </div>
+              <div className="flex flex-col gap-1">
+                <input
+                  className={cn(
+                    errors.confirmPassword && "!border-red-500",
+                    "px-3 py-2 bg-zinc-800/25 rounded-md border-2 border-zinc-700 transition-all duration-200 focus:border-green-600 ring-0 focus:ring-0 outline-none focus:outline-none"
+                  )}
+                  type="password"
+                  placeholder="Confirm Password"
+                  {...register("confirmPassword", {
+                    required: true,
+                    validate: (value) => value === watch("password"),
+                  })}
+                />
+                {errors.confirmPassword && (
+                  <span className="text-red-500">
+                    {errors.confirmPassword.message ||
+                      (errors.confirmPassword.type === "required" &&
+                        "Password confirmation is required") ||
+                      "Invalid password confirmation"}
+                  </span>
+                )}
+              </div>
+            </>
+          )}
 
           <button
             type="submit"

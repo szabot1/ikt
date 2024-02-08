@@ -239,7 +239,10 @@ public class AuthController : ControllerBase
                 Name = request.Username
             };
 
-            customerOptions.Metadata.Add("user_id", userId);
+            customerOptions.Metadata = new Dictionary<string, string>
+            {
+                { "user_id", userId }
+            };
 
             var requestOptions = new RequestOptions
             {
