@@ -8,3 +8,4 @@ drop table if exists orders cascade;
 drop table if exists sellers cascade;
 drop table if exists tags cascade;
 drop table if exists users cascade;
+drop table if exists email_tokens cascade;

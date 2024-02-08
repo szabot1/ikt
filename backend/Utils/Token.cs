@@ -38,4 +38,16 @@ public class Token
             .AddClaim("email", user.Email)
             .Encode();
     }
+
+    public static string GenerateEmailOneTimeCode()
+    {
+        var str = "";
+
+        for (var i = 0; i < 8; i++)
+        {
+            str += new Random().Next(0, 9);
+        }
+
+        return str;
+    }
 }

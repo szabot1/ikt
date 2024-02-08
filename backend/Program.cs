@@ -25,6 +25,7 @@ builder.Services.AddDbContext<GameStoreContext>(options => options.UseNpgsql(db)
 
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JWT"));
 builder.Services.Configure<StripeConfig>(builder.Configuration.GetSection("Stripe"));
+builder.Services.Configure<EmailConfig>(builder.Configuration.GetSection("Email"));
 
 var stripeConfig = builder.Configuration.Get<StripeConfig>()!;
 StripeConfiguration.ApiKey = stripeConfig.SecretKey;

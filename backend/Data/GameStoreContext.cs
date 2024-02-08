@@ -34,6 +34,8 @@ public partial class GameStoreContext : DbContext
 
     public virtual DbSet<UserSocial> UserSocials { get; set; }
 
+    public virtual DbSet<EmailToken> EmailTokens { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
@@ -374,6 +376,22 @@ public partial class GameStoreContext : DbContext
             entity.HasOne(d => d.User).WithOne(p => p.UserSocial)
                 .HasForeignKey<UserSocial>(d => d.UserId)
                 .HasConstraintName("user_social_user_id_fkey");
+        });
+
+        modelBuilder.Entity<EmailToken>(entity =>
+        {
+            entity.HasKey(e => e.Email).HasName("email_tokens_pkey");
+
+            entity.ToTable("email_tokens");
+
+            entity.HasIndex(e => e.Token, "email_tokens_token_idx");
+
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Token).HasColumnName("token");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
         });
 
         OnModelCreatingPartial(modelBuilder);
