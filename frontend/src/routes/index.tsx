@@ -9,8 +9,9 @@ import {
   featuredGamesQuery,
   recentlyUpdatedGamesQuery,
 } from "@/lib/query/games";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/").createRoute({
@@ -46,6 +47,13 @@ const FeaturedGames = () => {
   const { data, isLoading } = useQuery(featuredGamesQuery());
   const games = data as Game[] | undefined;
 
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    games?.forEach((game) => {
+      queryClient.setQueryData(["game", game.id], game);
+    });
+  }, [games]);
+
   return (
     <GameList
       title="Featured Games"
@@ -59,6 +67,13 @@ const RecentlyUpdatedGames = () => {
   const { data, isLoading } = useQuery(recentlyUpdatedGamesQuery());
   const games = data as Game[] | undefined;
 
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    games?.forEach((game) => {
+      queryClient.setQueryData(["game", game.id], game);
+    });
+  }, [games]);
+
   return (
     <GameList
       title="Recently Updated Games"
@@ -71,6 +86,13 @@ const RecentlyUpdatedGames = () => {
 const DiscountedGames = () => {
   const { data, isLoading } = useQuery(discountedGamesQuery());
   const games = data as Game[] | undefined;
+
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    games?.forEach((game) => {
+      queryClient.setQueryData(["game", game.id], game);
+    });
+  }, [games]);
 
   return (
     <GameList
