@@ -1,7 +1,9 @@
 export function seoPathKey(path: string): string {
-  return path.split("-")[0];
+  // return path.split("-")[0];
+  return path.split("-").slice(-1)[0];
 }
 
 export function seoPath(key: string, fancyName: string): string {
-  return `${key}-${fancyName.toLowerCase().replace(/ /g, "-")}`;
+  // return `${key}-${fancyName.toLowerCase().replace(/ /g, "-")}`;
+  return `${fancyName.toLowerCase().replace(/ /g, "-")}-${key}`;
 }
