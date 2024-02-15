@@ -58,11 +58,9 @@ function SignIn() {
       if (res.success) {
         setSession(res.accessToken, res.refreshToken);
 
-        // navigate({
-        //   to: secureRedirect,
-        // });
-
-        window.location.href = secureRedirect;
+        navigate({
+          to: secureRedirect,
+        });
       } else {
         if (res.statusCode >= 400 && res.statusCode < 500) {
           setGeneralError(res.errors.general?.[0]);

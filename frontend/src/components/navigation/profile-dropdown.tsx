@@ -82,9 +82,7 @@ export default function ProfileDropdown() {
         <DropdownMenuItem
           className="group cursor-pointer"
           onClick={() => {
-            logout().then(() => {
-              window.location.reload();
-            });
+            logout();
           }}
         >
           <span className="text-red-500 group-hover:text-red-400 transition-all duration-100">

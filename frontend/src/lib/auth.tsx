@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { createContext, useState } from "react";
 
 export type AuthState = {
@@ -10,20 +10,28 @@ export type AuthState = {
 const AuthContext = createContext<AuthState | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [accessToken, setAccessToken] = useState(load("accessToken"));
+  const [refreshToken, setRefreshToken] = useState(load("refreshToken"));
+
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "accessToken") {
+        setAccessToken(e.newValue);
+      } else if (e.key === "refreshToken") {
+        setRefreshToken(e.newValue);
+      }
+    };
+
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
-        get ["accessToken"]() {
-          return load("accessToken");
-        },
-
-        get ["refreshToken"]() {
-          return load("refreshToken");
-        },
-
-        get ["isAuthenticated"]() {
-          return !!load("accessToken");
-        },
+        accessToken,
+        refreshToken,
+        isAuthenticated: !!accessToken,
       }}
     >
       {children}
@@ -47,12 +55,27 @@ export function useAuth() {
 
 export function setSession(accessToken: string, refreshToken: string) {
   persist("accessToken", accessToken);
+  dispatch("accessToken", accessToken);
+
   persist("refreshToken", refreshToken);
+  dispatch("refreshToken", refreshToken);
 }
 
 export function clearSession() {
   persist("accessToken", null);
+  dispatch("accessToken", null);
+
   persist("refreshToken", null);
+  dispatch("refreshToken", null);
+}
+
+function dispatch(key: string, value: string | null) {
+  if (typeof window !== "undefined") {
+    let event = new StorageEvent("storage");
+    Object.defineProperty(event, "key", { value: key });
+    Object.defineProperty(event, "newValue", { value: value });
+    window.dispatchEvent(event);
+  }
 }
 
 function wrapSetter(key: string, setter: (value: string | null) => void) {

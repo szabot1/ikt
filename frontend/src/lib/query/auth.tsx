@@ -6,6 +6,7 @@ import {
 } from "react-hook-form";
 import { post } from "../fetch";
 import { makeQuery } from "./util";
+import { clearSession } from "../auth";
 
 export async function logout() {
   await post(`${import.meta.env.VITE_BACKEND_PROD_URL}/api/auth/logout`, {
@@ -13,8 +14,7 @@ export async function logout() {
     refreshToken: localStorage.getItem("refreshToken"),
   });
 
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
+  clearSession();
 }
 
 export type UserRole = "user" | "support" | "admin";
