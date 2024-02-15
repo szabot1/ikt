@@ -3,6 +3,7 @@ import { getCustomerPortalUrl } from "@/lib/query/billing";
 import { FileRoute, Link, redirect } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/settings").createRoute({
   component: Settings,
@@ -24,6 +25,10 @@ function Settings() {
 
   return (
     <section className="grow flex flex-col lg:flex-row gap-4 lg:gap-12 items-center justify-center">
+      <Helmet prioritizeSeoTags>
+        <title>Settings</title>
+      </Helmet>
+
       <div className="px-6 py-3 border-2 border-zinc-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
         <h1 className="text-xl font-semibold mb-4">Account</h1>
 

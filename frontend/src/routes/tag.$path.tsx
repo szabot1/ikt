@@ -1,9 +1,10 @@
 import ErrorPage from "@/error-page";
 import { Game } from "@/lib/query/games";
 import { Tag, tagGamesQuery, tagQuery } from "@/lib/query/tags";
-import { seoPathKey } from "@/lib/seo-path";
+import { seoPath, seoPathKey } from "@/lib/seo-path";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/tag/$path").createRoute({
   component: TagComponent,
@@ -24,6 +25,18 @@ function TagComponent() {
 
   return (
     <div>
+      {tag && (
+        <Helmet prioritizeSeoTags>
+          <title>Tag - {tag.name}</title>
+          <link
+            rel="canonical"
+            href={`${import.meta.env.VITE_FRONTEND_PROD_URL}/game/${seoPath(tag.id, tag.name)}`}
+          />
+          <meta property="og:title" content={tag.name} />
+          <meta property="og:url" content={window.location.href} />
+        </Helmet>
+      )}
+
       <h1>Tag</h1>
       <p>Tag ID: {tagId}</p>
 

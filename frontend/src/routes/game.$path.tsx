@@ -1,9 +1,10 @@
 import ErrorPage from "@/error-page";
 import { Game, gameQuery } from "@/lib/query/games";
-import { seoPathKey } from "@/lib/seo-path";
+import { seoPath, seoPathKey } from "@/lib/seo-path";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/game/$path").createRoute({
   component: GameComponent,
@@ -32,6 +33,21 @@ function GameComponent() {
 
   return (
     <div>
+      {game && (
+        <Helmet prioritizeSeoTags>
+          <title>Game - {game.name}</title>
+          <link
+            rel="canonical"
+            href={`${import.meta.env.VITE_FRONTEND_PROD_URL}/game/${seoPath(game.id, game.name)}`}
+          />
+          <meta name="description" content={game.description} />
+          <meta property="og:title" content={game.name} />
+          <meta property="og:description" content={game.description} />
+          <meta property="og:image" content={game.images[count].imageUrl} />
+          <meta property="og:url" content={window.location.href} />
+        </Helmet>
+      )}
+
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && game && (

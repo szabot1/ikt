@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { cn } from "@/lib/style";
 import { Loader2 } from "lucide-react";
 import { Login, login, setFormError } from "@/lib/query/auth";
+import { Helmet } from "react-helmet-async";
 
 const signInSchema = z.object({
   redirect: z.string().optional(),
@@ -84,6 +85,10 @@ function SignIn() {
 
   return (
     <section className="grow flex items-center justify-center mt-16">
+      <Helmet prioritizeSeoTags>
+        <title>Sign In</title>
+      </Helmet>
+
       <div className="px-12 py-6 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12">
         <h1 className="text-2xl mb-6">Sign In</h1>
 

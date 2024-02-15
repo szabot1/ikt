@@ -8,6 +8,7 @@ const queryClient = new QueryClient();
 import "./index.css";
 import { router } from "./router";
 import { AuthProvider, useAuth } from "./lib/auth";
+import { HelmetProvider } from "react-helmet-async";
 
 function InnerApp() {
   const auth = useAuth();
@@ -20,9 +21,11 @@ if (!rootElement.innerHTML) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <InnerApp />
-        </AuthProvider>
+        <HelmetProvider>
+          <AuthProvider>
+            <InnerApp />
+          </AuthProvider>
+        </HelmetProvider>
       </QueryClientProvider>
     </React.StrictMode>
   );

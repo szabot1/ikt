@@ -2,6 +2,7 @@ import ErrorPage from "@/error-page";
 import { Game, featuredGamesQuery } from "@/lib/query/games";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { z } from "zod";
 
 const searchSchema = z.object({
@@ -25,6 +26,10 @@ function Search() {
 
   return (
     <section className="grow flex flex-col gap-16 p-4 items-center mt-16">
+      <Helmet prioritizeSeoTags>
+        <title>Search</title>
+      </Helmet>
+
       <div className="w-full max-w-full lg:max-w-2xl">
         <form
           onSubmit={(e) => {

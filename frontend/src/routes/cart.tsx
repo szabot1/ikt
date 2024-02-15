@@ -1,5 +1,6 @@
 import ErrorPage from "@/error-page";
 import { FileRoute, Link, redirect } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/cart").createRoute({
   component: Cart,
@@ -19,6 +20,10 @@ export const Route = new FileRoute("/cart").createRoute({
 function Cart() {
   return (
     <section className="grow flex flex-col lg:flex-row gap-4 lg:gap-12 items-center justify-center">
+      <Helmet prioritizeSeoTags>
+        <title>Cart</title>
+      </Helmet>
+
       <div className="flex flex-col gap-2 w-10/12 md:w-6/12 lg:w-3/12">
         <h1 className="text-2xl font-semibold">Cart</h1>
 
