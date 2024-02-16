@@ -65,7 +65,8 @@ public class BillingController : ControllerBase
             },
             Customer = user.StripeCustomerId,
             Mode = "payment",
-            ReturnUrl = _stripeConfig.PortalReturnUrl,
+            SuccessUrl = _stripeConfig.CheckoutSuccessUrl,
+            CancelUrl = _stripeConfig.CheckoutCancelUrl
         };
 
         var session = await _checkoutSessionService.CreateAsync(options);
