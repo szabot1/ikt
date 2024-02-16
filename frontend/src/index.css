@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --zinc-100: theme("colors.zinc.100");
+  --zinc-200: theme("colors.zinc.200");
+  --zinc-300: theme("colors.zinc.300");
+  --zinc-400: theme("colors.zinc.400");
+  --zinc-500: theme("colors.zinc.500");
+  --zinc-600: theme("colors.zinc.600");
+  --zinc-700: theme("colors.zinc.700");
+  --zinc-800: theme("colors.zinc.800");
+  --zinc-900: theme("colors.zinc.900");
+
+  --green-100: theme("colors.green.100");
+  --green-200: theme("colors.green.200");
+  --green-300: theme("colors.green.300");
+  --green-400: theme("colors.green.400");
+  --green-500: theme("colors.green.500");
+  --green-600: theme("colors.green.600");
+  --green-700: theme("colors.green.700");
+  --green-800: theme("colors.green.800");
+  --green-900: theme("colors.green.900");
+}

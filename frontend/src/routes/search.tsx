@@ -77,7 +77,7 @@ function SearchItem({ game }: SearchItemProps) {
     <div className="group cursor-pointer border-2 border-zinc-700 w-full min-h-12 rounded-xl px-6 py-3 flex flex-row justify-between hover:scale-105 hover:-translate-y-1 transition-all duration-200">
       <div className="w-10/12 flex flex-col">
         <h2 className="text-xl font-semibold">{game.name}</h2>
-        <p className="text-gray-400 line-clamp-1 text-ellipsis">
+        <p className="text-zinc-400 line-clamp-1 text-ellipsis">
           {game.description}
         </p>
       </div>

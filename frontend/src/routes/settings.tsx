@@ -4,6 +4,17 @@ import { FileRoute, Link, redirect } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export const Route = new FileRoute("/settings").createRoute({
   component: Settings,
@@ -33,9 +44,26 @@ function Settings() {
         <h1 className="text-xl font-semibold mb-4">Account</h1>
 
         <div className="w-full flex flex-col gap-2">
-          <button className="w-full py-2 bg-red-700 rounded-lg hover:bg-red-600 transition-all duration-200 flex items-center justify-center">
-            Delete account
-          </button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button className="w-full py-2 bg-red-700 rounded-lg hover:bg-red-600 transition-all duration-200 flex items-center justify-center">
+                Delete account
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  your account and remove your data from our servers.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction>Continue</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
 
           <span className="text-zinc-400 text-sm text-justify">
             Click the button to delete your account. This action is irreversible

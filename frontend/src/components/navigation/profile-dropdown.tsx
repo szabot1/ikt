@@ -26,7 +26,7 @@ export default function ProfileDropdown() {
         <div className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100 flex flex-row gap-2 justify-center items-center">
           <p>{userInfo.username}</p>
           <img
-            src={`https://www.gravatar.com/avatar/${md5(userInfo.email)}`}
+            src={`https://secure.gravatar.com/avatar/${md5(userInfo.email)}`}
             className="w-8 h-8 rounded-full"
           />
         </div>

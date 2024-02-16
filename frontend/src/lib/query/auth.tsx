@@ -40,6 +40,7 @@ export type UserSocial = {
   ubisoft: string | null;
   epic: string | null;
   origin: string | null;
+  battlenet: string | null;
   createdAt: string;
   updatedAt: string;
 };
