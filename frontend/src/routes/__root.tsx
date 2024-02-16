@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import MainNavigation from "@/layouts/navigation";
 import { AuthState } from "@/lib/auth";
 import {
@@ -35,6 +36,7 @@ export const Route = rootRouteWithContext<RouterContext>()({
       <MainNavigation />
       <ScrollRestoration />
       <Outlet />
+      <Toaster />
       <Suspense fallback={null}>
         <TanStackRouterDevtools />
         <ReactQueryDevtools />

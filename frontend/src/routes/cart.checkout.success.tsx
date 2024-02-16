@@ -17,5 +17,5 @@ export const Route = new FileRoute("/cart/checkout/success").createRoute({
 });
 
 function CartCheckoutSuccess() {
-  return <></>;
+  return <span>Checkout success</span>;
 }
