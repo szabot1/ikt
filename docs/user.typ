@@ -16,8 +16,8 @@
 #set heading(numbering: "1.")
 
 #show heading: it => [
-  #set text(13pt, weight: "regular")
-  #block(smallcaps(it.body))
+  #set text(14pt, weight: "semibold")
+  #block(it.body)
 ]
 
 #show heading.where(
@@ -29,14 +29,13 @@
 
 // Title page
 #[
-  #align(center + horizon, text(25pt)[*Title*])
+  #align(center + horizon, text(25pt)[*Vizsgaremek*])
+  #pagebreak()
 ]
-
-#pagebreak()
 
 // Outline page
 #[
-  #align(center + horizon, text(25pt)[*Outline*])
+  #align(center + horizon, text(25pt)[*Tartalom*])
 
   #show outline.entry.where(
     level: 1
@@ -45,10 +44,9 @@
     strong(it)
   }
 
-  #outline(indent: auto)
+  #outline(indent: auto, title: "")
+  #pagebreak()
 ]
-
-#pagebreak()
 
 // Development environment
 #[
@@ -64,18 +62,81 @@
     #heading(title)
   ])
 
-  == Introduction
+  == Bevezetés
   #lorem(300)
+]
 
-  == Related Work
+#[
+  #let title = [
+    Visual Studio, Visual Studio Code
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  == Visual Studio
+
+  #lorem(200)
+
+  == Visual Studio Code
+
   #lorem(200)
 ]
 
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
+#[
+  #let title = [
+    PostgreSQL, MySQL
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  == PostgreSQL
+  
+  #lorem(200)
+
+  == MySQL
+
+  #lorem(200)
+]
+
+#[
+  #let title = [
+    .NET, ASP.NET, ASP.NET Core
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  == .NET
+  
+  #lorem(200)
+
+  == ASP.NET, ASP.NET Core
+
+  #lorem(200)
+]
+
+#[
+  #let title = [
+    Vite, TypeScript, React, Tailwind CSS
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  == Vite, TypeScript
+  
+  #lorem(200)
+
+  == React, Tailwind CSS
+
+  #lorem(200)
+]
 
 // User documentation
 #[
@@ -91,11 +152,8 @@
     #heading(title)
   ])
 
-  == Introduction
+  == Bevezetés
   #lorem(300)
-
-  == Related Work
-  #lorem(200)
 ]
 
 #pagebreak()
