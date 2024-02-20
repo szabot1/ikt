@@ -14,4 +14,7 @@ public partial class Tag
 
     [JsonIgnore]
     public virtual ICollection<GameTag> GameTags { get; set; } = new List<GameTag>();
+
+    public record CreateDto(string Name);
+    public record UpdateDto(string Name);
 }
