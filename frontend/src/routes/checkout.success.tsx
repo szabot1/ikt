@@ -1,21 +1,21 @@
 import ErrorPage from "@/error-page";
 import { FileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = new FileRoute("/cart/checkout/success").createRoute({
-  component: CartCheckoutSuccess,
+export const Route = new FileRoute("/checkout/success").createRoute({
+  component: CheckoutSuccess,
   errorComponent: ErrorPage,
   beforeLoad: async ({ context: { auth } }) => {
     if (!auth.isAuthenticated) {
       throw redirect({
         to: "/auth/signin",
         search: {
-          redirect: "/cart/checkout/success",
+          redirect: "/checkout/success",
         },
       });
     }
   },
 });
 
-function CartCheckoutSuccess() {
+function CheckoutSuccess() {
   return <span>Checkout success</span>;
 }

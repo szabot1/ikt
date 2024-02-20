@@ -7,10 +7,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { User as UserInfo, logout, userInfoQuery } from "@/lib/query/auth";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 import md5 from "md5";
 
 export default function ProfileDropdown() {
+  const path = useRouterState().location.pathname;
   const navigate = useNavigate();
 
   const { data, isLoading } = useQuery(userInfoQuery());
@@ -57,21 +58,36 @@ export default function ProfileDropdown() {
           </span>
         </DropdownMenuItem>
 
-        {(userInfo.role === "support" || userInfo.role === "admin") && (
-          <>
-            <DropdownMenuSeparator />
+        {!path.startsWith("/support") &&
+          (userInfo.role === "support" || userInfo.role === "admin") && (
+            <>
+              <DropdownMenuSeparator />
 
-            <DropdownMenuItem className="group cursor-pointer">
-              <span className="text-blue-500 group-hover:text-blue-400 transition-all duration-100">
-                Tickets
-              </span>
-            </DropdownMenuItem>
-          </>
-        )}
+              <DropdownMenuItem className="group cursor-pointer">
+                <span
+                  className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
+                  onClick={() => {
+                    navigate({
+                      to: "/support/tickets",
+                    });
+                  }}
+                >
+                  Tickets
+                </span>
+              </DropdownMenuItem>
+            </>
+          )}
 
-        {userInfo.role === "admin" && (
+        {!path.startsWith("/admin") && userInfo.role === "admin" && (
           <DropdownMenuItem className="group cursor-pointer">
-            <span className="text-blue-500 group-hover:text-blue-400 transition-all duration-100">
+            <span
+              className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
+              onClick={() => {
+                navigate({
+                  to: "/admin",
+                });
+              }}
+            >
               Admin
             </span>
           </DropdownMenuItem>
