@@ -65,7 +65,7 @@ function Inner() {
   const columns: ColumnDef<Game>[] = [
     {
       accessorKey: "slug",
-      header: "slug",
+      header: "Slug",
       cell: ({ row }) => <div>{row.getValue("slug")}</div>,
     },
     {
