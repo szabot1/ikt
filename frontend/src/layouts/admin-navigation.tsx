@@ -13,6 +13,13 @@ export default function AdminNavigation() {
 
         <div className="hidden lg:flex flex-row gap-4 place-items-center justify-start">
           <Link
+            to="/admin"
+            className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
+          >
+            Statistics
+          </Link>
+
+          <Link
             to="/admin/tags"
             className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
           >
