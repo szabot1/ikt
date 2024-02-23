@@ -252,6 +252,7 @@ public partial class GameStoreContext : DbContext
             entity.Property(e => e.DisplayName).HasColumnName("display_name");
             entity.Property(e => e.ImageUrl).HasColumnName("image_url");
             entity.Property(e => e.IsVerified).HasColumnName("is_verified");
+            entity.Property(e => e.IsClosed).HasColumnName("is_closed");
             entity.Property(e => e.Slug).HasColumnName("slug");
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")

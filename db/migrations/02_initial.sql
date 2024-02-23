@@ -100,6 +100,7 @@ create table sellers (
     display_name text not null,
     image_url text not null,
     is_verified boolean not null default false,
+    is_closed boolean not null default false,
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp
 );

@@ -16,6 +16,7 @@ public partial class Seller
     public string ImageUrl { get; set; } = null!;
 
     public bool IsVerified { get; set; }
+    public bool IsClosed { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
