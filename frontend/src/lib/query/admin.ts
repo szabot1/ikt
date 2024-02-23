@@ -1,6 +1,11 @@
 import { method } from "../fetch";
 import { makeQuery } from "./util";
 
+export const adminUsersQuery = makeQuery(
+  ["admin", "users"],
+  `${import.meta.env.VITE_BACKEND_PROD_URL}/api/admin/users`
+);
+
 export const adminTagsQuery = makeQuery(
   ["admin", "tags"],
   `${import.meta.env.VITE_BACKEND_PROD_URL}/api/admin/tags`

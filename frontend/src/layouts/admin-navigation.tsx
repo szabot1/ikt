@@ -20,6 +20,13 @@ export default function AdminNavigation() {
           </Link>
 
           <Link
+            to="/admin/users"
+            className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
+          >
+            Users
+          </Link>
+
+          <Link
             to="/admin/tags"
             className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
           >

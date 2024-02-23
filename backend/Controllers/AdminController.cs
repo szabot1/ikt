@@ -11,7 +11,6 @@ namespace backend.Controllers;
 [ApiController]
 public class AdminController : ControllerBase
 {
-
     [Authorize(Roles = "admin")]
     [HttpGet("stats")]
     public async Task<IActionResult> Stats(GameStoreContext context)
@@ -22,6 +21,14 @@ public class AdminController : ControllerBase
         var offers = await context.Offers.CountAsync();
 
         return Ok(new { Tags = tags, Games = games, Sellers = sellers, Offers = offers });
+    }
+
+    [Authorize(Roles = "admin")]
+    [HttpGet("users")]
+    public async Task<IActionResult> Users(GameStoreContext context)
+    {
+        var users = await context.Users.ToListAsync();
+        return Ok(users);
     }
 
     [Authorize(Roles = "admin")]
