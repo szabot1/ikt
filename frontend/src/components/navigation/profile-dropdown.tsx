@@ -58,42 +58,24 @@ export default function ProfileDropdown() {
           </span>
         </DropdownMenuItem>
 
-        {!path.startsWith("/support") &&
-          (userInfo.role === "support" || userInfo.role === "admin") && (
-            <>
-              <DropdownMenuSeparator />
-
-              <DropdownMenuItem className="group cursor-pointer">
-                <span
-                  className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
-                  onClick={() => {
-                    navigate({
-                      to: "/support/tickets",
-                    });
-                  }}
-                >
-                  Tickets
-                </span>
-              </DropdownMenuItem>
-            </>
-          )}
-
         {!path.startsWith("/admin") && userInfo.role === "admin" && (
-          <DropdownMenuItem className="group cursor-pointer">
-            <span
-              className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
-              onClick={() => {
-                navigate({
-                  to: "/admin",
-                });
-              }}
-            >
-              Admin
-            </span>
-          </DropdownMenuItem>
-        )}
+          <>
+            <DropdownMenuItem className="group cursor-pointer">
+              <span
+                className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
+                onClick={() => {
+                  navigate({
+                    to: "/admin",
+                  });
+                }}
+              >
+                Admin
+              </span>
+            </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+            <DropdownMenuSeparator />
+          </>
+        )}
 
         <DropdownMenuItem
           className="group cursor-pointer"

@@ -69,14 +69,14 @@ function Settings() {
             Click the button to delete your account. This action is irreversible
             and will delete all your data. If you would like to export your data
             first, please{" "}
-            <Link
-              to="/tickets"
+            <a
+              href="mailto:account-support@02c09f8b.net"
               target="_blank"
               rel="noreferrer"
               className="text-green-500 hover:underline transition-all duration-200 hover:text-green-400"
             >
               contact support
-            </Link>
+            </a>
             .
           </span>
         </div>
