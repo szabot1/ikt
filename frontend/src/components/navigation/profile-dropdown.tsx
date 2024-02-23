@@ -5,7 +5,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User as UserInfo, logout, userInfoQuery } from "@/lib/query/auth";
+import { type User as UserInfo, logout, userInfoQuery } from "@/lib/query/auth";
+import { type Seller, sellerMeQuery } from "@/lib/query/seller";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import md5 from "md5";
@@ -17,7 +18,11 @@ export default function ProfileDropdown() {
   const { data, isLoading } = useQuery(userInfoQuery());
   const userInfo = data as UserInfo;
 
-  if (isLoading || !data) {
+  const { data: sellerData, isLoading: sellerIsLoading } =
+    useQuery(sellerMeQuery());
+  const sellerInfo = sellerData as Seller;
+
+  if (isLoading || sellerIsLoading) {
     return null;
   }
 
@@ -57,6 +62,21 @@ export default function ProfileDropdown() {
             Settings
           </span>
         </DropdownMenuItem>
+
+        {sellerInfo && (
+          <DropdownMenuItem className="group cursor-pointer">
+            <span
+              className="text-green-500 group-hover:text-green-400 transition-all duration-100"
+              onClick={() => {
+                navigate({
+                  to: "/seller",
+                });
+              }}
+            >
+              Seller Dashboard
+            </span>
+          </DropdownMenuItem>
+        )}
 
         {!path.startsWith("/admin") && userInfo.role === "admin" && (
           <>

@@ -1,5 +1,15 @@
 import { get } from "../fetch";
 
+export class QueryError extends Error {
+  constructor(
+    message: string,
+    public status: number,
+    public error: string
+  ) {
+    super(message);
+  }
+}
+
 export function makeQuery(key: string[], url: string) {
   return {
     queryKey: key,
@@ -9,8 +19,10 @@ export function makeQuery(key: string[], url: string) {
       if (res.result === "success") {
         return res.data;
       } else {
-        throw new Error(
-          `Backend fetch failed: status=${res.status}, error=${res.error}`
+        throw new QueryError(
+          `Backend fetch failed: status=${res.status}, error=${res.error}`,
+          res.status,
+          res.error
         );
       }
     },
