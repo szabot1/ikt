@@ -27,7 +27,16 @@ public class AdminController : ControllerBase
     [HttpGet("users")]
     public async Task<IActionResult> Users(GameStoreContext context)
     {
-        var users = await context.Users.ToListAsync();
+        var users = await context.Users.Select(user => new
+        {
+            id = user.Id,
+            email = user.Email,
+            username = user.Username,
+            role = user.Role.ToString(),
+            stripeCustomerId = user.StripeCustomerId,
+            createdAt = user.CreatedAt,
+            updatedAt = user.UpdatedAt
+        }).ToListAsync();
         return Ok(users);
     }
 

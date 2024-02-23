@@ -1,4 +1,5 @@
 import { AdminRoute } from "@/components/auth/protected";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -55,6 +56,11 @@ function Admin() {
   );
 }
 
+const roleStyles: Record<string, [string, string]> = {
+  support: ["Support", "!bg-blue-500 !text-blue-100"],
+  admin: ["Admin", "!bg-red-500 !text-red-100"],
+};
+
 function Inner() {
   const queryClient = useQueryClient();
 
@@ -65,16 +71,12 @@ function Inner() {
     {
       accessorKey: "email",
       header: "Email",
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("email")}</div>
-      ),
+      cell: ({ row }) => <div>{row.getValue("email")}</div>,
     },
     {
       accessorKey: "username",
       header: "Username",
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("username")}</div>
-      ),
+      cell: ({ row }) => <div>{row.getValue("username")}</div>,
     },
     {
       accessorKey: "createdAt",
@@ -86,9 +88,12 @@ function Inner() {
     {
       accessorKey: "role",
       header: "Role",
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("role")}</div>
-      ),
+      cell: ({ row }) => {
+        const role = row.getValue("role") as string;
+        const [text, style] = roleStyles[role] || [role, "!bg-gray-500"];
+
+        return <Badge className={style}>{text}</Badge>;
+      },
     },
     {
       id: "actions",
@@ -110,6 +115,15 @@ function Inner() {
                 onClick={() => navigator.clipboard.writeText(tag.id)}
               >
                 Copy ID
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-green-500">
+                Create Seller Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-blue-500">
+                View Seller Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-red-500">
+                Delete Seller Profile
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
