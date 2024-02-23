@@ -1,4 +1,8 @@
-import { type User as UserInfo, userInfoQuery } from "@/lib/query/auth";
+import {
+  type User as UserInfo,
+  userInfoQuery,
+  UserRole,
+} from "@/lib/query/auth";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -19,7 +23,7 @@ export default function ProtectedRoute({
   allowedRoles,
 }: {
   children: React.ReactNode;
-  allowedRoles: string[];
+  allowedRoles: UserRole[];
 }) {
   const navigate = useNavigate();
 
