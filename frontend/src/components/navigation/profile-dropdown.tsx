@@ -60,6 +60,8 @@ export default function ProfileDropdown() {
 
         {!path.startsWith("/admin") && userInfo.role === "admin" && (
           <>
+            <DropdownMenuSeparator />
+
             <DropdownMenuItem className="group cursor-pointer">
               <span
                 className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
