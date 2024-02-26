@@ -64,15 +64,15 @@ export default function ProfileDropdown() {
         </DropdownMenuItem>
 
         {sellerInfo && (
-          <DropdownMenuItem className="group cursor-pointer">
-            <span
-              className="text-green-500 group-hover:text-green-400 transition-all duration-100"
-              onClick={() => {
-                navigate({
-                  to: "/seller",
-                });
-              }}
-            >
+          <DropdownMenuItem
+            className="group cursor-pointer"
+            onClick={() => {
+              navigate({
+                to: "/seller",
+              });
+            }}
+          >
+            <span className="text-green-500 group-hover:text-green-400 transition-all duration-100">
               Seller Dashboard
             </span>
           </DropdownMenuItem>
@@ -82,15 +82,15 @@ export default function ProfileDropdown() {
           <>
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem className="group cursor-pointer">
-              <span
-                className="text-blue-500 group-hover:text-blue-400 transition-all duration-100"
-                onClick={() => {
-                  navigate({
-                    to: "/admin",
-                  });
-                }}
-              >
+            <DropdownMenuItem
+              className="group cursor-pointer"
+              onClick={() => {
+                navigate({
+                  to: "/admin",
+                });
+              }}
+            >
+              <span className="text-blue-500 group-hover:text-blue-400 transition-all duration-100">
                 Admin
               </span>
             </DropdownMenuItem>
