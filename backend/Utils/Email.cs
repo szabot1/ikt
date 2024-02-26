@@ -6,7 +6,7 @@ using MimeKit;
 
 namespace backend.Utils;
 
-public class Email
+public static class Email
 {
     public enum EmailType
     {
@@ -25,8 +25,10 @@ public class Email
             _ => throw new ArgumentOutOfRangeException(nameof(emailType), emailType, null)
         };
 
-        var email = new MimeMessage();
-        email.Sender = new MailboxAddress(emailConfig.DisplayName, from);
+        var email = new MimeMessage
+        {
+            Sender = new MailboxAddress(emailConfig.DisplayName, from)
+        };
         email.From.Add(new MailboxAddress(emailConfig.DisplayName, from));
         email.To.Add(MailboxAddress.Parse(toEmail));
 

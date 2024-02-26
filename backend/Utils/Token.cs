@@ -6,7 +6,7 @@ using JWT.Builder;
 
 namespace backend.Utils;
 
-public class Token
+public static class Token
 {
     public static string GetUserIdFromAccessToken(JwtConfig jwtConfig, string accessToken)
     {

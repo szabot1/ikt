@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Utils;
 
-public class Validation
+public static class Validation
 {
     public record Result(bool IsValid, string? Error);
 
@@ -58,7 +58,6 @@ public class Validation
     public static IValidator Matches(string pattern, string errorMessage) => new ProxyingValidator(
         value => Regex.IsMatch(value, pattern),
         errorMessage);
-
 
     public class ProxyingValidator : IValidator
     {
