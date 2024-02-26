@@ -11,10 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-        });
+        policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 });
 
 var dbBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -31,7 +28,7 @@ var stripeConfig = builder.Configuration.Get<StripeConfig>()!;
 StripeConfiguration.ApiKey = stripeConfig.SecretKey;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddScheme<JwtBearerOptions, JwtAuthorization>(JwtBearerDefaults.AuthenticationScheme, options => { }); ;
+.AddScheme<JwtBearerOptions, JwtAuthorization>(JwtBearerDefaults.AuthenticationScheme, _ => { });
 
 builder.Services.AddControllers();
 
