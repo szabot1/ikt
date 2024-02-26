@@ -23,7 +23,7 @@ import {
   adminUsersQuery,
   deleteSeller,
 } from "@/lib/query/admin";
-import { createSellerProfile } from "@/lib/query/seller";
+import { createSellerProfile, sellerMeQuery } from "@/lib/query/seller";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import {
@@ -130,6 +130,7 @@ function Inner() {
                     createSellerProfile(user.id).then(() => {
                       toast({ title: "Seller profile created successfully" });
 
+                      queryClient.refetchQueries(sellerMeQuery());
                       queryClient.refetchQueries(adminUsersQuery);
                     });
                   }}
@@ -155,6 +156,7 @@ function Inner() {
                       deleteSeller(user.seller!.id).then(() => {
                         toast({ title: "Seller profile deleted successfully" });
 
+                        queryClient.refetchQueries(sellerMeQuery());
                         queryClient.refetchQueries(adminUsersQuery);
                       });
                     }}
