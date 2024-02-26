@@ -10,31 +10,31 @@ public partial class GameStoreContext : DbContext
     {
     }
 
-    public virtual DbSet<Game> Games { get; set; }
+    public virtual DbSet<Game> Games { get; set; } = null!;
 
-    public virtual DbSet<GameImage> GameImages { get; set; }
+    public virtual DbSet<GameImage> GameImages { get; set; } = null!;
 
-    public virtual DbSet<GameTag> GameTags { get; set; }
+    public virtual DbSet<GameTag> GameTags { get; set; } = null!;
 
-    public virtual DbSet<Offer> Offers { get; set; }
+    public virtual DbSet<Offer> Offers { get; set; } = null!;
 
-    public virtual DbSet<OfferType> OfferTypes { get; set; }
+    public virtual DbSet<OfferType> OfferTypes { get; set; } = null!;
 
-    public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<Order> Orders { get; set; } = null!;
 
-    public virtual DbSet<Seller> Sellers { get; set; }
+    public virtual DbSet<Seller> Sellers { get; set; } = null!;
 
-    public virtual DbSet<Tag> Tags { get; set; }
+    public virtual DbSet<Tag> Tags { get; set; } = null!;
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<User> Users { get; set; } = null!;
 
-    public virtual DbSet<UserExperience> UserExperiences { get; set; }
+    public virtual DbSet<UserExperience> UserExperiences { get; set; } = null!;
 
-    public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+    public virtual DbSet<UserRefreshToken> UserRefreshTokens { get; set; } = null!;
 
-    public virtual DbSet<UserSocial> UserSocials { get; set; }
+    public virtual DbSet<UserSocial> UserSocials { get; set; } = null!;
 
-    public virtual DbSet<EmailToken> EmailTokens { get; set; }
+    public virtual DbSet<EmailToken> EmailTokens { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
