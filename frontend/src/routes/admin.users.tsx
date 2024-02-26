@@ -152,7 +152,7 @@ function Inner() {
                   <DropdownMenuItem
                     className="text-red-500"
                     onClick={() => {
-                      deleteSeller(user.id).then(() => {
+                      deleteSeller(user.seller!.id).then(() => {
                         toast({ title: "Seller profile deleted successfully" });
 
                         queryClient.refetchQueries(adminUsersQuery);
