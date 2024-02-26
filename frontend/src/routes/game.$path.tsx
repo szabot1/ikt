@@ -51,7 +51,7 @@ function GameComponent() {
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && game && (
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
           <section className="flex items-start justify-start mt-8 ml-5">
             <div className="max-w-sm border-2 rounded-2xl border-zinc-700 overflow-hidden shadow-lg">
               <img
