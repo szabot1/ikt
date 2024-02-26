@@ -260,8 +260,8 @@ public partial class GameStoreContext : DbContext
                 .HasColumnName("updated_at");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Sellers)
-                .HasForeignKey(d => d.UserId)
+            entity.HasOne(d => d.User).WithOne(p => p.Seller)
+                .HasForeignKey<Seller>(d => d.UserId)
                 .HasConstraintName("sellers_user_id_fkey");
         });
 

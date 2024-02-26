@@ -1,4 +1,6 @@
 import { method } from "../fetch";
+import { type User } from "./auth";
+import { type Seller } from "./seller";
 import { makeQuery } from "./util";
 
 export type AdminStats = {
@@ -7,6 +9,10 @@ export type AdminStats = {
   sellers: number;
   offers: number;
   users: number;
+};
+
+export type AdminUser = User & {
+  seller: Seller | null;
 };
 
 export const adminStatsQuery = makeQuery(

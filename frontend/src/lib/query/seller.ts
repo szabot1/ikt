@@ -68,3 +68,13 @@ export async function setSellerImageUrl(imageUrl: string) {
 
   return response.result === "success";
 }
+
+export async function createSellerProfile(userId: string) {
+  const response = await method(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/seller`,
+    "POST",
+    { userId }
+  );
+
+  return response.result === "success";
+}

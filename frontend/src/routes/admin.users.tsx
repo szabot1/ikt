@@ -16,11 +16,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { toast } from "@/components/ui/use-toast";
 import ErrorPage from "@/error-page";
-import { adminUsersQuery } from "@/lib/query/admin";
-import { type User } from "@/lib/query/auth";
+import {
+  type AdminUser,
+  adminUsersQuery,
+  deleteSeller,
+} from "@/lib/query/admin";
+import { createSellerProfile } from "@/lib/query/seller";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FileRoute, redirect } from "@tanstack/react-router";
+import { FileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import {
   ColumnDef,
   flexRender,
@@ -63,11 +68,12 @@ const roleStyles: Record<string, [string, string]> = {
 
 function Inner() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data, isLoading } = useQuery(adminUsersQuery);
-  let users = data as User[];
+  let users = data as AdminUser[];
 
-  const columns: ColumnDef<User>[] = [
+  const columns: ColumnDef<AdminUser>[] = [
     {
       accessorKey: "email",
       header: "Email",
@@ -99,7 +105,7 @@ function Inner() {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const tag = row.original;
+        const user = row.original;
 
         return (
           <DropdownMenu>
@@ -112,19 +118,51 @@ function Inner() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(tag.id)}
+                onClick={() => navigator.clipboard.writeText(user.id)}
               >
                 Copy ID
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-green-500">
-                Create Seller Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-blue-500">
-                View Seller Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-red-500">
-                Delete Seller Profile
-              </DropdownMenuItem>
+
+              {!user.seller ? (
+                <DropdownMenuItem
+                  className="text-green-500"
+                  onClick={() => {
+                    createSellerProfile(user.id).then(() => {
+                      toast({ title: "Seller profile created successfully" });
+
+                      queryClient.refetchQueries(adminUsersQuery);
+                    });
+                  }}
+                >
+                  Create Seller Profile
+                </DropdownMenuItem>
+              ) : (
+                <>
+                  <DropdownMenuItem
+                    className="text-blue-500"
+                    onClick={() => {
+                      navigate({
+                        to: "/admin/sellers/$path",
+                        params: { path: user.id },
+                      });
+                    }}
+                  >
+                    View Seller Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="text-red-500"
+                    onClick={() => {
+                      deleteSeller(user.id).then(() => {
+                        toast({ title: "Seller profile deleted successfully" });
+
+                        queryClient.refetchQueries(adminUsersQuery);
+                      });
+                    }}
+                  >
+                    Delete Seller Profile
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         );

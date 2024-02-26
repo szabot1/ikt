@@ -27,7 +27,7 @@ public partial class User
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     [JsonIgnore]
-    public virtual ICollection<Seller> Sellers { get; set; } = new List<Seller>();
+    public virtual Seller? Seller { get; set; }
 
     [JsonIgnore]
     public virtual UserExperience? UserExperience { get; set; }

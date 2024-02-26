@@ -28,7 +28,9 @@ public class AdminController : ControllerBase
     [HttpGet("users")]
     public async Task<IActionResult> Users(GameStoreContext context)
     {
-        var users = await context.Users.Select(user => new
+        var users = await context.Users
+        .Include(user => user.Seller)
+        .Select(user => new
         {
             id = user.Id,
             email = user.Email,
@@ -36,8 +38,20 @@ public class AdminController : ControllerBase
             role = user.Role.ToString(),
             stripeCustomerId = user.StripeCustomerId,
             createdAt = user.CreatedAt,
-            updatedAt = user.UpdatedAt
+            updatedAt = user.UpdatedAt,
+            seller = user.Seller != null ? new
+            {
+                id = user.Seller.Id,
+                slug = user.Seller.Slug,
+                displayName = user.Seller.DisplayName,
+                imageUrl = user.Seller.ImageUrl,
+                isVerified = user.Seller.IsVerified,
+                isClosed = user.Seller.IsClosed,
+                createdAt = user.Seller.CreatedAt,
+                updatedAt = user.Seller.UpdatedAt
+            } : null
         }).ToListAsync();
+
         return Ok(users);
     }
 

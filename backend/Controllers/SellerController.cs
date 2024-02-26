@@ -162,4 +162,47 @@ public class SellerController : ControllerBase
     }
 
     public record SetImageUrlRequest(string ImageUrl);
+
+    [Authorize(Roles = "admin")]
+    [HttpPost]
+    public async Task<IActionResult> Create(GameStoreContext context, [FromBody] CreateSellerRequest request)
+    {
+        var user = await context.Users
+            .FirstOrDefaultAsync(u => u.Id == request.UserId);
+
+        if (user == null)
+        {
+            return BadRequest(new { message = "User not found" });
+        }
+
+        var existingSeller = await context.Sellers
+            .FirstOrDefaultAsync(s => s.UserId == request.UserId);
+
+        if (existingSeller != null)
+        {
+            return BadRequest(new { message = "Seller already exists" });
+        }
+
+        var displayName = user.Email.Split('@')[0];
+
+        var slug = displayName.Replace(" ", "-").ToLower();
+        slug = new string(slug.Where(c => char.IsLetterOrDigit(c)).ToArray());
+
+        var seller = new Seller
+        {
+            UserId = user.Id,
+            DisplayName = displayName,
+            Slug = slug,
+            ImageUrl = $"https://ui-avatars.com/api/?name={displayName}&background=random",
+            IsVerified = false,
+            IsClosed = false
+        };
+
+        await context.Sellers.AddAsync(seller);
+        await context.SaveChangesAsync();
+
+        return Ok(seller);
+    }
+
+    public record CreateSellerRequest(string UserId);
 }

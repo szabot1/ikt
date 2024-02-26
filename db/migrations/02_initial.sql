@@ -105,7 +105,7 @@ create table sellers (
     updated_at timestamp not null default current_timestamp
 );
 
-create index sellers_user_id_idx on sellers (user_id);
+create unique index sellers_user_id_idx on sellers (user_id);
 create index sellers_slug_idx on sellers (slug);
 create index sellers_display_name_idx on sellers (display_name);
 
