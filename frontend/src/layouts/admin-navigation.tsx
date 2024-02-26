@@ -39,20 +39,6 @@ export default function AdminNavigation() {
           >
             Games
           </Link>
-
-          <Link
-            to="/admin/sellers"
-            className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
-          >
-            Sellers
-          </Link>
-
-          <Link
-            to="/admin/offers"
-            className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
-          >
-            Offers
-          </Link>
         </div>
       </div>
 

@@ -19,8 +19,9 @@ public class AdminController : ControllerBase
         var games = await context.Games.CountAsync();
         var sellers = await context.Sellers.CountAsync();
         var offers = await context.Offers.CountAsync();
+        var users = await context.Users.CountAsync();
 
-        return Ok(new { Tags = tags, Games = games, Sellers = sellers, Offers = offers });
+        return Ok(new { Tags = tags, Games = games, Sellers = sellers, Offers = offers, Users = users });
     }
 
     [Authorize(Roles = "admin")]
