@@ -25,4 +25,12 @@ public partial class Seller
     public virtual ICollection<Offer> Offers { get; set; } = new List<Offer>();
 
     public virtual User User { get; set; } = null!;
+
+    public Seller NormalizeForJson()
+    {
+        Offers = null!;
+        User = null!;
+
+        return this;
+    }
 }

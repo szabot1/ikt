@@ -68,7 +68,7 @@ public class SellerController : ControllerBase
             return NotFound();
         }
 
-        return Ok(seller);
+        return Ok(seller.NormalizeForJson());
     }
 
     [Authorize]
