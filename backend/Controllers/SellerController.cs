@@ -3,6 +3,7 @@ using backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Visus.Cuid;
 
 namespace backend.Controllers;
 
@@ -190,6 +191,7 @@ public class SellerController : ControllerBase
 
         var seller = new Seller
         {
+            Id = new Cuid2().ToString(),
             UserId = user.Id,
             DisplayName = displayName,
             Slug = slug,
