@@ -1,6 +1,19 @@
 import { method } from "../fetch";
 import { makeQuery } from "./util";
 
+export type AdminStats = {
+  tags: number;
+  games: number;
+  sellers: number;
+  offers: number;
+  users: number;
+};
+
+export const adminStatsQuery = makeQuery(
+  ["admin", "stats"],
+  `${import.meta.env.VITE_BACKEND_PROD_URL}/api/admin/stats`
+);
+
 export const adminUsersQuery = makeQuery(
   ["admin", "users"],
   `${import.meta.env.VITE_BACKEND_PROD_URL}/api/admin/users`
