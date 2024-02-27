@@ -5,6 +5,32 @@ import { type Seller, sellerMeQuery } from "@/lib/query/seller";
 import { cn } from "@/lib/style";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute, redirect } from "@tanstack/react-router";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from "lucide-react";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -36,6 +62,71 @@ function Seller() {
   );
   const offers = offerData as Offer[];
 
+  const columns: ColumnDef<Offer>[] = [
+    {
+      accessorKey: "id",
+      header: "ID",
+      cell: ({ row }) => <div>{row.getValue("id")}</div>,
+    },
+    {
+      accessorKey: "gameId",
+      header: "Game ID",
+      cell: ({ row }) => <div>{row.getValue("gameId")}</div>,
+    },
+    {
+      accessorKey: "price",
+      header: "Price",
+      cell: ({ row }) => <div>${Number(row.getValue("price")) / 100}</div>,
+    },
+    {
+      accessorKey: "createdAt",
+      header: "Created at",
+      cell: ({ row }) => (
+        <div>{new Date(row.getValue("createdAt")).toLocaleString()}</div>
+      ),
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const offer = row.original;
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(offer.id)}
+              >
+                Copy ID
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
+  ];
+
+  const table = useReactTable({
+    data: offers ?? [],
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 5,
+      },
+    },
+  });
+
   if (userIsLoading || !userInfo) {
     return null;
   }
@@ -65,7 +156,7 @@ function Seller() {
         )}
       >
         <div className="px-6 py-3 border-2 border-zinc-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
-          <h1 className="text-xl font-semibold mb-4">Account</h1>
+          <h1 className="text-xl font-semibold mb-4">Profile</h1>
 
           <div className="flex items-center justify-center flex-col gap-2">
             <img
@@ -103,12 +194,77 @@ function Seller() {
           </div>
         </div>
 
-        <div className="px-6 py-3 border-2 border-zinc-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
+        <div className="w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
           <h1 className="text-xl font-semibold mb-4">Offers</h1>
 
-          <code className="whitespace-pre-wrap max-h-72 overflow-y-auto">
-            {JSON.stringify(offers, null, 2)}
-          </code>
+          <div className="border-2 border-zinc-700 rounded-lg">
+            <Table className="border-zinc-700">
+              <TableHeader className="border-zinc-700">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow className="border-zinc-700" key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead className="border-zinc-700" key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </TableHead>
+                      );
+                    })}
+                  </TableRow>
+                ))}
+              </TableHeader>
+              <TableBody className="border-zinc-700">
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow className="border-zinc-700" key={row.id}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell className="border-zinc-700" key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow className="border-zinc-700">
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center border-zinc-700"
+                    >
+                      No results.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+
+          <div className="flex items-center justify-end space-x-2 py-4">
+            <div className="space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
+                Previous
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+              >
+                Next
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </main>
