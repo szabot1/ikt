@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "@/components/ui/use-toast";
 import ErrorPage from "@/error-page";
+import { localDate } from "@/lib/date";
 import {
   type AdminUser,
   adminUsersQuery,
@@ -87,9 +88,7 @@ function Inner() {
     {
       accessorKey: "createdAt",
       header: "Register date",
-      cell: ({ row }) => (
-        <div>{new Date(row.getValue("createdAt")).toLocaleString()}</div>
-      ),
+      cell: ({ row }) => <div>{localDate(row.getValue("createdAt"))}</div>,
     },
     {
       accessorKey: "role",

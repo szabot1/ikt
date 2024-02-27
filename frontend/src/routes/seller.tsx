@@ -36,6 +36,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Pencil, Plus } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
+import { localDate } from "@/lib/date";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -88,9 +89,7 @@ function Seller() {
     {
       accessorKey: "createdAt",
       header: "Created at",
-      cell: ({ row }) => (
-        <div>{new Date(row.getValue("createdAt")).toLocaleString()}</div>
-      ),
+      cell: ({ row }) => <div>{localDate(row.getValue("createdAt"))}</div>,
     },
     {
       id: "actions",
@@ -215,7 +214,7 @@ function Seller() {
           <div className="flex flex-col gap-2 mt-4">
             <span>
               <span className="font-semibold">Created at:</span>{" "}
-              {new Date(sellerInfo.createdAt).toLocaleString()}
+              {localDate(sellerInfo.createdAt)}
             </span>
           </div>
         </div>

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { toast } from "@/components/ui/use-toast";
 import ErrorPage from "@/error-page";
+import { localDate } from "@/lib/date";
 import { adminTagsQuery, deleteTag } from "@/lib/query/admin";
 import { type Tag } from "@/lib/query/tags";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -73,9 +74,7 @@ function Inner() {
     {
       accessorKey: "createdAt",
       header: "Created at",
-      cell: ({ row }) => (
-        <div>{new Date(row.getValue("createdAt")).toLocaleString()}</div>
-      ),
+      cell: ({ row }) => <div>{localDate(row.getValue("createdAt"))}</div>,
     },
     {
       id: "actions",
