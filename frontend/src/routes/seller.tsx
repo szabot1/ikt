@@ -1,9 +1,13 @@
 import ErrorPage from "@/error-page";
 import { type User as UserInfo, userInfoQuery } from "@/lib/query/auth";
-import { type Offer, offersBySellerIdQuery } from "@/lib/query/offer";
+import {
+  type Offer,
+  offersBySellerIdQuery,
+  deleteOffer,
+} from "@/lib/query/offer";
 import { type Seller, sellerMeQuery } from "@/lib/query/seller";
 import { cn } from "@/lib/style";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FileRoute, redirect } from "@tanstack/react-router";
 import {
   DropdownMenu,
@@ -30,7 +34,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Pencil, Plus } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -48,6 +53,8 @@ export const Route = new FileRoute("/seller").createRoute({
 });
 
 function Seller() {
+  const queryClient = useQueryClient();
+
   const { data: userData, isLoading: userIsLoading } =
     useQuery(userInfoQuery());
   const userInfo = userData as UserInfo;
@@ -106,6 +113,21 @@ function Seller() {
               >
                 Copy ID
               </DropdownMenuItem>
+
+              <DropdownMenuItem
+                className="text-red-500"
+                onClick={() => {
+                  deleteOffer(offer.id).then(() => {
+                    toast({ title: "Offer deleted successfully" });
+
+                    queryClient.refetchQueries(
+                      offersBySellerIdQuery(sellerInfo.id)
+                    );
+                  });
+                }}
+              >
+                Delete Offer
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
@@ -156,7 +178,11 @@ function Seller() {
         )}
       >
         <div className="px-6 py-3 border-2 border-zinc-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
-          <h1 className="text-xl font-semibold mb-4">Profile</h1>
+          <div className="flex flex-row justify-between mb-4">
+            <h1 className="text-xl font-semibold">Profile</h1>
+
+            <Pencil className="h-5 w-5 cursor-pointer" onClick={() => {}} />
+          </div>
 
           <div className="flex items-center justify-center flex-col gap-2">
             <img
@@ -194,8 +220,12 @@ function Seller() {
           </div>
         </div>
 
-        <div className="w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
-          <h1 className="text-xl font-semibold mb-4">Offers</h1>
+        <div className="flex flex-col gap-2 max-w-full">
+          <div className="flex flex-row justify-between mb-4">
+            <h1 className="text-xl font-semibold">Offers</h1>
+
+            <Plus className="h-5 w-5 cursor-pointer" onClick={() => {}} />
+          </div>
 
           <div className="border-2 border-zinc-700 rounded-lg">
             <Table className="border-zinc-700">
