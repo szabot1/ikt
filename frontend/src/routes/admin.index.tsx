@@ -3,6 +3,7 @@ import ErrorPage from "@/error-page";
 import { AdminStats, adminStatsQuery } from "@/lib/query/admin";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute, redirect } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/admin/").createRoute({
   component: Admin,
@@ -37,6 +38,10 @@ function Inner() {
 
   return (
     <section className="flex flex-row items-center justify-center mt-16 gap-4 flex-wrap">
+      <Helmet prioritizeSeoTags>
+        <title>Admin</title>
+      </Helmet>
+
       <Stat label="Tags" value={games.tags || 0} />
       <Stat label="Games" value={games.games || 0} />
       <Stat label="Sellers" value={games.sellers || 0} />

@@ -37,6 +37,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Pencil, Plus } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { localDate } from "@/lib/date";
+import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -162,6 +163,10 @@ function Seller() {
 
   return (
     <main className="grow flex flex-col lg:flex-row gap-4 lg:gap-12 items-center justify-center">
+      <Helmet prioritizeSeoTags>
+        <title>Seller</title>
+      </Helmet>
+
       {sellerInfo.isClosed && (
         <div className="bg-red-700 text-white p-4 text-center mb-8">
           Your seller account has been closed. Contact support if you believe
