@@ -36,24 +36,24 @@ function TagComponent() {
           <meta property="og:url" content={window.location.href} />
         </Helmet>
       )}
-
-      <h1>Tag</h1>
-      <p>Tag ID: {tagId}</p>
-
       {isTagLoading && <p>Tag loading...</p>}
 
-      {!isTagLoading && tag && (
-        <code className="bg-red-400 whitespace-pre-wrap">
-          {JSON.stringify({ tag, isTagLoading }, null, 2)}
-        </code>
-      )}
+      {!isTagLoading && tag && <div>{tag.name}</div>}
 
       {isGamesLoading && <p>Games loading...</p>}
 
       {!isGamesLoading && games && (
-        <code className="bg-green-400 whitespace-pre-wrap">
-          {JSON.stringify({ games, isGamesLoading }, null, 2)}
-        </code>
+        <div className="grid grid-cols-1 place-items-right divide-y ml-5 mt-8 divide-slate-700">
+          {games.map((tag) => (
+            <div className="py-6 flex gap-2">
+              <image></image>
+              <span>{tag.name}</span>
+            </div>
+          ))}
+          <div className="py-6 flex gap-2">
+            <span>Teszt!</span>
+          </div>
+        </div>
       )}
     </div>
   );
