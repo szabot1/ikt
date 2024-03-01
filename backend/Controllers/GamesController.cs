@@ -81,12 +81,15 @@ public class GamesController : ControllerBase
     public async Task<ActionResult<IEnumerable<Game>>> SearchGames(
         GameStoreContext context,
         [FromQuery] string query)
-        => await context.Games
-            .Where(game => Search.Similarity(game.Name, query) > 0.5)
+    {
+        var games = await context.Games
+         .Include(game => game.GameImages)
+         .Include(game => game.GameTags)
+         .ThenInclude(gameTag => gameTag.Tag)
+         .ToListAsync();
+
+        return Ok(games.Where(game => Search.Similarity(game.Name, query) > 0.5)
             .OrderByDescending(game => Search.Similarity(game.Name, query))
-            .Include(game => game.GameImages)
-            .Include(game => game.GameTags)
-            .ThenInclude(gameTag => gameTag.Tag)
-            .Select(game => game.NormalizeForJson())
-            .ToListAsync();
+            .Select(game => game.NormalizeForJson()));
+    }
 }
