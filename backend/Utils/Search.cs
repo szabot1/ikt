@@ -4,8 +4,10 @@ public static class Search
 {
     public static double Similarity(string source, string target)
     {
-        var distance = CalculateDistance(source, target);
-        return 1 - (double)distance / Math.Max(source.Length, target.Length);
+        var score = FuzzySharp.Fuzz.WeightedRatio(source, target);
+        return score / 100.0;
+        // var distance = CalculateDistance(source, target);
+        // return 1 - (double)distance / Math.Max(source.Length, target.Length);
     }
 
     public static int CalculateDistance(string source, string target)

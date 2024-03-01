@@ -58,7 +58,7 @@ function Search() {
           <div className="h-[1px] w-full max-w-full lg:max-w-3xl bg-zinc-700" />
 
           <div className="w-full max-w-full lg:max-w-2xl">
-            <ul>
+            <ul className="flex flex-col gap-4">
               {games?.map((game) => <SearchItem key={game.id} game={game} />)}
             </ul>
           </div>
