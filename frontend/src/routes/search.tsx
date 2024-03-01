@@ -1,5 +1,5 @@
 import ErrorPage from "@/error-page";
-import { Game, featuredGamesQuery } from "@/lib/query/games";
+import { Game, featuredGamesQuery, searchQuery } from "@/lib/query/games";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { Helmet } from "react-helmet-async";
@@ -21,7 +21,9 @@ function Search() {
   const { q } = Route.useSearch();
   const showResults = q.length > 0;
 
-  const { data, isLoading } = useQuery(featuredGamesQuery());
+  const { data, isLoading } = useQuery(
+    (showResults ? searchQuery(q) : null) as any
+  );
   const games = data as Game[] | undefined;
 
   return (
@@ -51,15 +53,13 @@ function Search() {
         </form>
       </div>
 
-      {showResults && (
+      {showResults && games && !isLoading && games.length > 0 && (
         <>
           <div className="h-[1px] w-full max-w-full lg:max-w-3xl bg-zinc-700" />
 
           <div className="w-full max-w-full lg:max-w-2xl">
             <ul>
-              {games &&
-                !isLoading &&
-                games?.map((game) => <SearchItem key={game.id} game={game} />)}
+              {games?.map((game) => <SearchItem key={game.id} game={game} />)}
             </ul>
           </div>
         </>

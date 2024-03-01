@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -73,11 +74,19 @@ public class GamesController : ControllerBase
         .Select(game => game.NormalizeForJson())
         .FirstOrDefaultAsync();
 
-        if (game == null)
-        {
-            return NotFound();
-        }
-
-        return game;
+        return game ?? (ActionResult<Game>)NotFound();
     }
+
+    [HttpGet("search")]
+    public async Task<ActionResult<IEnumerable<Game>>> SearchGames(
+        GameStoreContext context,
+        [FromQuery] string query)
+        => await context.Games
+            .Where(game => Search.Similarity(game.Name, query) > 0.5)
+            .OrderByDescending(game => Search.Similarity(game.Name, query))
+            .Include(game => game.GameImages)
+            .Include(game => game.GameTags)
+            .ThenInclude(gameTag => gameTag.Tag)
+            .Select(game => game.NormalizeForJson())
+            .ToListAsync();
 }

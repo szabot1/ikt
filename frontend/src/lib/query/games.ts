@@ -47,20 +47,27 @@ export function gamesQuery(page: number, pageSize: number) {
 export function featuredGamesQuery() {
   return makeQuery(
     ["featuredGames"],
-    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/featured?page=1&size=50`
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/featured?page=1&size=15`
   );
 }
 
 export function recentlyUpdatedGamesQuery() {
   return makeQuery(
     ["recentlyUpdatedGames"],
-    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/recently-updated?page=1&size=50`
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/recently-updated?page=1&size=15`
   );
 }
 
 export function discountedGamesQuery() {
   return makeQuery(
     ["discountedGames"],
-    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/discounted?page=1&size=50`
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/discounted?page=1&size=15`
+  );
+}
+
+export function searchQuery(query: string) {
+  return makeQuery(
+    ["search", query],
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/search?query=${query}`
   );
 }
