@@ -48,7 +48,7 @@ export default function GameList({ title, isLoaded, games }: Props) {
           <TableBody>
             {games.map((game) => (
               <TableRow
-                className="hover:bg-transparent cursor-pointer hover:text-green-500"
+                className="hover:bg-transparent cursor-pointer hover:text-green-500 border-none"
                 key={game.id}
                 onClick={() => {
                   navigate({
@@ -61,7 +61,6 @@ export default function GameList({ title, isLoaded, games }: Props) {
                   <img src={game.imageUrl} />
                 </TableCell>
                 <TableCell className="w-6/12">{game.displayName}</TableCell>
-                <TableCell>$0.99</TableCell>
               </TableRow>
             ))}
           </TableBody>

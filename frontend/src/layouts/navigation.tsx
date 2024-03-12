@@ -2,11 +2,9 @@ import ProfileDropdown from "@/components/navigation/profile-dropdown";
 import TagsDropdown from "@/components/navigation/tags-dropdown";
 import { useAuth } from "@/lib/auth";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ShoppingCart } from "lucide-react";
 
 export default function MainNavigation() {
   const auth = useAuth();
-  const navigate = useNavigate();
 
   return (
     <nav className="w-full h-16 flex flex-row justify-between place-items-center border-b-2 border-zinc-700 px-4 py-2">
@@ -30,18 +28,7 @@ export default function MainNavigation() {
 
       <div className="flex flex-row gap-4 place-items-center justify-center">
         {auth.isAuthenticated ? (
-          <>
-            <ShoppingCart
-              className="w-6 h-6 cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100"
-              onClick={() => {
-                navigate({
-                  to: "/cart",
-                });
-              }}
-            />
-
-            <ProfileDropdown />
-          </>
+          <ProfileDropdown />
         ) : (
           <>
             <Link

@@ -1,5 +1,7 @@
 import ErrorPage from "@/error-page";
-import { Game, gameQuery } from "@/lib/query/games";
+import { checkout } from "@/lib/query/billing";
+import { type Game, gameQuery } from "@/lib/query/games";
+import { type Offer, offersByGameIdQuery } from "@/lib/query/offer";
 import { seoPath, seoPathKey } from "@/lib/seo-path";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
@@ -18,6 +20,11 @@ function GameComponent() {
   const { data, isLoading } = useQuery(gameQuery(gameId));
   const game = data as Game | undefined;
 
+  const { data: offersData, isLoading: offersLoading } = useQuery(
+    offersByGameIdQuery(gameId)
+  );
+  const offers = offersData as Offer[] | undefined;
+
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -32,7 +39,7 @@ function GameComponent() {
   }, [count]);
 
   return (
-    <div>
+    <section className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-5xl mx-auto mt-8 grow">
       {game && (
         <Helmet prioritizeSeoTags>
           <title>Game - {game.name}</title>
@@ -51,44 +58,68 @@ function GameComponent() {
       {isLoading && <p>Loading...</p>}
 
       {!isLoading && game && (
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
-          <section className="flex items-start justify-start mt-8 ml-5">
-            <div className="max-w-sm border-2 rounded-2xl border-zinc-700 overflow-hidden shadow-lg">
-              <img
-                className="w-full rounded-t-2xl"
-                src={game.images[count].imageUrl}
-                alt={game.name}
-              ></img>
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">{game.name}</div>
-                <p className="text-zinc-300 text-base">{game.description}</p>
-                <br></br>
-                {game.tags.map((tag) => (
-                  <span
-                    key={tag.tag.name}
-                    className="inline-block bg-inherit rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
-                  >
-                    #{tag.tag.name}
-                  </span>
+        <>
+          <div className="border-2 rounded-2xl border-zinc-700 overflow-hidden shadow-lg w-full lg:w-1/2">
+            <img
+              className="rounded-t-2xl w-full h-48"
+              src={game.images[count].imageUrl}
+              alt={game.name}
+            ></img>
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">{game.name}</div>
+              <p className="text-zinc-300 text-base line-clamp-4">
+                {game.description}
+              </p>
+              <br></br>
+              {game.tags.map((tag) => (
+                <span
+                  key={tag.tag.name}
+                  className="inline-block bg-inherit rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
+                >
+                  #{tag.tag.name}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2 w-full lg:w-1/2">
+            <h1 className="text-2xl font-semibold">Available Offers</h1>
+
+            {offersLoading || !offers || offers.length === 0 ? (
+              <div className="px-12 py-6 border-2 border-zinc-700 rounded-lg">
+                <span className="text-red-500 text-sm">
+                  There are no offers available for this game
+                </span>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                {offers.map((offer) => (
+                  <div className="px-4 py-2 border-2 border-zinc-700 rounded-lg flex items-center justify-between">
+                    <div className="text-lg">
+                      <p>Hidden Seller</p>
+                    </div>
+
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      <span>${offer.price / 100}</span>
+
+                      <button
+                        className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center"
+                        onClick={() => {
+                          checkout().then((checkoutUrl) => {
+                            window.location.href = checkoutUrl!;
+                          });
+                        }}
+                      >
+                        Purchase
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
-          </section>
-          <div className="grid grid-cols-1 place-items-right divide-y ml-5 mt-8 divide-slate-700">
-            {game.tags.map((tag) => (
-              <div className="py-6 flex gap-2">
-                <span>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                </span>
-                <button className="bg-green-600 text-gray font-bold py-2 px-5  hover:border-gray-600 rounded-lg  mr-2">
-                  Buy
-                </button>
-              </div>
-            ))}
+            )}
           </div>
-        </div>
+        </>
       )}
-    </div>
+    </section>
   );
 }
