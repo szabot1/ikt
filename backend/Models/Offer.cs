@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace backend.Models;
 
@@ -23,9 +24,21 @@ public partial class Offer
 
     public virtual Game Game { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
+    [JsonIgnore]
     public virtual Seller Seller { get; set; } = null!;
 
     public virtual OfferType TypeNavigation { get; set; } = null!;
+
+    public Offer NormalizeForJson()
+    {
+        if (Game != null)
+        {
+            Game = Game.NormalizeForJson();
+        }
+
+        return this;
+    }
 }

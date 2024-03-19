@@ -37,7 +37,6 @@ function Index() {
       <section className="w-full flex flex-col lg:flex-row gap-8 max-w-full lg:max-w-5xl">
         <FeaturedGames />
         <RecentlyUpdatedGames />
-        <DiscountedGames />
       </section>
     </section>
   );
@@ -77,26 +76,6 @@ const RecentlyUpdatedGames = () => {
   return (
     <GameList
       title="Recently Updated Games"
-      isLoaded={!isLoading && games ? true : false}
-      games={!isLoading && games ? games.map(gameToListedGame) : []}
-    />
-  );
-};
-
-const DiscountedGames = () => {
-  const { data, isLoading } = useQuery(discountedGamesQuery());
-  const games = data as Game[] | undefined;
-
-  const queryClient = useQueryClient();
-  useEffect(() => {
-    games?.forEach((game) => {
-      queryClient.setQueryData(["game", game.id], game);
-    });
-  }, [games]);
-
-  return (
-    <GameList
-      title="Discounted Games"
       isLoaded={!isLoading && games ? true : false}
       games={!isLoading && games ? games.map(gameToListedGame) : []}
     />

@@ -54,13 +54,6 @@ public class GamesController : ControllerBase
             .Select(game => game.NormalizeForJson())
             .ToListAsync();
 
-    [HttpGet("discounted")]
-    public ActionResult<IEnumerable<Game>> GetDiscountedGames(
-        GameStoreContext context,
-        [FromQuery] int page = 1,
-        [FromQuery] int size = 20)
-        => Ok(new List<Game>());
-
     [HttpGet("{id}")]
     public async Task<ActionResult<Game>> GetGameById(
         GameStoreContext context,
@@ -78,18 +71,37 @@ public class GamesController : ControllerBase
     }
 
     [HttpGet("search")]
-    public async Task<ActionResult<IEnumerable<Game>>> SearchGames(
+    public async Task<ActionResult<IEnumerable<object>>> SearchGames(
         GameStoreContext context,
         [FromQuery] string query)
     {
         var games = await context.Games
+         .Include(game => game.Offers)
          .Include(game => game.GameImages)
          .Include(game => game.GameTags)
          .ThenInclude(gameTag => gameTag.Tag)
          .ToListAsync();
 
-        return Ok(games.Where(game => Search.Similarity(game.Name, query) > 0.5)
-            .OrderByDescending(game => Search.Similarity(game.Name, query))
-            .Select(game => game.NormalizeForJson()));
+        var resultGames = games.Where(game => Search.Similarity(game.Name, query) > 0.5)
+           .OrderByDescending(game => Search.Similarity(game.Name, query))
+           .ToList();
+
+        return Ok(resultGames.ConvertAll(game =>
+        {
+            return new
+            {
+                game.Id,
+                game.Name,
+                game.Slug,
+                game.Description,
+                game.IsActive,
+                game.IsFeatured,
+                game.GameImages,
+                game.GameTags,
+                game.CreatedAt,
+                game.UpdatedAt,
+                game.Offers
+            };
+        }));
     }
 }

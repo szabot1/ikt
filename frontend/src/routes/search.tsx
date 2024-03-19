@@ -1,5 +1,6 @@
 import ErrorPage from "@/error-page";
-import { Game, featuredGamesQuery, searchQuery } from "@/lib/query/games";
+import { type Game, featuredGamesQuery, searchQuery } from "@/lib/query/games";
+import { type Offer } from "@/lib/query/offer";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { Helmet } from "react-helmet-async";
@@ -68,13 +69,24 @@ function Search() {
   );
 }
 
+type GameWithOffers = Game & { offers?: Offer[] };
+
 type SearchItemProps = {
-  game: Game;
+  game: GameWithOffers;
 };
 
 function SearchItem({ game }: SearchItemProps) {
+  const navigate = useNavigate();
+  const offerCount = game.offers?.length || 0;
+
   return (
-    <div className="group cursor-pointer border-2 border-zinc-700 w-full min-h-12 rounded-xl px-6 py-3 flex flex-row justify-between hover:scale-105 hover:-translate-y-1 transition-all duration-200">
+    <div
+      className="group cursor-pointer border-2 border-zinc-700 w-full min-h-12 rounded-xl px-6 py-3 flex flex-row justify-between hover:scale-105 hover:-translate-y-1 transition-all duration-200"
+      role="button"
+      onClick={() => {
+        navigate({ to: "/game/$path", params: { path: game.id } });
+      }}
+    >
       <div className="w-10/12 flex flex-col">
         <h2 className="text-xl font-semibold">{game.name}</h2>
         <p className="text-zinc-400 line-clamp-1 text-ellipsis">
@@ -84,7 +96,7 @@ function SearchItem({ game }: SearchItemProps) {
 
       <div className="w-2/12 flex justify-end items-center">
         <span className="text-green-500 group-hover:text-green-400 transition-all duration-200">
-          5 offers
+          {offerCount} offer{offerCount === 1 ? "" : "s"}
         </span>
       </div>
     </div>

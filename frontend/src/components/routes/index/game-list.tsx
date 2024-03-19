@@ -57,10 +57,18 @@ export default function GameList({ title, isLoaded, games }: Props) {
                   });
                 }}
               >
-                <TableCell>
-                  <img src={game.imageUrl} />
+                <TableCell className="h-20 font-semibold text-xl relative">
+                  <div
+                    style={{
+                      background:
+                        "url(" + game.imageUrl + ") no-repeat center center",
+                      backgroundSize: "cover",
+                    }}
+                    className="absolute w-full h-full top-0 left-0 -z-10 blur-[1px]"
+                  ></div>
+
+                  <span>{game.displayName}</span>
                 </TableCell>
-                <TableCell className="w-6/12">{game.displayName}</TableCell>
               </TableRow>
             ))}
           </TableBody>
