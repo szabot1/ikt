@@ -84,6 +84,7 @@ public class GamesController : ControllerBase
 
         var resultGames = games.Where(game => Search.Similarity(game.Name, query) > 0.5)
            .OrderByDescending(game => Search.Similarity(game.Name, query))
+           .Select(game => game.NormalizeForJson())
            .ToList();
 
         return Ok(resultGames.ConvertAll(game =>
@@ -100,7 +101,7 @@ public class GamesController : ControllerBase
                 game.GameTags,
                 game.CreatedAt,
                 game.UpdatedAt,
-                game.Offers
+                Offers = game.Offers.Select(offer => offer.NormalizeForJson()).ToList()
             };
         }));
     }
