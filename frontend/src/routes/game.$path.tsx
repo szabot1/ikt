@@ -3,6 +3,7 @@ import { checkout } from "@/lib/query/billing";
 import { type Game, gameQuery } from "@/lib/query/games";
 import { type Offer, offersByGameIdQuery } from "@/lib/query/offer";
 import { seoPath, seoPathKey } from "@/lib/seo-path";
+import { cn } from "@/lib/style";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
@@ -12,6 +13,23 @@ export const Route = new FileRoute("/game/$path").createRoute({
   component: GameComponent,
   errorComponent: ErrorPage,
 });
+
+const hashToColor: Record<number, string> = {
+  0: "bg-red-600",
+  1: "bg-green-600",
+  2: "bg-blue-600",
+  3: "bg-yellow-600",
+  4: "bg-indigo-600",
+  5: "bg-purple-600",
+  6: "bg-pink-600",
+};
+
+const getTagColor = (tagId: string) => {
+  const hash = tagId
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return hashToColor[hash % 7];
+};
 
 function GameComponent() {
   const { path } = Route.useParams();
@@ -74,7 +92,10 @@ function GameComponent() {
               {game.tags.map((tag) => (
                 <span
                   key={tag.tag.name}
-                  className="inline-block bg-inherit rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
+                  className={cn(
+                    "inline-block bg-inherit rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2",
+                    getTagColor(tag.tag.id)
+                  )}
                 >
                   #{tag.tag.name}
                 </span>
