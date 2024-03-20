@@ -35,45 +35,49 @@ export default function GameList({ title, isLoaded, games }: Props) {
 
   return (
     <div
-      className={`basis-1/3 grow rounded-xl bg-transparent border-2 border-zinc-700 px-4 py-2 text-center space-y-4 ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
+      className={`basis-1/3 grow text-center space-y-6 ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
     >
-      <span className="font-semibold">{title}</span>
+      <span className="font-semibold text-xl">{title}</span>
 
-      {!isLoaded ? (
-        <span className="text-zinc-400">Loading...</span>
-      ) : games.length === 0 ? (
-        <span className="text-zinc-400">No games found.</span>
-      ) : (
-        <Table>
-          <TableBody>
-            {games.map((game) => (
-              <TableRow
-                className="hover:bg-transparent cursor-pointer hover:text-green-500 border-none"
-                key={game.id}
-                onClick={() => {
-                  navigate({
-                    to: "/game/$path",
-                    params: { path: seoPath(game.id, game.slug) },
-                  });
-                }}
-              >
-                <TableCell className="h-20 font-semibold text-xl relative [text-shadow:_0_2px_4px_rgb(0_0_0_/_100%)]">
-                  <div
-                    style={{
-                      background:
-                        "url(" + game.imageUrl + ") no-repeat center center",
-                      backgroundSize: "cover",
-                    }}
-                    className="absolute w-full h-full top-0 left-0 -z-10 blur-[1px]"
-                  ></div>
+      <div
+        className={`basis-1/3 grow rounded-xl bg-transparent border-2 border-zinc-700 text-center ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
+      >
+        {!isLoaded ? (
+          <span className="text-zinc-400">Loading...</span>
+        ) : games.length === 0 ? (
+          <span className="text-zinc-400">No games found.</span>
+        ) : (
+          <Table className="border-separate border-spacing-4">
+            <TableBody>
+              {games.map((game) => (
+                <TableRow
+                  className="hover:bg-transparent cursor-pointer hover:text-green-500 border-none"
+                  key={game.id}
+                  onClick={() => {
+                    navigate({
+                      to: "/game/$path",
+                      params: { path: seoPath(game.id, game.slug) },
+                    });
+                  }}
+                >
+                  <TableCell className="h-20 font-semibold text-xl relative [text-shadow:_0_2px_4px_rgb(0_0_0_/_100%)]">
+                    <div
+                      style={{
+                        background:
+                          "url(" + game.imageUrl + ") no-repeat center center",
+                        backgroundSize: "cover",
+                      }}
+                      className="absolute w-full h-full top-0 left-0 -z-10 blur-[1px]"
+                    ></div>
 
-                  <span>{game.displayName}</span>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
+                    <span>{game.displayName}</span>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </div>
     </div>
   );
 }

@@ -45,17 +45,19 @@ function TagComponent() {
 
       {!isGamesLoading && games && (
         <div className="flex flex-col gap-2 w-full lg:w-1/2">
-          <h1 className="text-2xl font-semibold">Games with this tag</h1>
-
           {games.length === 0 ? (
-            <div className="px-12 py-6 border-2 border-zinc-700 rounded-lg">
-              <span className="text-red-500 text-sm">
-                There are no games associated with this tag
-              </span>
-            </div>
+            <>
+              <h1 className="text-2xl font-semibold">Games with this tag</h1>
+
+              <div className="px-12 py-6 border-2 border-zinc-700 rounded-lg">
+                <span className="text-red-500 text-sm">
+                  There are no games associated with this tag
+                </span>
+              </div>
+            </>
           ) : (
             <GameList
-              title=""
+              title="Games with this tag"
               isLoaded={true}
               games={games.map(gameToListedGame)}
             />
