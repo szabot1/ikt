@@ -30,7 +30,7 @@
 // Title page
 #[
   #align(center + horizon, [
-    #image("kkszki.png", height: 150pt)
+    #image("img/kkszki.png", height: 150pt)
     #text(25pt)[*Záródolgozat*]
   ])
 
@@ -85,12 +85,26 @@
     header: align(right + horizon, title)
   )
 
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/vs.png", height: 45pt)],
+    ),
+  )
   == Visual Studio
 
   A Visual Studio egy kiemelkedő fejlesztői környezet, amelyet kifejezetten a Microsoft által kínált technológiák, így az ASP.NET alapú webes és vállalati alkalmazások fejlesztésére terveztek. Az ASP.NET projektjeink fejlesztéséhez a Visual Studio biztosítja azt a rugalmasságot és a teljes körű támogatást, amire szükségünk van a hatékony munkavégzéshez. Az IDE integrált környezete lehetővé teszi számunkra, hogy a kódírást, a hibakeresést, az alkalmazások tesztelését, és a telepítést egyetlen, jól összehangolt felületen végezzük.
 
   Az ASP.NET projektek fejlesztésének egyik kulcsfontosságú aspektusa a NuGet csomagkezelő integrációja, amely lehetővé teszi számunkra, hogy könnyen kezeljük a projekt függőségeit és beilleszthessük a legújabb könyvtárakat vagy keretrendszereket a projektekbe. A NuGet segítségével automatikusan kezelhetjük a csomagfrissítéseket, ami jelentősen csökkenti a függőségekkel kapcsolatos problémák kockázatát, és egyszerűsíti a különböző környezetek közötti konzisztencia fenntartását. Innen telepítettük a szükséges csomagokat, mint például az Entity Framework Core-t, amely az adatbázis-kezeléshez szükséges keretrendszer.
 
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/vsc.jpg", height: 50pt)],
+    ),
+  )
   == Visual Studio Code
 
   A Visual Studio Code (VS Code) az egyik legelőnyösebb fejlesztői környezetünk a React alapú frontend projektekhez. Ennek a könnyű, mégis erőteljes forráskód-szerkesztőnek a kiválasztása elsősorban a JavaScript és TypeScript, két olyan nyelv támogatása miatt történt, amelyek létfontosságúak a React fejlesztésben. A VS Code különösen hasznos funkciókat kínál a React fejlesztők számára, mint például az intelligens kódkiegészítés, a komponensek közötti gyors navigáció és az integrált hibakeresés, ami jelentősen felgyorsítja a fejlesztési folyamatot és javítja a kód minőségét.
@@ -107,12 +121,26 @@
     header: align(right + horizon, title)
   )
 
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/dotnet.png", height: 45pt)],
+    ),
+  )
   == .NET
   
   A .NET keretrendszer egy átfogó fejlesztési platform a Microsofttól, amely lehetővé teszi a fejlesztők számára, hogy különféle típusú alkalmazásokat hozzanak létre, beleértve a webes, asztali, mobil-, játék-, és IoT-alkalmazásokat. A platform nyelvfüggetlen, ami azt jelenti, hogy támogatja a különböző programozási nyelveket, mint például a C\#, F\# és Visual Basic. A .NET keretrendszer különösen erős a vállalati szintű webalkalmazások fejlesztésében, köszönhetően az ASP.NET-nek, egy modell-nézet-vezérlő (MVC) architektúrát alkalmazó keretrendszernek, amely lehetővé teszi a dinamikus weboldalak és szolgáltatások kifejlesztését.
 
   Mi, különösen a C\# nyelvet részesítjük előnyben a .NET keretrendszer használatakor, mivel ez a nyelv kifejezetten a .NET-hez lett tervezve. A C\# egy objektumorientált programozási nyelv, amely erős típusosságot, memória kezelést, és számos modern programozási paradigma támogatását kínálja, ami lehetővé teszi a fejlesztők számára, hogy biztonságos, hatékony, és könnyen karbantartható kódot írjanak. A C\# nyelv szintaxisa egyszerű és könnyen érthető, ami csökkenti a tanulási görbét, és gyorsítja a fejlesztési folyamatot.
 
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/aspnet.png", height: 45pt)],
+    ),
+  )
   == ASP.NET, ASP.NET Core
   
   Az ASP.NET egy erőteljes webfejlesztési keretrendszer a Microsofttól, amely lehetővé teszi a fejlesztők számára, hogy dinamikus weboldalakat, alkalmazásokat és szolgáltatásokat hozzanak létre. Az ASP.NET Core, az ASP.NET modern, keresztplatformos, nagy teljesítményű változata, kifejezetten arra tervezték, hogy könnyen kezelhető és skálázható webalkalmazásokat lehetővé tegyen a .NET Core futtatási környezeten. Az ASP.NET Core kínálja az ASP.NET összes előnyét, miközben további előnyöket biztosít, mint például a keresztplatformos támogatás, a könnyebb konfiguráció, valamint a jobb teljesítmény.
@@ -129,6 +157,13 @@
     header: align(right + horizon, title)
   )
 
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/github.png", height: 45pt)],
+    ),
+  )
   == GitHub
   
   Projektünkben a GitHubot használjuk a forráskód tárolására, valamint a fejlesztési munkafolyamatok, mint a hibajavítás, funkciófejlesztés és automatizált telepítések kezelésére. A GitHub Actions, egy kulcsfontosságú szolgáltatás a GitHub platformon, lehetővé teszi számunkra, hogy automatizált workflowokat hozzunk létre, amelyek a kódbázisunkkal kapcsolatos eseményekre, mint például a push műveletekre vagy a pull requestekre reagálva aktiválódnak.
@@ -137,6 +172,13 @@
 
   A frontend automatikus telepítését a Cloudflare Pages-re, míg a backend automatikus telepítését a Fly.io-ra konfiguráltuk a GitHub Actions segítségével. Ez azt jelenti, hogy minden változás, amely a frontend vagy a backend kódjában történik, és egy adott branch-be kerül (például egy feature branch merge-elése a main branch-be), aktivál egy workflow-t, amely automatikusan teszteli, építi, és telepíti az alkalmazásokat az előre megadott platformokra. A Cloudflare Pages ideális választás a statikus frontend alkalmazások gyors és biztonságos telepítésére, míg a Fly.io kiválóan alkalmas a backend API-k nagy rendelkezésre állású és skálázható telepítésére.
 
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/jwt.png", height: 45pt)],
+    ),
+  )
   == JWT
 
   Projektünkben a JWT-kat használjuk a felhasználók hitelesítésére, ami lehetővé teszi számunkra, hogy biztonságos és hatékony hozzáférést biztosítsunk az alkalmazásainkhoz. Egy JWT három részből áll: a fejlécből (header), az adatokból (payload), és az aláírásból (signature), amelyeket pontokkal választanak el egymástól. A fejléc általában tartalmazza a token típusát, például JWT, és az aláíráshoz használt algoritmust, például HMAC SHA256 vagy RSA.
@@ -153,6 +195,14 @@
     header: align(right + horizon, title)
   )
 
+  #figure(
+    grid(
+      columns: 2,
+      gutter: 2mm,
+      [#image("img/vite.png", height: 40pt)],
+      [#image("img/ts.png", height: 40pt)],
+    ),
+  )
   == Vite, TypeScript
   
   A Vite és a TypeScript kombinációja jelentősen felgyorsítja és optimalizálja a frontend fejlesztési folyamatot projektünkben.
@@ -163,6 +213,14 @@
 
   A Vite használata a TypeScripttel különösen előnyös, mivel a Vite kihasználja a TypeScript gyors, inkrementális fordítását, ami lehetővé teszi, hogy a fejlesztők azonnal láthassák a kódjukban végrehajtott változtatások hatását. Ez a kombináció egyaránt támogatja a gyors prototípuskészítést és a nagy teljesítményű alkalmazásfejlesztést, miközben biztosítja a kód minőségét és robustusságát.
 
+  #figure(
+    grid(
+      columns: 2,
+      gutter: 2mm,
+      [#image("img/react.png", height: 40pt)],
+      [#image("img/tw.png", height: 40pt)],
+    ),
+  )
   == React, Tailwind CSS
 
   A React lehetővé teszi a dinamikus és interaktív felhasználói felületek hatékony építését a weben. Ennek a könyvtárnak az alkalmazása számos előnyt kínál, amelyek közvetlenül hozzájárulnak a fejlesztési folyamat javításához és a végtermék minőségének növeléséhez.
@@ -187,7 +245,7 @@
   ])
 
   == Bevezetés
-  #lorem(300)
+  #lorem(10)
 ]
 
 #pagebreak()
