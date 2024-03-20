@@ -94,9 +94,9 @@
   )
   == Visual Studio
 
-  A Visual Studio egy kiemelkedő fejlesztői környezet, amelyet kifejezetten a Microsoft által kínált technológiák, így az ASP.NET alapú webes és vállalati alkalmazások fejlesztésére terveztek. Az ASP.NET projektjeink fejlesztéséhez a Visual Studio biztosítja azt a rugalmasságot és a teljes körű támogatást, amire szükségünk van a hatékony munkavégzéshez. Az IDE integrált környezete lehetővé teszi számunkra, hogy a kódírást, a hibakeresést, az alkalmazások tesztelését, és a telepítést egyetlen, jól összehangolt felületen végezzük.
+  A Visual Studio egy kiemelkedő fejlesztői környezet, amelyet kifejezetten a Microsoft által kínált technológiák, így az ASP.NET alapú webes és vállalati alkalmazások fejlesztésére terveztek. A projektünk fejlesztéséhez a Visual Studio biztosítja azt a rugalmasságot és a teljes körű támogatást, amire szükségünk van a hatékony munkavégzéshez. Az integrált környezet lehetővé teszi számunkra, hogy a kódírást, a hibakeresést, az alkalmazások tesztelését, és a telepítést egyetlen, jól összehangolt felületen végezzük.
 
-  Az ASP.NET projektek fejlesztésének egyik kulcsfontosságú aspektusa a NuGet csomagkezelő integrációja, amely lehetővé teszi számunkra, hogy könnyen kezeljük a projekt függőségeit és beilleszthessük a legújabb könyvtárakat vagy keretrendszereket a projektekbe. A NuGet segítségével automatikusan kezelhetjük a csomagfrissítéseket, ami jelentősen csökkenti a függőségekkel kapcsolatos problémák kockázatát, és egyszerűsíti a különböző környezetek közötti konzisztencia fenntartását. Innen telepítettük a szükséges csomagokat, mint például az Entity Framework Core-t, amely az adatbázis-kezeléshez szükséges keretrendszer.
+  Az ASP.NET projektek fejlesztésének egyik kulcsfontosságú része a NuGet integrációja, amely lehetővé teszi számunkra, hogy könnyen kezeljük a projekt függőségeit és beilleszthessük őket a projektbe. A NuGet segítségével automatikusan kezelhetjük a csomagfrissítéseket, ami jelentősen csökkenti a függőségekkel kapcsolatos problémák kockázatát, és egyszerűsíti a projekt konfigurációját. Innen telepítettük a szükséges csomagokat, mint például az Entity Framework Core-t, amely az adatbázis-kezeléshez szükséges keretrendszer.
 
   #figure(
     grid(
@@ -107,9 +107,9 @@
   )
   == Visual Studio Code
 
-  A Visual Studio Code (VS Code) az egyik legelőnyösebb fejlesztői környezetünk a React alapú frontend projektekhez. Ennek a könnyű, mégis erőteljes forráskód-szerkesztőnek a kiválasztása elsősorban a JavaScript és TypeScript, két olyan nyelv támogatása miatt történt, amelyek létfontosságúak a React fejlesztésben. A VS Code különösen hasznos funkciókat kínál a React fejlesztők számára, mint például az intelligens kódkiegészítés, a komponensek közötti gyors navigáció és az integrált hibakeresés, ami jelentősen felgyorsítja a fejlesztési folyamatot és javítja a kód minőségét.
+  A Visual Studio Code (VS Code) az egyik legelőnyösebb fejlesztői környezet a React alapú frontend projektekhez. Ennek a könnyű, mégis erőteljes forráskód-szerkesztőnek a kiválasztása elsősorban a JavaScript és TypeScript, két olyan nyelv támogatása miatt történt, amelyek létfontosságúak a React fejlesztésben. A VS Code különösen hasznos funkciókat kínál a React fejlesztők számára, mint például az intelligens kódkiegészítés, a komponensek közötti gyors navigáció és az integrált hibakeresés, ami jelentősen felgyorsítja a fejlesztési folyamatot és javítja a kód minőségét.
 
-  A fejlesztői környezetünk további testreszabását és optimalizálását számos, kifejezetten a React és a modern webfejlesztési munkafolyamatokhoz tervezett VS Code kiterjesztés segíti. Ezek közé tartoznak a linter-ek és kódformázók, mint például az ESLint és a Prettier, amelyek segítenek fenntartani a kódbázis konzisztenciáját és olvashatóságát. Emellett a React specifikus kiterjesztések, mint a React Code Snippets, tovább egyszerűsítik a gyakori minták és komponensek kódolását. Ezek a kiterjesztések jelentősen hozzájárulnak a fejlesztési hatékonysághoz.
+  A fejlesztői környezetünk további testreszabását és optimalizálását számos, kifejezetten a React és a modern webfejlesztési munkafolyamatokhoz tervezett VS Code kiterjesztés segíti. Ezek közé tartoznak a linter-ek és kódformázók, mint például az ESLint és a Prettier, amelyek segítenek fenntartani a kódbázis olvashatóságát. Emellett a React specifikus kiterjesztések, mint a React Code Snippets, tovább egyszerűsítik a gyakori minták és komponensek kódolását. Ezek a kiterjesztések jelentősen hozzájárulnak a fejlesztési hatékonysághoz.
 ]
 
 #[
@@ -132,7 +132,7 @@
   
   A .NET keretrendszer egy átfogó fejlesztési platform a Microsofttól, amely lehetővé teszi a fejlesztők számára, hogy különféle típusú alkalmazásokat hozzanak létre, beleértve a webes, asztali, mobil-, játék-, és IoT-alkalmazásokat. A platform nyelvfüggetlen, ami azt jelenti, hogy támogatja a különböző programozási nyelveket, mint például a C\#, F\# és Visual Basic. A .NET keretrendszer különösen erős a vállalati szintű webalkalmazások fejlesztésében, köszönhetően az ASP.NET-nek, egy modell-nézet-vezérlő (MVC) architektúrát alkalmazó keretrendszernek, amely lehetővé teszi a dinamikus weboldalak és szolgáltatások kifejlesztését.
 
-  Mi, különösen a C\# nyelvet részesítjük előnyben a .NET keretrendszer használatakor, mivel ez a nyelv kifejezetten a .NET-hez lett tervezve. A C\# egy objektumorientált programozási nyelv, amely erős típusosságot, memória kezelést, és számos modern programozási paradigma támogatását kínálja, ami lehetővé teszi a fejlesztők számára, hogy biztonságos, hatékony, és könnyen karbantartható kódot írjanak. A C\# nyelv szintaxisa egyszerű és könnyen érthető, ami csökkenti a tanulási görbét, és gyorsítja a fejlesztési folyamatot.
+  Mi a C\# nyelvet részesítjük előnyben a .NET keretrendszer használatakor, mivel ez a nyelv kifejezetten a .NET-hez lett tervezve. A C\# egy objektumorientált programozási nyelv, amely erős típusosságot, memória kezelést, és lehetővé teszi a fejlesztők számára, hogy biztonságos, hatékony, és könnyen karbantartható kódot írjanak. A C\# nyelv szintaxisa egyszerű és könnyen érthető, ami gyorsítja a fejlesztési folyamatot.
 
   #figure(
     grid(
@@ -166,11 +166,9 @@
   )
   == GitHub
   
-  Projektünkben a GitHubot használjuk a forráskód tárolására, valamint a fejlesztési munkafolyamatok, mint a hibajavítás, funkciófejlesztés és automatizált telepítések kezelésére. A GitHub Actions, egy kulcsfontosságú szolgáltatás a GitHub platformon, lehetővé teszi számunkra, hogy automatizált workflowokat hozzunk létre, amelyek a kódbázisunkkal kapcsolatos eseményekre, mint például a push műveletekre vagy a pull requestekre reagálva aktiválódnak.
+  Projektünkben a GitHubot használjuk a forráskód tárolására, valamint a fejlesztési munkafolyamatok, mint a hibajavítás, funkciófejlesztés és automatizált telepítések kezelésére. A GitHub Actions, egy kiemelt szolgáltatás a GitHubon, lehetővé teszi számunkra, hogy automatizált munkafolyamatokat állítsunk be, amelyek különböző eseményekre reagálva aktiválódnak, mint a forráskódhoz való hozzáadás (push) vagy a pull requestek.
 
-  A GitHub Actions, egy kiemelt szolgáltatás a GitHubon, lehetővé teszi számunkra, hogy automatizált munkafolyamatokat állítsunk be, amelyek különböző eseményekre reagálva aktiválódnak, mint a forráskódhoz való hozzáadás (push) vagy a pull requestek.
-
-  A frontend automatikus telepítését a Cloudflare Pages-re, míg a backend automatikus telepítését a Fly.io-ra konfiguráltuk a GitHub Actions segítségével. Ez azt jelenti, hogy minden változás, amely a frontend vagy a backend kódjában történik, és egy adott branch-be kerül (például egy feature branch merge-elése a main branch-be), aktivál egy workflow-t, amely automatikusan teszteli, építi, és telepíti az alkalmazásokat az előre megadott platformokra. A Cloudflare Pages ideális választás a statikus frontend alkalmazások gyors és biztonságos telepítésére, míg a Fly.io kiválóan alkalmas a backend API-k nagy rendelkezésre állású és skálázható telepítésére.
+  A frontend automatikus telepítését a Cloudflare Pages-re, míg a backend automatikus telepítését a Fly.io-ra konfiguráltuk a GitHub Actions segítségével. Ez azt jelenti, hogy minden változás, amely a frontend vagy a backend kódjában történik, és egy adott branch-be kerül (például egy feature branch merge-elése a main branch-be), aktivál egy workflow-t, amely automatikusan teszteli, építi, és telepíti az alkalmazásokat az előre megadott platformokra. A Cloudflare Pages ideális választás a statikus frontend alkalmazások gyors telepítésére, míg a Fly.io kiválóan alkalmas a backend API-k nagy rendelkezésre állású és skálázható telepítésére.
 
   #figure(
     grid(
@@ -181,9 +179,9 @@
   )
   == JWT
 
-  Projektünkben a JWT-kat használjuk a felhasználók hitelesítésére, ami lehetővé teszi számunkra, hogy biztonságos és hatékony hozzáférést biztosítsunk az alkalmazásainkhoz. Egy JWT három részből áll: a fejlécből (header), az adatokból (payload), és az aláírásból (signature), amelyeket pontokkal választanak el egymástól. A fejléc általában tartalmazza a token típusát, például JWT, és az aláíráshoz használt algoritmust, például HMAC SHA256 vagy RSA.
+  Projektünkben a JWT-kat használjuk a felhasználók hitelesítésére, ami lehetővé teszi számunkra, hogy biztonságos és hatékony hozzáférést biztosítsunk az alkalmazásainkhoz. Egy JWT három részből áll: a fejlécből (header), az adatokból (payload), és az aláírásból (signature), amelyek pontokkal vannak elválasztva egymástól. A fejléc tartalmazza a token típusát, például JWT, és az aláíráshoz használt algoritmust, például HMAC SHA256 vagy RSA.
 
-  Projektünkben a JWT frissítéséhez egy refresh tokent használunk, amely lehetővé teszi a felhasználók számára, hogy új hitelesítési tokent kérjenek anélkül, hogy újra be kelljen jelentkezniük. Ha a frontend alkalmazás egy nem engedélyezett választ kap, automatikusan használja a refresh tokent egy új JWT kéréséhez. Ez a megközelítés javítja a felhasználói élményt, mivel a felhasználóknak nem kell gyakran újra bejelentkezniük, miközben fenntartja a rendszer biztonságát azáltal, hogy rendszeresen frissíti a hitelesítési tokeneket.
+  Projektünkben a JWT frissítéséhez egy refresh tokent használunk, amely lehetővé teszi a felhasználók számára, hogy új hitelesítési tokent kérjenek anélkül, hogy újra be kelljen jelentkezniük. Ha a frontend alkalmazás egy nem engedélyezett (HTTP 401) választ kap, automatikusan használja a refresh tokent egy új JWT kéréséhez. Ez a megközelítés javítja a felhasználói élményt, mivel a felhasználóknak nem kell gyakran újra bejelentkezniük, miközben fenntartja a rendszer biztonságát azáltal, hogy rendszeresen frissíti a hitelesítési tokeneket.
 ]
 
 #[
