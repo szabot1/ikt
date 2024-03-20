@@ -137,32 +137,19 @@ function Inner() {
                   Create Seller Profile
                 </DropdownMenuItem>
               ) : (
-                <>
-                  <DropdownMenuItem
-                    className="text-blue-500"
-                    onClick={() => {
-                      navigate({
-                        to: "/admin/sellers/$path",
-                        params: { path: user.id },
-                      });
-                    }}
-                  >
-                    View Seller Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="text-red-500"
-                    onClick={() => {
-                      deleteSeller(user.seller!.id).then(() => {
-                        toast({ title: "Seller profile deleted successfully" });
+                <DropdownMenuItem
+                  className="text-red-500"
+                  onClick={() => {
+                    deleteSeller(user.seller!.id).then(() => {
+                      toast({ title: "Seller profile deleted successfully" });
 
-                        queryClient.refetchQueries(sellerMeQuery());
-                        queryClient.refetchQueries(adminUsersQuery);
-                      });
-                    }}
-                  >
-                    Delete Seller Profile
-                  </DropdownMenuItem>
-                </>
+                      queryClient.refetchQueries(sellerMeQuery());
+                      queryClient.refetchQueries(adminUsersQuery);
+                    });
+                  }}
+                >
+                  Delete Seller Profile
+                </DropdownMenuItem>
               )}
             </DropdownMenuContent>
           </DropdownMenu>

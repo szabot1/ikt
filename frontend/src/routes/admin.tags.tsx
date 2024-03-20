@@ -98,6 +98,7 @@ function Inner() {
                 Copy ID
               </DropdownMenuItem>
               <DropdownMenuItem
+                className="text-red-500"
                 onClick={() => {
                   deleteTag(tag.id).then(() => {
                     toast({ title: "Tag deleted successfully" });

@@ -113,6 +113,7 @@ function Inner() {
                 Copy ID
               </DropdownMenuItem>
               <DropdownMenuItem
+                className="text-red-500"
                 onClick={() => {
                   deleteGame(game.id).then(() => {
                     toast({ title: "Game deleted successfully" });
