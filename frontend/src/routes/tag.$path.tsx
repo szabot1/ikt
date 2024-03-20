@@ -27,7 +27,7 @@ function TagComponent() {
   const games = gamesData as Game[] | undefined;
 
   return (
-    <div className="flex flex-row items-center justify-center grow">
+    <div className="flex flex-row items-center justify-center grow mt-16">
       {tag && (
         <Helmet prioritizeSeoTags>
           <title>Tag - {tag.name}</title>
