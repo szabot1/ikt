@@ -1,3 +1,6 @@
+import GameList, {
+  gameToListedGame,
+} from "@/components/routes/index/game-list";
 import ErrorPage from "@/error-page";
 import { Game } from "@/lib/query/games";
 import { Tag, tagGamesQuery, tagQuery } from "@/lib/query/tags";
@@ -24,7 +27,7 @@ function TagComponent() {
   const games = gamesData as Game[] | undefined;
 
   return (
-    <div>
+    <div className="flex flex-row items-center justify-center grow">
       {tag && (
         <Helmet prioritizeSeoTags>
           <title>Tag - {tag.name}</title>
@@ -38,21 +41,25 @@ function TagComponent() {
       )}
       {isTagLoading && <p>Tag loading...</p>}
 
-      {!isTagLoading && tag && <div>{tag.name}</div>}
-
       {isGamesLoading && <p>Games loading...</p>}
 
       {!isGamesLoading && games && (
-        <div className="grid grid-cols-1 place-items-right divide-y ml-5 mt-8 divide-slate-700">
-          {games.map((tag) => (
-            <div className="py-6 flex gap-2">
-              <image></image>
-              <span>{tag.name}</span>
+        <div className="flex flex-col gap-2 w-full lg:w-1/2">
+          <h1 className="text-2xl font-semibold">Games with this tag</h1>
+
+          {games.length === 0 ? (
+            <div className="px-12 py-6 border-2 border-zinc-700 rounded-lg">
+              <span className="text-red-500 text-sm">
+                There are no games associated with this tag
+              </span>
             </div>
-          ))}
-          <div className="py-6 flex gap-2">
-            <span>Teszt!</span>
-          </div>
+          ) : (
+            <GameList
+              title=""
+              isLoaded={true}
+              games={games.map(gameToListedGame)}
+            />
+          )}
         </div>
       )}
     </div>

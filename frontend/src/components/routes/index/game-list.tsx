@@ -57,7 +57,7 @@ export default function GameList({ title, isLoaded, games }: Props) {
                   });
                 }}
               >
-                <TableCell className="h-20 font-semibold text-xl relative">
+                <TableCell className="h-20 font-semibold text-xl relative [text-shadow:_0_2px_4px_rgb(0_0_0_/_100%)]">
                   <div
                     style={{
                       background:
