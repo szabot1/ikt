@@ -385,17 +385,16 @@ const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
   const onSubmit: SubmitHandler<CreateInputs> = (data: CreateInputs) => {
     setIsSubmitting(true);
 
-    createOffer(data.gameId, data.typeId, data.price).then((success) => {
-      if (success) {
+    createOffer(data.gameId, data.typeId, data.price).then((error) => {
+      if (error == null) {
         toast({ title: "Offer created successfully" });
 
         setIsSubmitting(false);
         setOpen(false);
       } else {
         toast({
-          title: "Error",
-          description:
-            "An error occurred while creating the offer. Please try again.",
+          title: "An error occurred while creating the offer",
+          description: error + ". Please try again.",
         });
 
         setIsSubmitting(false);

@@ -86,7 +86,7 @@ public class OfferController : ControllerBase
 
         if (request.Price <= 0)
         {
-            return BadRequest("Price must be greater than 0");
+            return BadRequest("Price must be at least $0.01");
         }
 
         var game = await context.Games.FindAsync(request.GameId);

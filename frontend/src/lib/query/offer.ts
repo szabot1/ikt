@@ -75,7 +75,7 @@ export async function createOffer(
   gameId: string,
   typeId: string,
   price: number
-): Promise<boolean> {
+): Promise<string | null> {
   const response = await post(
     `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer`,
     {
@@ -86,8 +86,8 @@ export async function createOffer(
   );
 
   if (response.result === "success") {
-    return true;
+    return null;
   }
 
-  return false;
+  return response.error || "Unknown error";
 }
