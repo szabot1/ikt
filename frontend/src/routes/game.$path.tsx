@@ -126,8 +126,22 @@ function GameComponent() {
               <div className="flex flex-col gap-4">
                 {offers.map((offer) => (
                   <div className="px-4 py-2 border-2 border-zinc-700 rounded-lg flex items-center justify-between">
-                    <div className="text-lg">
+                    <div className="text-lg flex flex-row items-center gap-2">
                       <p>{offer.seller.displayName}</p>
+
+                      <span
+                        className={cn(
+                          "px-2 py-1 rounded-md",
+                          offer.seller.isVerified
+                            ? "bg-green-500 text-green-100"
+                            : "bg-orange-500 text-orange-100",
+                          "text-sm font-semibold"
+                        )}
+                      >
+                        {offer.seller.isVerified
+                          ? "Verified seller"
+                          : "Unverified seller"}
+                      </span>
                     </div>
 
                     <div className="flex flex-row items-center justify-center gap-2">
