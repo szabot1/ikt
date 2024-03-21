@@ -2,6 +2,7 @@ import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Game } from "@/lib/query/games";
 import { seoPath } from "@/lib/seo-path";
 import { useNavigate } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 
 export function gameToListedGame(game: Game): ListedGame {
   return {
@@ -43,7 +44,9 @@ export default function GameList({ title, isLoaded, games }: Props) {
         className={`basis-1/3 grow rounded-xl bg-transparent border-2 border-zinc-700 text-center ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
       >
         {!isLoaded ? (
-          <span className="text-zinc-400 my-6 mx-6">Loading...</span>
+          <span className="text-zinc-400 my-6 mx-6">
+            <Loader className="h-4 w-4 animate-spin" />
+          </span>
         ) : games.length === 0 ? (
           <span className="text-zinc-400 my-6 mx-6">No games found.</span>
         ) : (

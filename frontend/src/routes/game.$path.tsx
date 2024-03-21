@@ -8,6 +8,7 @@ import { seoPath, seoPathKey } from "@/lib/seo-path";
 import { cn } from "@/lib/style";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
@@ -81,7 +82,7 @@ function GameComponent() {
         </Helmet>
       )}
 
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader className="h-4 w-4 animate-spin" />}
 
       {!isLoading && game && (
         <>
