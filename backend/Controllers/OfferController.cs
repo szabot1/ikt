@@ -73,7 +73,7 @@ public class OfferController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost]
+    [HttpPost("new")]
     public async Task<IActionResult> Create(GameStoreContext context, [FromBody] CreateOfferRequest request)
     {
         var user = (User)HttpContext.Items["User"]!;

@@ -77,7 +77,7 @@ export async function createOffer(
   price: number
 ): Promise<string | null> {
   const response = await post(
-    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer`,
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer/new`,
     {
       gameId,
       typeId,
