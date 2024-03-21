@@ -89,7 +89,7 @@ export async function createOffer(
     return null;
   }
 
-  return response.error || "Unknown error";
+  return response.error.message || response.error || "Unknown error";
 }
 
 export async function clearStock(offerId: string): Promise<string | null> {
@@ -101,7 +101,7 @@ export async function clearStock(offerId: string): Promise<string | null> {
     return null;
   }
 
-  return response.error || "Unknown error";
+  return response.error.message || response.error || "Unknown error";
 }
 
 export type AddStockRequest = {
@@ -121,5 +121,5 @@ export async function addStockBulk(
     return null;
   }
 
-  return response.error || "Unknown error";
+  return response.error.message || response.error || "Unknown error";
 }

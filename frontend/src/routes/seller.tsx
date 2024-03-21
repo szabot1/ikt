@@ -496,7 +496,6 @@ const EditProfileModal = ({
 };
 
 type AddInputs = {
-  offerId: string;
   items: string;
 };
 
@@ -519,7 +518,7 @@ const AddStockModal = ({
     const items = data.items.split("\n").filter((item) => item.trim() !== "");
 
     addStockBulk({
-      offerId: data.offerId,
+      offerId: offer.id,
       items,
     }).then((error) => {
       if (error == null) {
