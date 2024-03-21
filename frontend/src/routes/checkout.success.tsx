@@ -21,6 +21,11 @@ export const Route = new FileRoute("/checkout/success").createRoute({
 function CheckoutSuccess() {
   const { data, isLoading } = useQuery(userInfoQuery());
   const userInfo = data as UserInfo;
+
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="px-6 py-3 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
@@ -36,7 +41,7 @@ function CheckoutSuccess() {
             assistance. Enjoy your gaming experience, and we look forward to
             serving you again in the future.
           </p>
-          <p>Best regards, </p>
+          <p>Best regards,</p>
           <p className="mb-5">Game Key Store Team</p>
         </p>
       </div>

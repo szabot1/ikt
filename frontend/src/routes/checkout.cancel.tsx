@@ -23,6 +23,10 @@ function CheckoutSuccess() {
   const { data, isLoading } = useQuery(userInfoQuery());
   const userInfo = data as UserInfo;
 
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="px-6 py-3 border-2 border-red-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
@@ -36,12 +40,9 @@ function CheckoutSuccess() {
           payment processor. We kindly ask you to double-check the payment
           information provided and ensure that all details are accurate. If the
           issue persists, we recommend contacting your bank or payment provider
-          for further assistance. If you have any questions or require
-          assistance, please don't hesitate to reach out to our customer support
-          team. We're here to help resolve any issues and ensure a smooth
-          shopping experience for you. Thank you for your understanding.
+          for further assistance.
         </p>
-        <p>Best regards, </p>
+        <p>Best regards,</p>
         <p className="mb-5">Game Key Store Team</p>
       </div>
     </div>
