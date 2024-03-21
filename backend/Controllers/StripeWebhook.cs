@@ -72,11 +72,11 @@ public class StripeWebhook : ControllerBase
         }
         catch (Exception e)
         {
-            return BadRequest(e);
+            return StatusCode(500, e.Message);
         }
     }
 
-    private bool VerifyKeys(Dictionary<string, string> metadata, params string[] keys)
+    private static bool VerifyKeys(Dictionary<string, string> metadata, params string[] keys)
     {
         return keys.All(key => metadata.ContainsKey(key));
     }
