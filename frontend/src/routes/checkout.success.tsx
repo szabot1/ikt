@@ -26,7 +26,7 @@ function CheckoutSuccess() {
       <div className="px-6 py-3 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12 flex flex-col gap-2">
         <h1 className="text-xl font-semibold mb-4">Thank you</h1>
         <p className="mb-1">
-          <p className="mb-5">Dear [Customer's Name],</p>
+          <p className="mb-5">Dear {userInfo.username},</p>
           <p className="mb-5">
             Thank you for choosing Game Key Store for your gaming needs! We
             appreciate your recent purchase and hope you're excited to dive into
