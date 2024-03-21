@@ -32,7 +32,7 @@ public class StripeWebhook : ControllerBase
             var stripeEvent = EventUtility.ConstructEvent(
               json,
               Request.Headers["Stripe-Signature"],
-              _stripeConfig.SecretKey
+              _stripeConfig.WebhookSigningSecret
             );
 
             if (stripeEvent.Type == Events.ChargeSucceeded)
