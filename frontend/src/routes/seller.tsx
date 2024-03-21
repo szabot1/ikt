@@ -34,7 +34,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Pencil, Plus } from "lucide-react";
+import { MoreHorizontal, PackageOpen, Pencil, Plus } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { localDate } from "@/lib/date";
 import { Helmet } from "react-helmet-async";
@@ -99,37 +99,56 @@ function Seller() {
         const offer = row.original;
 
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(offer.id)}
-              >
-                Copy ID
-              </DropdownMenuItem>
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <PackageOpen className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem>Add stock</DropdownMenuItem>
 
-              <DropdownMenuItem
-                className="text-red-500"
-                onClick={() => {
-                  deleteOffer(offer.id).then(() => {
-                    toast({ title: "Offer deleted successfully" });
+                <DropdownMenuItem className="text-red-500">
+                  Clear stock
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
-                    queryClient.refetchQueries(
-                      offersBySellerIdQuery(sellerInfo.id)
-                    );
-                  });
-                }}
-              >
-                Delete Offer
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => navigator.clipboard.writeText(offer.id)}
+                >
+                  Copy ID
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  className="text-red-500"
+                  onClick={() => {
+                    deleteOffer(offer.id).then(() => {
+                      toast({ title: "Offer deleted successfully" });
+
+                      queryClient.refetchQueries(
+                        offersBySellerIdQuery(sellerInfo.id)
+                      );
+                    });
+                  }}
+                >
+                  Delete Offer
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
         );
       },
     },
