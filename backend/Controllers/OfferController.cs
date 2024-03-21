@@ -19,6 +19,32 @@ public class OfferController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet("types")]
+    public async Task<IActionResult> GetTypes(GameStoreContext context)
+    {
+        var types = await context.OfferTypes.ToListAsync();
+        return Ok(types);
+    }
+
+    [Authorize]
+    [HttpGet("create-offer-game-list")]
+    public async Task<IActionResult> GetCreateOfferGameList(GameStoreContext context)
+    {
+        var user = (User)HttpContext.Items["User"]!;
+
+        var seller = await context.Sellers.Include(s => s.Offers).FirstOrDefaultAsync(s => s.UserId == user.Id);
+        if (seller == null)
+        {
+            return Unauthorized();
+        }
+
+        var games = await context.Games.ToListAsync();
+        var availableGames = games.Where(g => !seller.Offers.Any(o => o.GameId == g.Id)).ToList();
+
+        return Ok(availableGames);
+    }
+
+    [Authorize]
     [HttpGet("seller-id/{sellerId}")]
     public async Task<IActionResult> GetBySellerId(GameStoreContext context, string sellerId)
     {

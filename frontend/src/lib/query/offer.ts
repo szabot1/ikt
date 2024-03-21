@@ -12,6 +12,15 @@ export type Offer = {
   updatedAt: string;
 };
 
+export type OfferType = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  claimInstructions: string;
+  createdAt: string;
+};
+
 export function offersByGameIdQuery(gameId: string) {
   return makeQuery(
     ["offer", "game-id", gameId],
@@ -51,3 +60,13 @@ export function deleteOffer(offerId: string) {
     }
   );
 }
+
+export const offerTypesQuery = makeQuery(
+  ["offer", "types"],
+  `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer/types`
+);
+
+export const createOfferGameListQuery = makeQuery(
+  ["offer", "create-offer-game-list"],
+  `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer/create-offer-game-list`
+);

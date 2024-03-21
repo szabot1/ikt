@@ -4,6 +4,9 @@ import {
   type Offer,
   offersBySellerIdQuery,
   deleteOffer,
+  offerTypesQuery,
+  type OfferType,
+  createOfferGameListQuery,
 } from "@/lib/query/offer";
 import { type Seller, sellerMeQuery } from "@/lib/query/seller";
 import { cn } from "@/lib/style";
@@ -38,6 +41,27 @@ import { MoreHorizontal, PackageOpen, Pencil, Plus } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { localDate } from "@/lib/date";
 import { Helmet } from "react-helmet-async";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { type Game } from "@/lib/query/games";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -219,7 +243,7 @@ function Seller() {
                 {sellerInfo.displayName}
               </span>
 
-              <span className="text-sm text-gray-500">({sellerInfo.slug})</span>
+              <span className="text-sm text-zinc-500">({sellerInfo.slug})</span>
             </h2>
 
             <span
@@ -247,7 +271,9 @@ function Seller() {
           <div className="flex flex-row justify-between mb-4">
             <h1 className="text-xl font-semibold">Offers</h1>
 
-            <Plus className="h-5 w-5 cursor-pointer" onClick={() => {}} />
+            <CreateOfferModal>
+              <Plus className="h-5 w-5 cursor-pointer" />
+            </CreateOfferModal>
           </div>
 
           <div className="border-2 border-zinc-700 rounded-lg">
@@ -323,3 +349,78 @@ function Seller() {
     </main>
   );
 }
+
+const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
+  const { data: gamesData, isLoading: gamesLoading } = useQuery(
+    createOfferGameListQuery
+  );
+  let games = gamesData as Game[];
+
+  const { data: offerTypesData, isLoading: offerTypesLoading } =
+    useQuery(offerTypesQuery);
+  let offerTypes = offerTypesData as OfferType[];
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Create offer</DialogTitle>
+          <DialogDescription>
+            Create a new offer for a game. Click save when you're done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a game" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {gamesLoading || !games ? (
+                  <SelectLabel>Games are still loading...</SelectLabel>
+                ) : (
+                  <>
+                    <SelectLabel>Games</SelectLabel>
+
+                    {games.map((game) => (
+                      <SelectItem key={game.id} value={game.id}>
+                        {game.name}
+                      </SelectItem>
+                    ))}
+                  </>
+                )}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a delivery type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {offerTypesLoading || !offerTypes ? (
+                  <SelectLabel>Delivery types are still loading...</SelectLabel>
+                ) : (
+                  <>
+                    <SelectLabel>Delivery types</SelectLabel>
+
+                    {offerTypes.map((offerType) => (
+                      <SelectItem key={offerType.id} value={offerType.id}>
+                        {offerType.name} ({offerType.slug})
+                      </SelectItem>
+                    ))}
+                  </>
+                )}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};

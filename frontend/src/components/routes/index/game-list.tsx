@@ -43,9 +43,9 @@ export default function GameList({ title, isLoaded, games }: Props) {
         className={`basis-1/3 grow rounded-xl bg-transparent border-2 border-zinc-700 text-center ${(!isLoaded || games.length === 0) && "flex flex-col"}`}
       >
         {!isLoaded ? (
-          <span className="text-zinc-400">Loading...</span>
+          <span className="text-zinc-400 my-6 mx-6">Loading...</span>
         ) : games.length === 0 ? (
-          <span className="text-zinc-400">No games found.</span>
+          <span className="text-zinc-400 my-6 mx-6">No games found.</span>
         ) : (
           <Table className="border-separate border-spacing-4">
             <TableBody>
