@@ -35,7 +35,7 @@ public class StripeWebhook : ControllerBase
               _stripeConfig.WebhookSigningSecret
             );
 
-            if (stripeEvent.Type == Events.ChargeSucceeded)
+            if (stripeEvent.Type == Events.CheckoutSessionCompleted)
             {
                 var session = stripeEvent.Data.Object as Stripe.Checkout.Session;
                 var metadata = session!.Metadata;
@@ -49,23 +49,14 @@ public class StripeWebhook : ControllerBase
                 var offerId = metadata["offerId"];
                 var stockId = metadata["stockId"];
 
-                return await HandleSuccess(ctx, userId, offerId, stockId);
-            }
-            else if (stripeEvent.Type == Events.ChargeFailed)
-            {
-                var session = stripeEvent.Data.Object as Stripe.Checkout.Session;
-                var metadata = session!.Metadata;
-
-                if (!VerifyKeys(metadata, "userId", "offerId", "stockId"))
+                if (session.PaymentStatus != "unpaid" && session.Status == "complete")
                 {
-                    return BadRequest("metadata is missing keys, event: " + stripeEvent.Id);
+                    return await HandleSuccess(ctx, userId, offerId, stockId);
                 }
-
-                var userId = metadata["userId"];
-                var offerId = metadata["offerId"];
-                var stockId = metadata["stockId"];
-
-                return await HandleFailure(ctx, userId, offerId, stockId);
+                else
+                {
+                    return await HandleFailure(ctx, userId, offerId, stockId);
+                }
             }
 
             return Ok();
