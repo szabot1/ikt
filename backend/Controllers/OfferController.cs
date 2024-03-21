@@ -176,4 +176,61 @@ public class OfferController : ControllerBase
 
         return Ok();
     }
+
+    [Authorize]
+    [HttpDelete("stock/{id}")]
+    public async Task<IActionResult> ClearOfferStock(GameStoreContext context, string id)
+    {
+        var user = (User)HttpContext.Items["User"]!;
+
+        var offer = await context.Offers.FindAsync(id);
+        if (offer == null)
+        {
+            return NotFound();
+        }
+
+        if (offer.SellerId != user.Id && user.Role != UserRole.admin)
+        {
+            return Unauthorized();
+        }
+
+        context.OfferStocks.RemoveRange(context.OfferStocks.Where(os => os.OfferId == id));
+
+        await context.SaveChangesAsync();
+
+        return Ok();
+    }
+
+    [Authorize]
+    [HttpPost("stock/bulk")]
+    public async Task<IActionResult> AddStockBulk(GameStoreContext context, [FromBody] AddStockBulkRequest request)
+    {
+        var user = (User)HttpContext.Items["User"]!;
+
+        var offer = await context.Offers.FindAsync(request.OfferId);
+        if (offer == null)
+        {
+            return NotFound();
+        }
+
+        if (offer.SellerId != user.Id && user.Role != UserRole.admin)
+        {
+            return Unauthorized();
+        }
+
+        var items = request.Items.Select(i => new OfferStock
+        {
+            Id = new Cuid2().ToString(),
+            OfferId = offer.Id,
+            Item = i,
+            IsLocked = false
+        });
+
+        context.OfferStocks.AddRange(items);
+        await context.SaveChangesAsync();
+
+        return Ok();
+    }
+
+    public record AddStockBulkRequest(string OfferId, List<string> Items);
 }

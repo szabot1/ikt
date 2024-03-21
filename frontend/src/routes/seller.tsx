@@ -8,6 +8,8 @@ import {
   type OfferType,
   createOfferGameListQuery,
   createOffer,
+  clearStock,
+  addStockBulk,
 } from "@/lib/query/offer";
 import { type Seller, sellerMeQuery } from "@/lib/query/seller";
 import { cn } from "@/lib/style";
@@ -72,6 +74,7 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import { type SubmitHandler, useForm, Controller } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -143,10 +146,33 @@ function Seller() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>Add stock</DropdownMenuItem>
 
-                <DropdownMenuItem className="text-red-500">
-                  Clear stock
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  <AddStockModal offer={offer}>
+                    <span>Add Stock</span>
+                  </AddStockModal>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  className="text-red-500"
+                  onClick={() => {
+                    clearStock(offer.id).then((error) => {
+                      if (error == null) {
+                        toast({ title: "Stock cleared successfully" });
+
+                        queryClient.refetchQueries(
+                          offersBySellerIdQuery(sellerInfo.id)
+                        );
+                      } else {
+                        toast({
+                          title: "An error occurred while clearing stock",
+                          description: error + ". Please try again.",
+                        });
+                      }
+                    });
+                  }}
+                >
+                  Clear Stock
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -359,6 +385,93 @@ function Seller() {
     </main>
   );
 }
+
+type AddInputs = {
+  offerId: string;
+  items: string;
+};
+
+const AddStockModal = ({
+  offer,
+  children,
+}: {
+  offer: Offer;
+  children: React.ReactNode;
+}) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const { register, control, handleSubmit } = useForm<AddInputs>();
+
+  const onSubmit: SubmitHandler<AddInputs> = (data: AddInputs) => {
+    setIsSubmitting(true);
+
+    const items = data.items.split("\n").filter((item) => item.trim() !== "");
+
+    addStockBulk({
+      offerId: data.offerId,
+      items,
+    }).then((error) => {
+      if (error == null) {
+        toast({ title: "Stock added successfully" });
+
+        setIsSubmitting(false);
+        setOpen(false);
+      } else {
+        toast({
+          title: "An error occurred while adding stock",
+          description: error + ". Please try again.",
+        });
+
+        setIsSubmitting(false);
+      }
+    });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Add stock</DialogTitle>
+          <DialogDescription>
+            Add stock for an offer. Every line is treated as a new item. Click
+            the add button when you're done.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form
+          id={`add-stock-form-${offer.id}`}
+          className="grid gap-4 py-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Textarea
+            placeholder="Items (one per line)"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.stopPropagation();
+              }
+            }}
+            {...register("items", { required: true })}
+          />
+        </form>
+
+        <DialogFooter>
+          <Button
+            type="submit"
+            form={`add-stock-form-${offer.id}`}
+            disabled={isSubmitting}
+            className="flex flex-row items-center gap-2"
+          >
+            {isSubmitting && <Loader className="h-4 w-4 animate-spin" />}
+            <span>Add stock</span>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 type CreateInputs = {
   gameId: string;

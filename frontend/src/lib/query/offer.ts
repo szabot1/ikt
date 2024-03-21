@@ -1,4 +1,4 @@
-import { fetch, post } from "../fetch";
+import { del, fetch, post } from "../fetch";
 import { makeQuery } from "./util";
 
 export type Offer = {
@@ -83,6 +83,38 @@ export async function createOffer(
       typeId,
       price,
     }
+  );
+
+  if (response.result === "success") {
+    return null;
+  }
+
+  return response.error || "Unknown error";
+}
+
+export async function clearStock(offerId: string): Promise<string | null> {
+  const response = await del(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer/stock/${offerId}`
+  );
+
+  if (response.result === "success") {
+    return null;
+  }
+
+  return response.error || "Unknown error";
+}
+
+export type AddStockRequest = {
+  offerId: string;
+  items: string[];
+};
+
+export async function addStockBulk(
+  request: AddStockRequest
+): Promise<string | null> {
+  const response = await post(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer/stock/bulk`,
+    request
   );
 
   if (response.result === "success") {
