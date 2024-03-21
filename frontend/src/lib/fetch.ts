@@ -59,8 +59,13 @@ export async function fetch<T>(
     const response = await window.fetch(url, { ...options, headers });
 
     if (response.ok) {
-      const data = await response.json();
-      return { result: "success", data };
+      try {
+        const data = await response.json();
+
+        return { result: "success", data };
+      } catch (_) {
+        return { result: "success", data: null as T };
+      }
     } else if (response.status === 401 && accessToken && refreshToken) {
       const response = await refresh({
         refreshToken,
