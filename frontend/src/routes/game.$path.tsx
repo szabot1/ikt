@@ -109,7 +109,9 @@ function GameComponent() {
           <div className="flex flex-col gap-2 w-full lg:w-1/2">
             <h1 className="text-2xl font-semibold">Available Offers</h1>
 
-            {offersLoading || !offers || offers.length === 0 ? (
+            {offersLoading ? (
+              <></>
+            ) : !offers || offers.length === 0 ? (
               <div className="px-12 py-6 border-2 border-zinc-700 rounded-lg">
                 <span className="text-red-500 text-sm">
                   There are no offers available for this game
