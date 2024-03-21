@@ -49,24 +49,36 @@ export async function closeSellerAccount() {
   return response.result === "success";
 }
 
-export async function setSellerDisplayName(displayName: string) {
+export async function setSellerDisplayName(
+  displayName: string
+): Promise<string | null> {
   const response = await method(
     `${import.meta.env.VITE_BACKEND_PROD_URL}/api/seller/display-name`,
     "POST",
     { displayName }
   );
 
-  return response.result === "success";
+  if (response.result === "success") {
+    return null;
+  }
+
+  return response.error || "Unknown error";
 }
 
-export async function setSellerImageUrl(imageUrl: string) {
+export async function setSellerImageUrl(
+  imageUrl: string
+): Promise<string | null> {
   const response = await method(
     `${import.meta.env.VITE_BACKEND_PROD_URL}/api/seller/image-url`,
     "POST",
     { imageUrl }
   );
 
-  return response.result === "success";
+  if (response.result === "success") {
+    return null;
+  }
+
+  return response.error || "Unknown error";
 }
 
 export async function createSellerProfile(userId: string) {

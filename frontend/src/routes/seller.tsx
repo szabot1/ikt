@@ -11,7 +11,12 @@ import {
   clearStock,
   addStockBulk,
 } from "@/lib/query/offer";
-import { type Seller, sellerMeQuery } from "@/lib/query/seller";
+import {
+  type Seller,
+  sellerMeQuery,
+  setSellerDisplayName,
+  setSellerImageUrl,
+} from "@/lib/query/seller";
 import { cn } from "@/lib/style";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FileRoute, redirect } from "@tanstack/react-router";
@@ -264,7 +269,9 @@ function Seller() {
           <div className="flex flex-row justify-between mb-4">
             <h1 className="text-xl font-semibold">Profile</h1>
 
-            <Pencil className="h-5 w-5 cursor-pointer" onClick={() => {}} />
+            <EditProfileModal seller={sellerInfo}>
+              <Pencil className="h-5 w-5 cursor-pointer" />
+            </EditProfileModal>
           </div>
 
           <div className="flex items-center justify-center flex-col gap-2">
@@ -385,6 +392,108 @@ function Seller() {
     </main>
   );
 }
+
+type EditProfileInputs = {
+  displayName: string;
+  imageUrl: string;
+};
+
+const EditProfileModal = ({
+  seller,
+  children,
+}: {
+  seller: Seller;
+  children: React.ReactNode;
+}) => {
+  const queryClient = useQueryClient();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const { register, handleSubmit } = useForm<EditProfileInputs>();
+
+  const onSubmit: SubmitHandler<EditProfileInputs> = (
+    data: EditProfileInputs
+  ) => {
+    setIsSubmitting(true);
+
+    const displayNamePromise =
+      data.displayName !== seller.displayName
+        ? setSellerDisplayName(data.displayName)
+        : Promise.resolve(null);
+
+    const imageUrlPromise =
+      data.imageUrl !== seller.imageUrl
+        ? setSellerImageUrl(data.imageUrl)
+        : Promise.resolve(null);
+
+    Promise.all([displayNamePromise, imageUrlPromise]).then((errors) => {
+      if (errors.every((error) => error == null)) {
+        toast({ title: "Profile updated successfully" });
+
+        setIsSubmitting(false);
+        setOpen(false);
+
+        queryClient.refetchQueries(sellerMeQuery());
+      } else {
+        toast({
+          title: "An error occurred while updating the profile",
+          description: errors.join(". ") + ". Please try again.",
+        });
+
+        setIsSubmitting(false);
+      }
+    });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit seller profile</DialogTitle>
+          <DialogDescription>
+            Edit your brand name, and profile image. Click the save button when
+            you're done.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form
+          id="edit-profile-form"
+          className="grid gap-4 py-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Input
+            type="text"
+            placeholder="Display name"
+            defaultValue={seller.displayName}
+            {...register("displayName", { required: true })}
+          />
+
+          <Input
+            type="text"
+            placeholder="Profile image URL"
+            defaultValue={seller.imageUrl}
+            {...register("imageUrl", { required: true })}
+          />
+        </form>
+
+        <DialogFooter>
+          <Button
+            type="submit"
+            form="edit-profile-form"
+            disabled={isSubmitting}
+            className="flex flex-row items-center gap-2"
+          >
+            {isSubmitting && <Loader className="h-4 w-4 animate-spin" />}
+            <span>Save changes</span>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 type AddInputs = {
   offerId: string;
