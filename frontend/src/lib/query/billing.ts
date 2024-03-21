@@ -12,14 +12,33 @@ export async function getCustomerPortalUrl(): Promise<string | null> {
   return null;
 }
 
-export async function checkout(): Promise<string | null> {
+export type CheckoutUrlResult =
+  | {
+      result: "success";
+      url: string;
+    }
+  | {
+      result: "error";
+      message: string;
+    };
+
+export async function checkout(offerId: string): Promise<CheckoutUrlResult> {
   const response = await post(
-    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/billing/checkout`
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/billing/checkout`,
+    {
+      offerId,
+    }
   );
 
   if (response.result === "success") {
-    return (response.data as any).url;
+    return {
+      result: "success",
+      url: (response.data as any).url,
+    };
   }
 
-  return null;
+  return {
+    result: "error",
+    message: response.error?.message || "An error occurred",
+  };
 }

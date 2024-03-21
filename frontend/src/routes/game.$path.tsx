@@ -1,3 +1,4 @@
+import { useToast } from "@/components/ui/use-toast";
 import ErrorPage from "@/error-page";
 import { checkout } from "@/lib/query/billing";
 import { type Game, gameQuery } from "@/lib/query/games";
@@ -32,6 +33,8 @@ const getTagColor = (tagId: string) => {
 };
 
 function GameComponent() {
+  const { toast } = useToast();
+
   const { path } = Route.useParams();
   const gameId = seoPathKey(path);
 
@@ -126,8 +129,15 @@ function GameComponent() {
                       <button
                         className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center"
                         onClick={() => {
-                          checkout().then((checkoutUrl) => {
-                            window.location.href = checkoutUrl!;
+                          checkout(offer.id).then((result) => {
+                            if (result.result === "success") {
+                              window.location.href = result.url!;
+                            } else {
+                              toast({
+                                title: "Failed to checkout offer",
+                                description: result.message,
+                              });
+                            }
                           });
                         }}
                       >
