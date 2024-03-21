@@ -14,7 +14,13 @@ public class OfferController : ControllerBase
     [HttpGet("game-id/{gameId}")]
     public async Task<IActionResult> GetByGameId(GameStoreContext context, string gameId)
     {
-        var offers = await context.Offers.Where(o => o.GameId == gameId).Where(o => o.IsActive == true).ToListAsync();
+        var offers = await context.Offers
+        .Include(o => o.Seller)
+        .Where(o => o.GameId == gameId)
+        .Where(o => o.IsActive == true)
+        .Select(o => o.RedactForCasualViewer())
+        .ToListAsync();
+
         return Ok(offers);
     }
 

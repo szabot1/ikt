@@ -3,6 +3,7 @@ import ErrorPage from "@/error-page";
 import { checkout } from "@/lib/query/billing";
 import { type Game, gameQuery } from "@/lib/query/games";
 import { type Offer, offersByGameIdQuery } from "@/lib/query/offer";
+import { type Seller } from "@/lib/query/seller";
 import { seoPath, seoPathKey } from "@/lib/seo-path";
 import { cn } from "@/lib/style";
 import { useQuery } from "@tanstack/react-query";
@@ -32,6 +33,10 @@ const getTagColor = (tagId: string) => {
   return hashToColor[hash % 7];
 };
 
+type OfferWithSellerInfo = Offer & {
+  seller: Seller;
+};
+
 function GameComponent() {
   const { toast } = useToast();
 
@@ -44,7 +49,7 @@ function GameComponent() {
   const { data: offersData, isLoading: offersLoading } = useQuery(
     offersByGameIdQuery(gameId)
   );
-  const offers = offersData as Offer[] | undefined;
+  const offers = offersData as OfferWithSellerInfo[] | undefined;
 
   const [count, setCount] = useState(0);
 
@@ -122,7 +127,7 @@ function GameComponent() {
                 {offers.map((offer) => (
                   <div className="px-4 py-2 border-2 border-zinc-700 rounded-lg flex items-center justify-between">
                     <div className="text-lg">
-                      <p>Hidden Seller</p>
+                      <p>{offer.seller.displayName}</p>
                     </div>
 
                     <div className="flex flex-row items-center justify-center gap-2">

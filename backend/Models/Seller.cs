@@ -26,6 +26,15 @@ public partial class Seller
 
     public virtual User User { get; set; } = null!;
 
+    public Seller RedactForCasualViewer()
+    {
+        UserId = null!;
+        Offers = null!;
+        User = null!;
+
+        return this;
+    }
+
     public Seller NormalizeForJson()
     {
         Offers = null!;

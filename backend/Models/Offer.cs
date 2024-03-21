@@ -35,6 +35,16 @@ public partial class Offer
     [JsonIgnore]
     public virtual ICollection<OfferStock> OfferStocks { get; set; } = new List<OfferStock>();
 
+    public Offer RedactForCasualViewer()
+    {
+        if (Seller != null)
+        {
+            Seller = Seller.RedactForCasualViewer();
+        }
+
+        return this;
+    }
+
     public Offer NormalizeForJson()
     {
         if (Game != null)
