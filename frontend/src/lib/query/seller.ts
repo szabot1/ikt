@@ -62,7 +62,7 @@ export async function setSellerDisplayName(
     return null;
   }
 
-  return response.error || "Unknown error";
+  return response.error.message || response.error || "Unknown error";
 }
 
 export async function setSellerImageUrl(
@@ -78,7 +78,7 @@ export async function setSellerImageUrl(
     return null;
   }
 
-  return response.error || "Unknown error";
+  return response.error.message || response.error || "Unknown error";
 }
 
 export async function createSellerProfile(userId: string) {
