@@ -78,6 +78,12 @@ public class OfferController : ControllerBase
     {
         var user = (User)HttpContext.Items["User"]!;
 
+        var seller = await context.Sellers.FirstOrDefaultAsync(s => s.UserId == user.Id);
+        if (seller == null)
+        {
+            return Unauthorized();
+        }
+
         if (request.Price <= 0)
         {
             return BadRequest("Price must be greater than 0");
@@ -99,7 +105,7 @@ public class OfferController : ControllerBase
         {
             Id = new Cuid2().ToString(),
             GameId = game.Id,
-            SellerId = user.Id,
+            SellerId = seller.Id,
             Price = request.Price,
             IsActive = true,
             Type = offerType.Id,

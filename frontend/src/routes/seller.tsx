@@ -7,6 +7,7 @@ import {
   offerTypesQuery,
   type OfferType,
   createOfferGameListQuery,
+  createOffer,
 } from "@/lib/query/offer";
 import { type Seller, sellerMeQuery } from "@/lib/query/seller";
 import { cn } from "@/lib/style";
@@ -37,7 +38,14 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, PackageOpen, Pencil, Plus } from "lucide-react";
+import {
+  Info,
+  Loader,
+  MoreHorizontal,
+  PackageOpen,
+  Pencil,
+  Plus,
+} from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { localDate } from "@/lib/date";
 import { Helmet } from "react-helmet-async";
@@ -62,6 +70,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
+import { type SubmitHandler, useForm, Controller } from "react-hook-form";
 
 export const Route = new FileRoute("/seller").createRoute({
   component: Seller,
@@ -350,6 +360,12 @@ function Seller() {
   );
 }
 
+type CreateInputs = {
+  gameId: string;
+  typeId: string;
+  price: number;
+};
+
 const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
   const { data: gamesData, isLoading: gamesLoading } = useQuery(
     createOfferGameListQuery
@@ -360,65 +376,129 @@ const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
     useQuery(offerTypesQuery);
   let offerTypes = offerTypesData as OfferType[];
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const { register, control, handleSubmit } = useForm<CreateInputs>();
+
+  const onSubmit: SubmitHandler<CreateInputs> = (data: CreateInputs) => {
+    setIsSubmitting(true);
+
+    createOffer(data.gameId, data.typeId, data.price).then((success) => {
+      if (success) {
+        toast({ title: "Offer created successfully" });
+
+        setIsSubmitting(false);
+        setOpen(false);
+      } else {
+        toast({
+          title: "Error",
+          description:
+            "An error occurred while creating the offer. Please try again.",
+        });
+
+        setIsSubmitting(false);
+      }
+    });
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create offer</DialogTitle>
           <DialogDescription>
-            Create a new offer for a game. Click save when you're done.
+            Create a new offer for a game. Click the create button when you're
+            done.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a game" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {gamesLoading || !games ? (
-                  <SelectLabel>Games are still loading...</SelectLabel>
-                ) : (
-                  <>
-                    <SelectLabel>Games</SelectLabel>
 
-                    {games.map((game) => (
-                      <SelectItem key={game.id} value={game.id}>
-                        {game.name}
-                      </SelectItem>
-                    ))}
-                  </>
-                )}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+        <form
+          id="create-offer-form"
+          className="grid gap-4 py-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Controller
+            name="gameId"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a game" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {gamesLoading || !games ? (
+                      <SelectLabel>Games are still loading...</SelectLabel>
+                    ) : (
+                      <>
+                        <SelectLabel>Games</SelectLabel>
 
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a delivery type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                {offerTypesLoading || !offerTypes ? (
-                  <SelectLabel>Delivery types are still loading...</SelectLabel>
-                ) : (
-                  <>
-                    <SelectLabel>Delivery types</SelectLabel>
+                        {games.map((game) => (
+                          <SelectItem key={game.id} value={game.id}>
+                            {game.name}
+                          </SelectItem>
+                        ))}
+                      </>
+                    )}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
 
-                    {offerTypes.map((offerType) => (
-                      <SelectItem key={offerType.id} value={offerType.id}>
-                        {offerType.name} ({offerType.slug})
-                      </SelectItem>
-                    ))}
-                  </>
-                )}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+          <Controller
+            name="typeId"
+            control={control}
+            render={({ field }) => (
+              <Select onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a delivery type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {offerTypesLoading || !offerTypes ? (
+                      <SelectLabel>
+                        Delivery types are still loading...
+                      </SelectLabel>
+                    ) : (
+                      <>
+                        <SelectLabel>Delivery types</SelectLabel>
+
+                        {offerTypes.map((offerType) => (
+                          <SelectItem key={offerType.id} value={offerType.id}>
+                            {offerType.name} ({offerType.slug})
+                          </SelectItem>
+                        ))}
+                      </>
+                    )}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
+
+          <Input
+            type="number"
+            min={0.01}
+            step={"any"}
+            placeholder="Price in USD (e.g. 9.99)"
+            {...register("price", { required: true })}
+          />
+        </form>
+
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button
+            type="submit"
+            form="create-offer-form"
+            disabled={isSubmitting}
+            className="flex flex-row items-center gap-2"
+          >
+            {isSubmitting && <Loader className="h-4 w-4 animate-spin" />}
+            <span>Create offer</span>
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -8,6 +8,7 @@ import { router } from "./router";
 import { AuthProvider, useAuth } from "./lib/auth";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryError } from "./lib/query/util";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,13 +31,15 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-          <AuthProvider>
-            <InnerApp />
-          </AuthProvider>
-        </HelmetProvider>
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <HelmetProvider>
+            <TooltipProvider>
+              <InnerApp />
+            </TooltipProvider>
+          </HelmetProvider>
+        </QueryClientProvider>
+      </AuthProvider>
     </React.StrictMode>
   );
 }

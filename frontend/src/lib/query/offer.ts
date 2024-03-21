@@ -1,4 +1,4 @@
-import { fetch } from "../fetch";
+import { fetch, post } from "../fetch";
 import { makeQuery } from "./util";
 
 export type Offer = {
@@ -70,3 +70,24 @@ export const createOfferGameListQuery = makeQuery(
   ["offer", "create-offer-game-list"],
   `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer/create-offer-game-list`
 );
+
+export async function createOffer(
+  gameId: string,
+  typeId: string,
+  price: number
+): Promise<boolean> {
+  const response = await post(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/offer`,
+    {
+      gameId,
+      typeId,
+      price,
+    }
+  );
+
+  if (response.result === "success") {
+    return true;
+  }
+
+  return false;
+}
