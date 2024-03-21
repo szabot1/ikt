@@ -85,10 +85,10 @@ public class StripeWebhook : ControllerBase
 
         ctx.OfferStocks.Remove(stock);
 
-        var exp = offer.Price * Random.Shared.NextDouble();
+        var exp = (int)(offer.Price * Random.Shared.NextDouble());
 
         var userExperience = await ctx.UserExperiences.FindAsync(userId);
-        userExperience!.Experience += (int)exp;
+        userExperience!.Experience += exp;
 
         await ctx.SaveChangesAsync();
 
