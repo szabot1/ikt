@@ -20,6 +20,8 @@ public partial class GameStoreContext : DbContext
 
     public virtual DbSet<OfferType> OfferTypes { get; set; } = null!;
 
+    public virtual DbSet<OfferStock> OfferStocks { get; set; } = null!;
+
     public virtual DbSet<Order> Orders { get; set; } = null!;
 
     public virtual DbSet<Seller> Sellers { get; set; } = null!;
@@ -166,6 +168,10 @@ public partial class GameStoreContext : DbContext
             entity.HasOne(d => d.TypeNavigation).WithMany(p => p.Offers)
                 .HasForeignKey(d => d.Type)
                 .HasConstraintName("offers_type_fkey");
+
+            entity.HasMany(d => d.OfferStocks).WithOne(p => p.Offer)
+                .HasForeignKey(d => d.OfferId)
+                .HasConstraintName("offer_stock_offer_id_fkey");
         });
 
         modelBuilder.Entity<OfferType>(entity =>
@@ -193,6 +199,28 @@ public partial class GameStoreContext : DbContext
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Slug).HasColumnName("slug");
+        });
+
+        modelBuilder.Entity<OfferStock>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("offer_stock_pkey");
+
+            entity.ToTable("offer_stock");
+
+            entity.HasIndex(e => e.OfferId, "offer_stock_offer_id_idx");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.OfferId).HasColumnName("offer_id");
+            entity.Property(e => e.Item).HasColumnName("item");
+            entity.Property(e => e.IsLocked).HasColumnName("is_locked");
+
+            entity.HasOne(d => d.Offer).WithMany(p => p.OfferStocks)
+                .HasForeignKey(d => d.OfferId)
+                .HasConstraintName("offer_stock_offer_id_fkey");
         });
 
         modelBuilder.Entity<Order>(entity =>

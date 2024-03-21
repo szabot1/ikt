@@ -12,9 +12,12 @@ export async function getCustomerPortalUrl(): Promise<string | null> {
   return null;
 }
 
-export async function checkout(): Promise<string | null> {
+export async function checkout(offerId: string): Promise<string | null> {
   const response = await post(
-    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/billing/checkout`
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/billing/checkout`,
+    {
+      offerId,
+    }
   );
 
   if (response.result === "success") {

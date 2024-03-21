@@ -126,7 +126,7 @@ function GameComponent() {
                       <button
                         className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center"
                         onClick={() => {
-                          checkout().then((checkoutUrl) => {
+                          checkout(offer.id).then((checkoutUrl) => {
                             window.location.href = checkoutUrl!;
                           });
                         }}

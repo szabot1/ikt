@@ -32,6 +32,9 @@ public partial class Offer
 
     public virtual OfferType TypeNavigation { get; set; } = null!;
 
+    [JsonIgnore]
+    public virtual ICollection<OfferStock> OfferStocks { get; set; } = new List<OfferStock>();
+
     public Offer NormalizeForJson()
     {
         if (Game != null)

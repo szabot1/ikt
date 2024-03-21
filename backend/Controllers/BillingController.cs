@@ -2,6 +2,7 @@ using backend.Data;
 using backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Checkout;
@@ -12,7 +13,6 @@ namespace backend.Controllers;
 [ApiController]
 public class BillingController : ControllerBase
 {
-    private static readonly CustomerService _customerService = new();
     private static readonly Stripe.BillingPortal.SessionService _billingSessionService = new();
     private static readonly Stripe.Checkout.SessionService _checkoutSessionService = new();
 
@@ -44,8 +44,22 @@ public class BillingController : ControllerBase
 
     [Authorize]
     [HttpPost("checkout")]
-    public async Task<IActionResult> Checkout()
+    public async Task<IActionResult> Checkout([FromServices] GameStoreContext ctx, [FromBody] CheckoutRequest request)
     {
+        var offer = await ctx.Offers.Include(o => o.Game).Include(o => o.Seller).FirstOrDefaultAsync(o => o.Id == request.OfferId);
+
+        if (offer == null || offer.IsActive == false || offer.Seller.IsClosed)
+        {
+            return NotFound(new { message = "Offer not found" });
+        }
+
+        var stock = await ctx.OfferStocks.FromSqlInterpolated($"select * from take_stock({offer.Id})").FirstOrDefaultAsync();
+
+        if (stock == null)
+        {
+            return BadRequest(new { message = "Offer is out of stock" });
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var options = new Stripe.Checkout.SessionCreateOptions
@@ -56,9 +70,9 @@ public class BillingController : ControllerBase
                     PriceData = new() {
                         Currency = "usd",
                         ProductData = new() {
-                            Name = "Test Item"
+                            Name = offer.Game.Name,
                         },
-                        UnitAmount = 499
+                        UnitAmount = offer.Price
                     },
                     Quantity = 1
                 }
@@ -66,11 +80,19 @@ public class BillingController : ControllerBase
             Customer = user.StripeCustomerId,
             Mode = "payment",
             SuccessUrl = _stripeConfig.CheckoutSuccessUrl,
-            CancelUrl = _stripeConfig.CheckoutCancelUrl
+            CancelUrl = _stripeConfig.CheckoutCancelUrl,
+            Metadata = new Dictionary<string, string>
+            {
+                { "userId", user.Id },
+                { "offerId", offer.Id },
+                { "stockId", stock.Id }
+            }
         };
 
         var session = await _checkoutSessionService.CreateAsync(options);
 
         return Ok(new { url = session.Url });
     }
+
+    public record CheckoutRequest(string OfferId);
 }
