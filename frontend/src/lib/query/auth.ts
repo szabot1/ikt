@@ -40,7 +40,7 @@ export type UserSocial = {
   ubisoft: string | null;
   epic: string | null;
   origin: string | null;
-  battlenet: string | null;
+  battleNet: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -58,7 +58,7 @@ export type SocialLinks = {
   ubisoft: string;
   epic: string;
   origin: string;
-  battlenet: string;
+  battleNet: string;
 };
 
 export async function setSocialLinks(

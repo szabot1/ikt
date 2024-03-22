@@ -131,7 +131,7 @@ function Profile() {
           <SocialLink
             baseUrl="https://battle.net"
             iconFile="battlenet"
-            value={userInfo.social.battlenet}
+            value={userInfo.social.battleNet}
           />
         </div>
       </div>
@@ -173,7 +173,7 @@ type EditProfileInputs = {
   ubisoft: string;
   epic: string;
   origin: string;
-  battlenet: string;
+  battleNet: string;
 };
 
 const EditProfileModal = ({
@@ -203,7 +203,7 @@ const EditProfileModal = ({
       ubisoft: data.ubisoft || "",
       epic: data.epic || "",
       origin: data.origin || "",
-      battlenet: data.battlenet || "",
+      battleNet: data.battleNet || "",
     }).then((error) => {
       if (error === null) {
         toast({ title: "Profile updated successfully" });
@@ -249,7 +249,7 @@ const EditProfileModal = ({
             <ArrowUpRightSquare className="h-4 w-4 mt-1" />
           </a>
 
-          {["discord", "steam", "ubisoft", "epic", "origin", "battlenet"].map(
+          {["discord", "steam", "ubisoft", "epic", "origin", "battleNet"].map(
             (social) => (
               <div className="flex flex-row items-center justify-center gap-2 w-full">
                 <img
