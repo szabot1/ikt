@@ -7,6 +7,7 @@ import { Tag, tagGamesQuery, tagQuery } from "@/lib/query/tags";
 import { seoPath, seoPathKey } from "@/lib/seo-path";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/tag/$path").createRoute({
@@ -39,9 +40,10 @@ function TagComponent() {
           <meta property="og:url" content={window.location.href} />
         </Helmet>
       )}
-      {isTagLoading && <p>Tag loading...</p>}
 
-      {isGamesLoading && <p>Games loading...</p>}
+      {(isTagLoading || isGamesLoading) && (
+        <Loader className="h-4 w-4 animate-spin" />
+      )}
 
       {!isGamesLoading && games && (
         <div className="flex flex-col gap-2 w-full lg:w-1/2">

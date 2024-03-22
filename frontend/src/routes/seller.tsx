@@ -651,7 +651,9 @@ const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
                 <SelectContent>
                   <SelectGroup>
                     {gamesLoading || !games ? (
-                      <SelectLabel>Games are still loading...</SelectLabel>
+                      <SelectLabel>
+                        <Loader className="h-4 w-4 animate-spin" />
+                      </SelectLabel>
                     ) : (
                       <>
                         <SelectLabel>Games</SelectLabel>
@@ -681,7 +683,7 @@ const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
                   <SelectGroup>
                     {offerTypesLoading || !offerTypes ? (
                       <SelectLabel>
-                        Delivery types are still loading...
+                        <Loader className="h-4 w-4 animate-spin" />
                       </SelectLabel>
                     ) : (
                       <>
