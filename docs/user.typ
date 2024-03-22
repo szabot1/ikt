@@ -29,12 +29,41 @@
 
 // Title page
 #[
-  #align(center + horizon, [
-    #image("img/kkszki.png", height: 150pt)
-    #text(25pt)[*Záródolgozat*]
-  ])
+  #set page(
+    paper: "a4",
+    height: 1683.78pt,
+    margin: (x: 0pt, y: 0pt)
+  )
 
-  #pagebreak()
+  #rect(
+    width: 100%,
+    height: 49.6%,
+    stroke: none,
+    [
+      #align(center + horizon, [
+        #figure(
+          grid(
+            columns: 2,
+            gutter: 2mm,
+            [#image("img/kkszki.png", height: 80pt)],
+            [#image("img/mszc.jpg", height: 80pt)],
+          ),
+        )
+        #text(25pt)[*Záródolgozat*]
+      ])
+    ]
+  )
+
+  #rect(
+    width: 100%,
+    height: 49.6%,
+    stroke: none,
+    [
+      #align(center + horizon, [
+        #text(25pt)[*Game Key Store*]
+      ])
+    ]
+  )
 ]
 
 // Outline page
