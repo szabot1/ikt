@@ -46,12 +46,14 @@ import {
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import {
+  Image,
   Info,
   Loader,
   MoreHorizontal,
   PackageOpen,
   Pencil,
   Plus,
+  User,
 } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { localDate } from "@/lib/date";
@@ -464,19 +466,27 @@ const EditProfileModal = ({
           className="grid gap-4 py-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Input
-            type="text"
-            placeholder="Display name"
-            defaultValue={seller.displayName}
-            {...register("displayName", { required: true })}
-          />
+          <div className="flex flex-row items-center justify-center gap-2 w-full">
+            <User className="w-6 h-6" />
 
-          <Input
-            type="text"
-            placeholder="Profile image URL"
-            defaultValue={seller.imageUrl}
-            {...register("imageUrl", { required: true })}
-          />
+            <Input
+              type="text"
+              placeholder="Display name"
+              defaultValue={seller.displayName}
+              {...register("displayName", { required: true })}
+            />
+          </div>
+
+          <div className="flex flex-row items-center justify-center gap-2 w-full">
+            <Image className="w-6 h-6" />
+
+            <Input
+              type="text"
+              placeholder="Profile image URL"
+              defaultValue={seller.imageUrl}
+              {...register("imageUrl", { required: true })}
+            />
+          </div>
         </form>
 
         <DialogFooter>
