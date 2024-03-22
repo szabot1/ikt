@@ -41,7 +41,7 @@
   ])
   
   #align(center + horizon, [
-    #text(25pt)[*ZÁRÓDOLGOZAT*]
+    #text(25pt, font: "SF Pro Display")[*ZÁRÓDOLGOZAT*]
   ])
 
   #align(bottom, [
@@ -50,7 +50,6 @@
       #linebreak()
       #text(13pt)[Szabó Tamás - Gyurkó Levente]
 
-      #linebreak()
       #text(15pt)[Konzulens:]
       #linebreak()
       #text(13pt)[Németh Bence]
@@ -81,9 +80,9 @@
   ])
 
   #align(center + horizon, [
-    #text(25pt, fill: orange)[*Game Key Store*]
+    #text(25pt, font: "SF Pro Display", fill: orange)[*Game Key Store*]
 
-    #text(20pt)[projekt feladat]
+    #text(20pt, font: "SF Pro Display")[projekt feladat]
   ])
 
   #align(bottom, [
@@ -101,7 +100,7 @@
 
 // Outline page
 #[
-  #align(center + horizon, text(25pt)[*Tartalom*])
+  #align(center + horizon, text(25pt, font: "SF Pro Display")[*Tartalom*])
 
   #show outline.entry.where(
     level: 1
@@ -115,10 +114,10 @@
 ]
 
 #set page(
-  footer: context [
+  footer: [
     #set align(right)
     #set text(12pt)
-    #counter(page).display("1.")
+    #counter(page).display("1")
   ]
 )
 
