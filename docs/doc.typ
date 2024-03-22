@@ -29,41 +29,74 @@
 
 // Title page
 #[
-  #set page(
-    paper: "a4",
-    height: 1683.78pt,
-    margin: (x: 0pt, y: 0pt)
-  )
+  #align(center, [
+    #figure(
+      grid(
+        columns: 2,
+        gutter: 2mm,
+        [#image("img/kkszki.png", height: 80pt)],
+        [#image("img/mszc.jpg", height: 80pt)],
+      ),
+    )
+  ])
+  
+  #align(center + horizon, [
+    #text(25pt)[*ZÁRÓDOLGOZAT*]
+  ])
 
-  #rect(
-    width: 100%,
-    height: 49.6%,
-    stroke: none,
-    [
-      #align(center + horizon, [
-        #figure(
-          grid(
-            columns: 2,
-            gutter: 2mm,
-            [#image("img/kkszki.png", height: 80pt)],
-            [#image("img/mszc.jpg", height: 80pt)],
-          ),
-        )
-        #text(25pt)[*Záródolgozat*]
-      ])
-    ]
-  )
+  #align(bottom, [
+    #align(right, [
+      #text(15pt)[Készítették:]
+      #linebreak()
+      #text(13pt)[Szabó Tamás - Gyurkó Levente]
 
-  #rect(
-    width: 100%,
-    height: 49.6%,
-    stroke: none,
-    [
-      #align(center + horizon, [
-        #text(25pt)[*Game Key Store*]
-      ])
-    ]
-  )
+      #linebreak()
+      #text(15pt)[Konzulens:]
+      #linebreak()
+      #text(13pt)[Németh Bence]
+    ])
+
+    #pad(
+      top: 2cm,
+      [
+        #align(center, [
+          #text(14pt)[Miskolc]
+          #linebreak()
+          #text(14pt)[2024.]
+        ])
+      ]
+    )
+  ])
+
+  #pagebreak()
+]
+
+#[
+  #align(center, [
+    #text(14pt, fill: blue)[Miskolci SZC Kandó Kálmán Informatikai Technikum]
+
+    #text(14pt, fill: blue)[Miskolci Szakképzési Centrum]
+
+    #text(14pt, fill: blue, weight: "semibold")[SZOFTVERFEJLESZTŐ- ÉS TESZTELŐ SZAK]
+  ])
+
+  #align(center + horizon, [
+    #text(25pt, fill: orange)[*Game Key Store*]
+
+    #text(20pt)[projekt feladat]
+  ])
+
+  #align(bottom, [
+    #align(right, [
+      #text(13pt)[Szabó Tamás - Gyurkó Levente]
+    ])
+
+    #align(center, [
+      #text(14pt)[2023-2024]
+    ])
+  ])
+
+  #pagebreak()
 ]
 
 // Outline page
@@ -80,6 +113,14 @@
   #outline(indent: auto, title: "")
   #pagebreak()
 ]
+
+#set page(
+  footer: context [
+    #set align(right)
+    #set text(12pt)
+    #counter(page).display("1.")
+  ]
+)
 
 // Development environment
 #[
