@@ -130,7 +130,7 @@ function Profile() {
           />
           <SocialLink
             baseUrl="https://battle.net"
-            iconFile="battlenet"
+            iconFile="battleNet"
             value={userInfo.social.battleNet}
           />
         </div>
