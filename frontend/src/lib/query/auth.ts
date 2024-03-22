@@ -52,6 +52,30 @@ export function userInfoQuery() {
   );
 }
 
+export type SocialLinks = {
+  discord: string;
+  steam: string;
+  ubisoft: string;
+  epic: string;
+  origin: string;
+  battlenet: string;
+};
+
+export async function setSocialLinks(
+  links: SocialLinks
+): Promise<string | null> {
+  const response = await post(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/auth/set-social-links`,
+    links
+  );
+
+  if (response.result === "success") {
+    return null;
+  }
+
+  return response.error?.message || "An error occurred";
+}
+
 export type ErrorMap = {
   [key: string]: string[];
 };

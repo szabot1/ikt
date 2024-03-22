@@ -397,6 +397,7 @@ public partial class GameStoreContext : DbContext
             entity.Property(e => e.Origin).HasColumnName("origin");
             entity.Property(e => e.Steam).HasColumnName("steam");
             entity.Property(e => e.Ubisoft).HasColumnName("ubisoft");
+            entity.Property(e => e.BattleNet).HasColumnName("battlenet");
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp without time zone")

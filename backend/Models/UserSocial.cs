@@ -18,6 +18,8 @@ public partial class UserSocial
 
     public string? Origin { get; set; }
 
+    public string? BattleNet { get; set; }
+
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }

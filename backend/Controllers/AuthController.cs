@@ -424,4 +424,40 @@ public class AuthController : ControllerBase
     }
 
     public record RefreshRequest(string RefreshToken);
+
+    [Authorize]
+    [HttpPost("set-social-links")]
+    public async Task<IActionResult> SetSocialLinks([FromServices] GameStoreContext ctx, [FromBody] SetSocialLinksRequest request)
+    {
+        var user = (User)HttpContext.Items["User"]!;
+
+        var social = await ctx.UserSocials.FirstOrDefaultAsync(social => social.UserId == user.Id);
+        if (social == null)
+        {
+            return StatusCode(500, "User social not found");
+        }
+
+        social.Discord = FixSocial(request.Discord);
+        social.Steam = FixSocial(request.Steam);
+        social.Ubisoft = FixSocial(request.Ubisoft);
+        social.Epic = FixSocial(request.Epic);
+        social.Origin = FixSocial(request.Origin);
+        social.BattleNet = FixSocial(request.BattleNet);
+
+        await ctx.SaveChangesAsync();
+
+        return Ok();
+    }
+
+    private static string? FixSocial(string? Link)
+    {
+        if (string.IsNullOrEmpty(Link))
+        {
+            return null;
+        }
+
+        return Link;
+    }
+
+    public record SetSocialLinksRequest(string Discord, string Steam, string Ubisoft, string Epic, string Origin, string BattleNet);
 }

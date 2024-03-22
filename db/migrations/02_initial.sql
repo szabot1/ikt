@@ -42,6 +42,7 @@ create table user_social (
     ubisoft text,
     epic text,
     origin text,
+    battlenet text,
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp
 );
