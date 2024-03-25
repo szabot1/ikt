@@ -128,7 +128,7 @@ public class OfferController : ControllerBase
         context.Offers.Add(offer);
         await context.SaveChangesAsync();
 
-        return Ok(offer);
+        return Ok(offer.NormalizeForJson());
     }
 
     public record CreateOfferRequest(string GameId, int Price, string TypeId);
@@ -166,7 +166,7 @@ public class OfferController : ControllerBase
 
         await context.SaveChangesAsync();
 
-        return Ok(offer);
+        return Ok(offer.NormalizeForJson());
     }
 
     public record UpdateOfferRequest(int Price, bool IsActive);
