@@ -624,7 +624,19 @@ const CreateOfferModal = ({
   const onSubmit: SubmitHandler<CreateInputs> = (data: CreateInputs) => {
     setIsSubmitting(true);
 
-    createOffer(data.gameId, data.typeId, data.price).then((error) => {
+    const cents = Math.round(data.price * 100);
+
+    if (cents <= 0 || isNaN(cents)) {
+      toast({
+        title: "Invalid price",
+        description: "Please enter a valid price greater than 0.",
+      });
+
+      setIsSubmitting(false);
+      return;
+    }
+
+    createOffer(data.gameId, data.typeId, cents).then((error) => {
       if (error == null) {
         toast({ title: "Offer created successfully" });
 
