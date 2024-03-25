@@ -9,6 +9,7 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import React, { Suspense } from "react";
+import { Helmet } from "react-helmet-async";
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === "production"
@@ -40,15 +41,21 @@ function ContextAwareNavigation() {
 
 export const Route = rootRouteWithContext<RouterContext>()({
   component: () => (
-    <main className="flex flex-col w-full h-full min-h-screen">
-      <ContextAwareNavigation />
-      <ScrollRestoration />
-      <Outlet />
-      <Toaster />
-      <Suspense fallback={null}>
-        <TanStackRouterDevtools />
-        <ReactQueryDevtools />
-      </Suspense>
-    </main>
+    <>
+      <Helmet>
+        <link rel="preconnect" href={import.meta.env.VITE_BACKEND_PROD_URL} />
+        <link rel="preconnect" href="https://secure.gravatar.com" />
+      </Helmet>
+      <main className="flex flex-col w-full h-full min-h-screen">
+        <ContextAwareNavigation />
+        <ScrollRestoration />
+        <Outlet />
+        <Toaster />
+        <Suspense fallback={null}>
+          <TanStackRouterDevtools />
+          <ReactQueryDevtools />
+        </Suspense>
+      </main>
+    </>
   ),
 });
