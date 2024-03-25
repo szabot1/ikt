@@ -29,14 +29,14 @@ export default function ProfileDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100 flex flex-row gap-2 justify-center items-center">
+        <button className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100 flex flex-row gap-2 justify-center items-center">
           <p>{userInfo.username}</p>
           <img
             src={`https://secure.gravatar.com/avatar/${md5(userInfo.email)}`}
             alt="avatar"
             className="w-8 h-8 rounded-full"
           />
-        </div>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem
