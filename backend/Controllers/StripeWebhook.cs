@@ -1,3 +1,4 @@
+using System.Net;
 using backend.Data;
 using backend.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -97,16 +98,16 @@ public class StripeWebhook : ControllerBase
             user.Email,
             "Purchase Confirmation",
             $@"<h1>Thank you for your purchase!</h1>
-                    <p>You have successfully purchased {offer.Game.Name} for ${offer.Price / 100.0}, and received {exp} experience points.</p>
+                    <p>You have successfully purchased {WebUtility.HtmlEncode(offer.Game.Name)} for ${offer.Price / 100.0}, and received {exp} experience points.</p>
                     <br>
                     <h2>Delivery Instructions</h2>
                     <code>
-                    {offer.TypeNavigation.ClaimInstructions}
+                    {WebUtility.HtmlEncode(offer.TypeNavigation.ClaimInstructions)}
                     </code>
                     <br>
                     <h2>Item Details</h2>
                     <code>
-                    {stock.Item}
+                    {WebUtility.HtmlEncode(stock.Item)}
                     </code>",
             Email.EmailType.Billing);
 
@@ -133,7 +134,7 @@ public class StripeWebhook : ControllerBase
             user.Email,
             "Purchase Failed",
             $@"<h1>Sorry, your purchase failed.</h1>
-                    <p>Your purchase of {offer.Game.Name} for ${offer.Price / 100.0} has failed, the item has been released back into the store.</p>",
+                    <p>Your purchase of {WebUtility.HtmlEncode(offer.Game.Name)} for ${offer.Price / 100.0} has failed, the item has been released back into the store.</p>",
             Email.EmailType.Billing);
 
         return Ok();

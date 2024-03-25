@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http.Headers;
 using backend.Data;
 using backend.Models;
@@ -183,7 +184,7 @@ public class AuthController : ControllerBase
                     $@"<h1>Hello!</h1>
                 <p>Someone (hopefully you) has requested to register an account on our store.</p>
                 <p>If this was you, please use the following code to verify your email address:</p>
-                <h2>{token.Token}</h2>
+                <h2>{WebUtility.HtmlEncode(token.Token)}</h2>
                 <p>If this wasn't you, please ignore this email.</p>
                 ",
                     Utils.Email.EmailType.Accounts);
