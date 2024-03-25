@@ -429,7 +429,7 @@ public class AuthController : ControllerBase
     [HttpPost("set-social-links")]
     public async Task<IActionResult> SetSocialLinks([FromServices] GameStoreContext ctx, [FromBody] SetSocialLinksRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -470,7 +470,7 @@ public class AuthController : ControllerBase
     [HttpDelete("delete-account")]
     public async Task<IActionResult> DeleteAccount([FromServices] GameStoreContext ctx, [FromQuery] bool Confirm)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }

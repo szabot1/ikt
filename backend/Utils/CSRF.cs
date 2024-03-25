@@ -4,7 +4,7 @@ namespace backend.Utils;
 
 public static class CSRF
 {
-    public static bool IsCrossSite(IHeaderDictionary headers, string method)
+    public static bool IsInvalidCSRF(IHeaderDictionary headers, string method)
     {
         var secFetchSite = headers["Sec-Fetch-Site"].FirstOrDefault();
 
@@ -28,6 +28,30 @@ public static class CSRF
         }
 #pragma warning restore RCS1073
 
-        return true;
+        var origin = headers["Origin"].FirstOrDefault();
+
+        if (origin == null)
+        {
+            return true;
+        }
+
+        if (origin != "https://ikt-dvt.pages.dev" && origin != "http://localhost:5173")
+        {
+            return true;
+        }
+
+        var referer = headers["Referer"].FirstOrDefault();
+
+        if (referer == null)
+        {
+            return true;
+        }
+
+        if (referer != "https://ikt-dvt.pages.dev/" && referer != "http://localhost:5173/")
+        {
+            return true;
+        }
+
+        return false;
     }
 }

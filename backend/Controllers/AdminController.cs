@@ -68,7 +68,7 @@ public class AdminController : ControllerBase
     [HttpPost("tags")]
     public async Task<IActionResult> AddTag(GameStoreContext context, [FromBody] Tag.CreateDto create)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -90,7 +90,7 @@ public class AdminController : ControllerBase
     [HttpDelete("tags/{id}")]
     public async Task<IActionResult> DeleteTag(GameStoreContext context, string id)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -110,7 +110,7 @@ public class AdminController : ControllerBase
     [HttpPut("tags/{id}")]
     public async Task<IActionResult> UpdateTag(GameStoreContext context, string id, [FromBody] Tag.UpdateDto update)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -138,7 +138,7 @@ public class AdminController : ControllerBase
     [HttpDelete("games/{id}")]
     public async Task<IActionResult> DeleteGame(GameStoreContext context, string id)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -166,7 +166,7 @@ public class AdminController : ControllerBase
     [HttpDelete("sellers/{id}")]
     public async Task<IActionResult> DeleteSeller(GameStoreContext context, string id)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -194,7 +194,7 @@ public class AdminController : ControllerBase
     [HttpDelete("offers/{id}")]
     public async Task<IActionResult> DeleteOffer(GameStoreContext context, string id)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }

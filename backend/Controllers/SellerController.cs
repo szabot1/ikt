@@ -76,7 +76,7 @@ public class SellerController : ControllerBase
     [HttpPost("close-account")]
     public async Task<IActionResult> Close(GameStoreContext context)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -106,7 +106,7 @@ public class SellerController : ControllerBase
     [HttpPost("display-name")]
     public async Task<IActionResult> SetDisplayName(GameStoreContext context, [FromBody] SetDisplayNameRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -147,7 +147,7 @@ public class SellerController : ControllerBase
     [HttpPost("image-url")]
     public async Task<IActionResult> SetImageUrl(GameStoreContext context, [FromBody] SetImageUrlRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -184,7 +184,7 @@ public class SellerController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(GameStoreContext context, [FromBody] CreateSellerRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }

@@ -47,7 +47,7 @@ public class BillingController : ControllerBase
     [HttpPost("checkout")]
     public async Task<IActionResult> Checkout([FromServices] GameStoreContext ctx, [FromBody] CheckoutRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
+        if (CSRF.IsInvalidCSRF(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
