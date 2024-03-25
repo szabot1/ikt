@@ -33,6 +33,7 @@ export default function ProfileDropdown() {
           <p>{userInfo.username}</p>
           <img
             src={`https://secure.gravatar.com/avatar/${md5(userInfo.email)}`}
+            alt="avatar"
             className="w-8 h-8 rounded-full"
           />
         </div>

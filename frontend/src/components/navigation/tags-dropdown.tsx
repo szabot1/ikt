@@ -19,9 +19,9 @@ export default function TagsDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <p className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100">
+        <button className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100">
           Browse Tags
-        </p>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {!isLoading &&

@@ -90,6 +90,7 @@ function Profile() {
             <img
               src={`https://secure.gravatar.com/avatar/${md5(userInfo.email)}?size=1024`}
               className="w-24 h-24 rounded-full z-50"
+              alt="avatar"
             />
           </div>
         </div>
@@ -160,6 +161,7 @@ const SocialLink = ({
       <img
         src={`/assets/social-icons/${iconFile}.svg`}
         className="w-6 h-6 invert"
+        alt={iconFile}
       />
 
       {value?.replace(`${baseUrl}/`, "") || "No account"}
@@ -255,6 +257,7 @@ const EditProfileModal = ({
                 <img
                   src={`/assets/social-icons/${social}.svg`}
                   className="w-6 h-6 invert"
+                  alt={social}
                 />
 
                 <Input
