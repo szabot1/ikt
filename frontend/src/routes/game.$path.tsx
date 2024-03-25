@@ -132,7 +132,7 @@ function GameComponent() {
 
                       <span
                         className={cn(
-                          "px-2 py-1 rounded-md",
+                          "hidden lg:block px-2 py-1 rounded-md",
                           offer.seller.isVerified
                             ? "bg-green-500 text-green-100"
                             : "bg-orange-500 text-orange-100",
