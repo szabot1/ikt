@@ -83,7 +83,7 @@ public class OfferController : ControllerBase
     [HttpPost("new")]
     public async Task<IActionResult> Create(GameStoreContext context, [FromBody] CreateOfferRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers))
+        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -137,7 +137,7 @@ public class OfferController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(GameStoreContext context, string id, [FromBody] UpdateOfferRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers))
+        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -175,7 +175,7 @@ public class OfferController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(GameStoreContext context, string id)
     {
-        if (CSRF.IsCrossSite(Request.Headers))
+        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -203,7 +203,7 @@ public class OfferController : ControllerBase
     [HttpDelete("stock/{id}")]
     public async Task<IActionResult> ClearOfferStock(GameStoreContext context, string id)
     {
-        if (CSRF.IsCrossSite(Request.Headers))
+        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
@@ -232,7 +232,7 @@ public class OfferController : ControllerBase
     [HttpPost("stock/bulk")]
     public async Task<IActionResult> AddStockBulk(GameStoreContext context, [FromBody] AddStockBulkRequest request)
     {
-        if (CSRF.IsCrossSite(Request.Headers))
+        if (CSRF.IsCrossSite(Request.Headers, Request.Method))
         {
             return BadRequest("Please try again. (CSRF)");
         }
