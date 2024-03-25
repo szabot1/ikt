@@ -316,7 +316,7 @@ function Seller() {
           <div className="flex flex-row justify-between mb-4">
             <h1 className="text-xl font-semibold">Offers</h1>
 
-            <CreateOfferModal>
+            <CreateOfferModal sellerId={sellerInfo.id}>
               <Plus className="h-5 w-5 cursor-pointer" />
             </CreateOfferModal>
           </div>
@@ -597,7 +597,15 @@ type CreateInputs = {
   price: number;
 };
 
-const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
+const CreateOfferModal = ({
+  sellerId,
+  children,
+}: {
+  sellerId: string;
+  children: React.ReactNode;
+}) => {
+  const queryClient = useQueryClient();
+
   const { data: gamesData, isLoading: gamesLoading } = useQuery(
     createOfferGameListQuery
   );
@@ -619,6 +627,9 @@ const CreateOfferModal = ({ children }: { children: React.ReactNode }) => {
     createOffer(data.gameId, data.typeId, data.price).then((error) => {
       if (error == null) {
         toast({ title: "Offer created successfully" });
+
+        queryClient.refetchQueries(sellerMeQuery());
+        queryClient.refetchQueries(offersBySellerIdQuery(sellerId));
 
         setIsSubmitting(false);
         setOpen(false);
