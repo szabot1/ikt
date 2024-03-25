@@ -151,7 +151,7 @@ function GameComponent() {
                       <span>${offer.price / 100}</span>
 
                       <button
-                        className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex flex-row items-center justify-center gap-2"
+                        className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex flex-row items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-green-700 disabled:hover:cursor-not-allowed disabled:hover:opacity-50"
                         onClick={() => {
                           setIsSubmitting(true);
 
