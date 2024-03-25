@@ -54,6 +54,8 @@ function GameComponent() {
 
   const [count, setCount] = useState(0);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (count + 1 == game?.images.length) {
@@ -149,8 +151,10 @@ function GameComponent() {
                       <span>${offer.price / 100}</span>
 
                       <button
-                        className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center"
+                        className="px-4 py-2 bg-green-700 rounded-lg hover:bg-green-600 transition-all duration-200 flex flex-row items-center justify-center gap-2"
                         onClick={() => {
+                          setIsSubmitting(true);
+
                           checkout(offer.id).then((result) => {
                             if (result.result === "success") {
                               window.location.href = result.url!;
@@ -159,10 +163,16 @@ function GameComponent() {
                                 title: "Failed to checkout offer",
                                 description: result.message,
                               });
+
+                              setIsSubmitting(false);
                             }
                           });
                         }}
+                        disabled={isSubmitting}
                       >
+                        {isSubmitting && (
+                          <Loader className="h-4 w-4 animate-spin" />
+                        )}
                         Purchase
                       </button>
                     </div>
