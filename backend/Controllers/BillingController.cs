@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,11 @@ public class BillingController : ControllerBase
     [HttpPost("checkout")]
     public async Task<IActionResult> Checkout([FromServices] GameStoreContext ctx, [FromBody] CheckoutRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var offer = await ctx.Offers.Include(o => o.Game).Include(o => o.Seller).FirstOrDefaultAsync(o => o.Id == request.OfferId);
 
         if (offer == null || offer.IsActive == false || offer.Seller.IsClosed)

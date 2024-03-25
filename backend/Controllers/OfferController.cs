@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -82,6 +83,11 @@ public class OfferController : ControllerBase
     [HttpPost("new")]
     public async Task<IActionResult> Create(GameStoreContext context, [FromBody] CreateOfferRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var seller = await context.Sellers.FirstOrDefaultAsync(s => s.UserId == user.Id);
@@ -131,6 +137,11 @@ public class OfferController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(GameStoreContext context, string id, [FromBody] UpdateOfferRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var offer = await context.Offers.FindAsync(id);
@@ -164,6 +175,11 @@ public class OfferController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(GameStoreContext context, string id)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var offer = await context.Offers.FindAsync(id);
@@ -187,6 +203,11 @@ public class OfferController : ControllerBase
     [HttpDelete("stock/{id}")]
     public async Task<IActionResult> ClearOfferStock(GameStoreContext context, string id)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var offer = await context.Offers.FindAsync(id);
@@ -211,6 +232,11 @@ public class OfferController : ControllerBase
     [HttpPost("stock/bulk")]
     public async Task<IActionResult> AddStockBulk(GameStoreContext context, [FromBody] AddStockBulkRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var offer = await context.Offers.FindAsync(request.OfferId);

@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -75,6 +76,11 @@ public class SellerController : ControllerBase
     [HttpPost("close-account")]
     public async Task<IActionResult> Close(GameStoreContext context)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var seller = await context.Sellers
@@ -100,6 +106,11 @@ public class SellerController : ControllerBase
     [HttpPost("display-name")]
     public async Task<IActionResult> SetDisplayName(GameStoreContext context, [FromBody] SetDisplayNameRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var seller = await context.Sellers
@@ -136,6 +147,11 @@ public class SellerController : ControllerBase
     [HttpPost("image-url")]
     public async Task<IActionResult> SetImageUrl(GameStoreContext context, [FromBody] SetImageUrlRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var seller = await context.Sellers
@@ -168,6 +184,11 @@ public class SellerController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(GameStoreContext context, [FromBody] CreateSellerRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = await context.Users
             .FirstOrDefaultAsync(u => u.Id == request.UserId);
 

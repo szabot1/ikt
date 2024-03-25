@@ -15,6 +15,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { deleteAccount } from "@/lib/query/auth";
+import { useToast } from "@/components/ui/use-toast";
 
 export const Route = new FileRoute("/settings").createRoute({
   component: Settings,
@@ -32,6 +34,8 @@ export const Route = new FileRoute("/settings").createRoute({
 });
 
 function Settings() {
+  const { toast } = useToast();
+
   const [isOpeningPortal, setIsOpeningPortal] = useState(false);
 
   return (
@@ -60,7 +64,22 @@ function Settings() {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
+                <AlertDialogAction
+                  onClick={() => {
+                    deleteAccount().then((error) => {
+                      if (error === null) {
+                        window.location.href = "/";
+                      } else {
+                        toast({
+                          title: "Failed to delete account",
+                          description: error,
+                        });
+                      }
+                    });
+                  }}
+                >
+                  Continue
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>

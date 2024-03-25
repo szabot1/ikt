@@ -18,12 +18,7 @@ public class TagsController : ControllerBase
     {
         var tag = await context.Tags.FindAsync(id);
 
-        if (tag == null)
-        {
-            return NotFound();
-        }
-
-        return tag;
+        return tag ?? (ActionResult<Tag>)NotFound();
     }
 
     [HttpGet("{id}/games")]

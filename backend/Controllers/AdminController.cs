@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Models;
+using backend.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +68,11 @@ public class AdminController : ControllerBase
     [HttpPost("tags")]
     public async Task<IActionResult> AddTag(GameStoreContext context, [FromBody] Tag.CreateDto create)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var id = new Cuid2().ToString();
 
         context.Tags.Add(new Tag
@@ -84,6 +90,11 @@ public class AdminController : ControllerBase
     [HttpDelete("tags/{id}")]
     public async Task<IActionResult> DeleteTag(GameStoreContext context, string id)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var tag = await context.Tags.FindAsync(id);
         if (tag == null)
         {
@@ -99,6 +110,11 @@ public class AdminController : ControllerBase
     [HttpPut("tags/{id}")]
     public async Task<IActionResult> UpdateTag(GameStoreContext context, string id, [FromBody] Tag.UpdateDto update)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var tag = await context.Tags.FindAsync(id);
         if (tag == null)
         {
@@ -122,6 +138,11 @@ public class AdminController : ControllerBase
     [HttpDelete("games/{id}")]
     public async Task<IActionResult> DeleteGame(GameStoreContext context, string id)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var game = await context.Games.FindAsync(id);
         if (game == null)
         {
@@ -145,6 +166,11 @@ public class AdminController : ControllerBase
     [HttpDelete("sellers/{id}")]
     public async Task<IActionResult> DeleteSeller(GameStoreContext context, string id)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var seller = await context.Sellers.FindAsync(id);
         if (seller == null)
         {
@@ -168,6 +194,11 @@ public class AdminController : ControllerBase
     [HttpDelete("offers/{id}")]
     public async Task<IActionResult> DeleteOffer(GameStoreContext context, string id)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var offer = await context.Offers.FindAsync(id);
         if (offer == null)
         {

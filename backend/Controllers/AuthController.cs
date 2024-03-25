@@ -429,6 +429,11 @@ public class AuthController : ControllerBase
     [HttpPost("set-social-links")]
     public async Task<IActionResult> SetSocialLinks([FromServices] GameStoreContext ctx, [FromBody] SetSocialLinksRequest request)
     {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
         var user = (User)HttpContext.Items["User"]!;
 
         var social = await ctx.UserSocials.FirstOrDefaultAsync(social => social.UserId == user.Id);
@@ -460,4 +465,27 @@ public class AuthController : ControllerBase
     }
 
     public record SetSocialLinksRequest(string Discord, string Steam, string Ubisoft, string Epic, string Origin, string BattleNet);
+
+    [Authorize]
+    [HttpDelete("delete-account")]
+    public async Task<IActionResult> DeleteAccount([FromServices] GameStoreContext ctx, [FromQuery] bool Confirm)
+    {
+        if (CSRF.IsCrossSite(Request.Headers))
+        {
+            return BadRequest("Please try again. (CSRF)");
+        }
+
+        if (!Confirm)
+        {
+            return BadRequest("Please confirm the deletion of your account");
+        }
+
+        var user = (User)HttpContext.Items["User"]!;
+
+        ctx.Users.Remove(user);
+
+        await ctx.SaveChangesAsync();
+
+        return Ok();
+    }
 }

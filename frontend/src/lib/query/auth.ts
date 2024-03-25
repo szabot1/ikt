@@ -186,6 +186,19 @@ export async function refresh(refresh: Refresh): Promise<RefreshResult> {
   }
 }
 
+export async function deleteAccount(): Promise<string | null> {
+  const res = await post(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/auth/delete-account?confirm=true`
+  );
+
+  if (res.result === "success") {
+    clearSession();
+    return null;
+  }
+
+  return res.error?.message || "An error occurred";
+}
+
 export function setFormError<T extends FieldValues>(
   setError: UseFormSetError<T>,
   clearErrors: UseFormClearErrors<T>,
