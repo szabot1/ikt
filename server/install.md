@@ -25,20 +25,17 @@ cat ~/.ssh/id_ed25519.pub
 git clone git@github.com:szabot1/ikt.git /home/ikt -b master --depth 1
 ```
 
-5. Start watchtower:
-```bash
-chmod +x /home/ikt/server/watchtower.sh
-/home/ikt/server/watchtower.sh
 ```
-
-6. Start postgres and redis:
-```bash
-docker compose -f /home/ikt/db/docker-compose.yaml up -d
-```
-
-7. Run migrations:
-```bash
 cd /home/ikt/db
+```
+
+5. Start postgres and redis:
+```bash
+docker compose -f docker-compose.yaml up -d
+```
+
+6. Run migrations:
+```bash
 chmod +x migrate.sh
 ./migrate.sh
 ```
