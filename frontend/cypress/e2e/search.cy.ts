@@ -15,6 +15,14 @@ describe("search", () => {
     cy.url().should("eq", "http://localhost:5173/search?q=cypress");
   });
 
+  it("invalid search returns no results", () => {
+    cy.visit("http://localhost:5173/search?q=cypress+this+is+invalid");
+
+    cy.get("div")
+      .contains(/\d+ offer(s)?/)
+      .should("not.exist");
+  });
+
   it("returns correct results", () => {
     cy.visit("http://localhost:5173/search?q=counter");
 

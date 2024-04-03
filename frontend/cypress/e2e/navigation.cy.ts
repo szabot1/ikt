@@ -35,6 +35,7 @@ describe("navigation", () => {
     cy.get("nav").find("button").contains("cypress").click();
     cy.get("div").contains("Sign out").click();
 
+    cy.clearLocalStorage();
     cy.url().should("eq", "http://localhost:5173/");
 
     cy.get("nav").find("a").contains("Sign In");

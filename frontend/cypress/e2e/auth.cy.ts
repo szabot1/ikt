@@ -105,5 +105,7 @@ describe("auth", () => {
     cy.url().should("eq", "http://localhost:5173/");
 
     cy.get("nav").find("a").contains("Sign In");
+
+    cy.clearLocalStorage();
   });
 });
