@@ -23,7 +23,7 @@ public class StripeWebhook : ControllerBase
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   "
 >
-  <h1 style="color: #333333; text-align: center">
+  <h1 style="color: #2ecc71; text-align: center">
     Thank You for Your Purchase!
   </h1>
   <p style="text-align: center; color: #666666">
@@ -39,7 +39,7 @@ public class StripeWebhook : ControllerBase
       margin-top: 30px;
     "
   >
-    <h2 style="color: #333333">Delivery Instructions</h2>
+    <h2 style="color: #2ecc71;">Delivery Instructions</h2>
     <pre
       style="
         font-family: Courier, monospace;
@@ -61,7 +61,7 @@ public class StripeWebhook : ControllerBase
       margin-top: 30px;
     "
   >
-    <h2 style="color: #333333">Item Details</h2>
+    <h2 style="color: #2ecc71;">Item Details</h2>
     <pre
       style="
         font-family: Courier, monospace;
