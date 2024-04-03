@@ -237,7 +237,7 @@
   
   Projektünkben a GitHubot használjuk a forráskód tárolására, valamint a fejlesztési munkafolyamatok, mint a hibajavítás, funkciófejlesztés és automatizált telepítések kezelésére. A GitHub Actions, egy kiemelt szolgáltatás a GitHubon, lehetővé teszi számunkra, hogy automatizált munkafolyamatokat állítsunk be, amelyek különböző eseményekre reagálva aktiválódnak, mint a forráskódhoz való hozzáadás (push) vagy a pull requestek.
 
-  A frontend automatikus telepítését a Cloudflare Pages-re, míg a backend automatikus telepítését a Fly.io-ra konfiguráltuk a GitHub Actions segítségével. Ez azt jelenti, hogy minden változás, amely a frontend vagy a backend kódjában történik, és egy adott branch-be kerül (például egy feature branch merge-elése a main branch-be), aktivál egy workflow-t, amely automatikusan teszteli, építi, és telepíti az alkalmazásokat az előre megadott platformokra. A Cloudflare Pages ideális választás a statikus frontend alkalmazások gyors telepítésére, míg a Fly.io kiválóan alkalmas a backend API-k nagy rendelkezésre állású és skálázható telepítésére.
+  A frontend automatikus telepítését a Cloudflare Pages-re, míg a backend automatikus telepítését a Fly.io-ra konfiguráltuk a GitHub Actions segítségével. Ez azt jelenti, hogy minden változás, amely a frontend vagy a backend kódjában történik, és egy adott branch-be kerül, aktivál egy workflow-t, amely automatikusan teszteli, építi, és telepíti az alkalmazásokat az előre megadott platformokra. A Cloudflare Pages ideális választás a statikus frontend alkalmazások gyors telepítésére, míg a Fly.io kiválóan alkalmas a backend API-k nagy rendelkezésre állású és skálázható telepítésére.
 
   #figure(
     grid(
@@ -248,7 +248,7 @@
   )
   == JWT
 
-  Projektünkben a JWT-kat használjuk a felhasználók hitelesítésére, ami lehetővé teszi számunkra, hogy biztonságos és hatékony hozzáférést biztosítsunk az alkalmazásainkhoz. Egy JWT három részből áll: a fejlécből (header), az adatokból (payload), és az aláírásból (signature), amelyek pontokkal vannak elválasztva egymástól. A fejléc tartalmazza a token típusát, például JWT, és az aláíráshoz használt algoritmust, például HMAC SHA256 vagy RSA.
+  Projektünkben JWT-t használunk a felhasználók hitelesítésére, ami lehetővé teszi számunkra, hogy biztonságos és hatékony hozzáférést biztosítsunk az alkalmazásainkhoz. Egy JWT három részből áll: a fejlécből (header), az adatokból (payload), és az aláírásból (signature), amelyek pontokkal vannak elválasztva egymástól. A fejléc tartalmazza a token típusát, például JWT, és az aláíráshoz használt algoritmust, például HMAC SHA256 vagy RSA.
 
   Projektünkben a JWT frissítéséhez egy refresh tokent használunk, amely lehetővé teszi a felhasználók számára, hogy új hitelesítési tokent kérjenek anélkül, hogy újra be kelljen jelentkezniük. Ha a frontend alkalmazás egy nem engedélyezett (HTTP 401) választ kap, automatikusan használja a refresh tokent egy új JWT kéréséhez. Ez a megközelítés javítja a felhasználói élményt, mivel a felhasználóknak nem kell gyakran újra bejelentkezniük, miközben fenntartja a rendszer biztonságát azáltal, hogy rendszeresen frissíti a hitelesítési tokeneket.
 ]
@@ -292,9 +292,9 @@
 
   A React lehetővé teszi a dinamikus és interaktív felhasználói felületek hatékony építését a weben. Ennek a könyvtárnak az alkalmazása számos előnyt kínál, amelyek közvetlenül hozzájárulnak a fejlesztési folyamat javításához és a végtermék minőségének növeléséhez.
 
-  A Bootstrap-tel szemben, amely előre meghatározott stílusú komponenseket és JavaScript pluginokat kínál, a Tailwind CSS egy "utility-first" megközelítést alkalmaz, ami azt jelenti, hogy kis, újrafelhasználható stílusosztályokat biztosít, amelyeket közvetlenül a HTML elemekhez rendelhetünk. Ez a megközelítés nagyobb mértékű testreszabhatóságot és finomhangolást tesz lehetővé, anélkül, hogy aggodalmat kellene érezni a felesleges CSS kód vagy stílusütközések miatt. Ezenkívül a Tailwind CSS segítségével könnyen létrehozhatók reszponzív designok, mivel a keretrendszer mobil-first megközelítést követ és rendelkezik számos reszponzív segédosztállyal.
+  A Bootstrap-tel szemben, amely előre meghatározott stílusú komponenseket kínál, a Tailwind CSS egy "utility-first" megközelítést alkalmaz, ami azt jelenti, hogy kis, újrafelhasználható stílusosztályokat biztosít, amelyeket közvetlenül a HTML elemekhez rendelhetünk. Ez a megközelítés nagyobb mértékű testreszabhatóságot és finomhangolást tesz lehetővé, anélkül, hogy aggódnunk kéne a felesleges CSS kód vagy stílusütközések miatt. Ezenkívül a Tailwind CSS segítségével könnyen létrehozhatók reszponzív designok, mivel a keretrendszer "mobile-first" megközelítést követ és rendelkezik számos reszponzív segédosztállyal.
 
-  Egy másik fontos szempont, amiért a Tailwind CSS-t preferáljuk a Bootstrap-pel szemben, az a teljesítmény. A Tailwind lehetővé teszi, hogy csak azokat a stílusokat építsük be, amelyeket ténylegesen használunk, csökkentve ezzel az alkalmazásunk végső CSS méretét. Ez a "purge" (tisztítási) funkció jelentősen optimalizálja a betöltési időket, különösen nagyobb projektjeink esetében.
+  Egy másik fontos szempont, amiért a Tailwind CSS-t preferáljuk a Bootstrap-pel szemben, az a teljesítmény. A Tailwind lehetővé teszi, hogy csak azokat a stílusokat építsük be, amelyeket ténylegesen használunk, csökkentve ezzel az alkalmazásunk végső CSS méretét.
 ]
 
 // User documentation
