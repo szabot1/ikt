@@ -25,3 +25,6 @@ dist-ssr
 
 # Tanstack
 src/routeTree.gen.ts
+
+# Cypress
+cypress/screenshots
