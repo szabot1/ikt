@@ -152,7 +152,7 @@ public class GamesController : ControllerBase
 
         await context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetGameById), new { id = game.Id }, game);
+        return CreatedAtAction(nameof(GetGameById), new { id = game.Id }, game.NormalizeForJson());
     }
 
     public record CreateGameRequest(
