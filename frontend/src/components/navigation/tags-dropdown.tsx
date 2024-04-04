@@ -19,7 +19,7 @@ export default function TagsDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100">
+        <button className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150 border-b-2 border-transparent hover:border-cyan-500 hover:-translate-y-0.5">
           Browse Tags
         </button>
       </DropdownMenuTrigger>
@@ -37,7 +37,7 @@ export default function TagsDropdown() {
                 });
               }}
             >
-              <span className="text-zinc-100 group-hover:text-green-500 transition-all duration-100">
+              <span className="text-zinc-100 group-hover:text-cyan-500 transition-all duration-100">
                 {tag.name}
               </span>
             </DropdownMenuItem>

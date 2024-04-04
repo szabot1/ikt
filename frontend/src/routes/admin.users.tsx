@@ -65,6 +65,7 @@ function Admin() {
 const roleStyles: Record<string, [string, string]> = {
   support: ["Support", "!bg-blue-500 !text-blue-100"],
   admin: ["Admin", "!bg-red-500 !text-red-100"],
+  user: ["User", "!bg-green-500 !text-green-100"],
 };
 
 function Inner() {
