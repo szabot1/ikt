@@ -5,6 +5,7 @@ import {
 } from "@/lib/query/auth";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 
 export function SupportRoute({ children }: { children: React.ReactNode }) {
   return (
@@ -31,7 +32,11 @@ export default function ProtectedRoute({
   const userInfo = data as UserInfo;
 
   if (isLoading || !data) {
-    return null;
+    return (
+      <div className="flex items-center justify-center w-full h-full grow">
+        <Loader className="h-4 w-4 animate-spin" />
+      </div>
+    );
   }
 
   if (!allowedRoles.includes(userInfo.role)) {

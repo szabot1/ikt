@@ -14,28 +14,28 @@ export default function AdminNavigation() {
         <div className="hidden lg:flex flex-row gap-4 place-items-center justify-start">
           <Link
             to="/admin"
-            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150"
+            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150 border-b-2 border-transparent hover:border-cyan-500 hover:-translate-y-0.5"
           >
             Statistics
           </Link>
 
           <Link
             to="/admin/users"
-            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150"
+            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150 border-b-2 border-transparent hover:border-cyan-500 hover:-translate-y-0.5"
           >
             Users
           </Link>
 
           <Link
             to="/admin/tags"
-            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150"
+            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150 border-b-2 border-transparent hover:border-cyan-500 hover:-translate-y-0.5"
           >
             Tags
           </Link>
 
           <Link
             to="/admin/games"
-            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150"
+            className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150 border-b-2 border-transparent hover:border-cyan-500 hover:-translate-y-0.5"
           >
             Games
           </Link>

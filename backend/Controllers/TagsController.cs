@@ -1,7 +1,9 @@
 using backend.Data;
 using backend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Visus.Cuid;
 
 namespace backend.Controllers;
 
@@ -36,4 +38,23 @@ public class TagsController : ControllerBase
             .ThenInclude(gameTag => gameTag.Tag)
             .Select(game => game.NormalizeForJson())
             .ToListAsync();
+
+    [HttpPost("new")]
+    [Authorize(Roles = "admin")]
+    public async Task<ActionResult<Tag>> CreateTag(GameStoreContext context, [FromBody] CreateTagRequest request)
+    {
+        var tag = new Tag
+        {
+            Id = new Cuid2().ToString(),
+            Name = request.Name,
+            CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified)
+        };
+
+        context.Tags.Add(tag);
+        await context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetTagById), new { id = tag.Id }, tag);
+    }
+
+    public record CreateTagRequest(string Name);
 }

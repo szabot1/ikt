@@ -3,6 +3,7 @@ import ErrorPage from "@/error-page";
 import { AdminStats, adminStatsQuery } from "@/lib/query/admin";
 import { useQuery } from "@tanstack/react-query";
 import { FileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/admin/").createRoute({
@@ -33,7 +34,11 @@ function Inner() {
   let games = data as AdminStats;
 
   if (isLoading || !games) {
-    return null;
+    return (
+      <div className="flex items-center justify-center w-full h-full grow">
+        <Loader className="h-4 w-4 animate-spin" />
+      </div>
+    );
   }
 
   return (

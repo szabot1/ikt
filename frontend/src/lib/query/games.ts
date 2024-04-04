@@ -1,3 +1,4 @@
+import { post } from "../fetch";
 import { Tag } from "./tags";
 import { makeQuery } from "./util";
 
@@ -70,4 +71,31 @@ export function searchQuery(query: string) {
     ["search", query],
     `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/search?query=${query}`
   );
+}
+
+export async function createGame(
+  slug: string,
+  name: string,
+  description: string,
+  isFeatured: boolean,
+  imageUrls: string[],
+  tagIds: string[]
+): Promise<string | null> {
+  const response = await post(
+    `${import.meta.env.VITE_BACKEND_PROD_URL}/api/games/new`,
+    {
+      slug,
+      name,
+      description,
+      isFeatured,
+      imageUrls,
+      tagIds,
+    }
+  );
+
+  if (response.result === "success") {
+    return null;
+  }
+
+  return response.error.message || response.error || "Unknown error";
 }

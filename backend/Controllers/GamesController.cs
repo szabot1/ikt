@@ -1,8 +1,10 @@
 using backend.Data;
 using backend.Models;
 using backend.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Visus.Cuid;
 
 namespace backend.Controllers;
 
@@ -105,4 +107,59 @@ public class GamesController : ControllerBase
             };
         }));
     }
+
+    [HttpPost("new")]
+    [Authorize(Roles = "admin")]
+    public async Task<ActionResult<Game>> CreateGame(
+        GameStoreContext context,
+        [FromBody] CreateGameRequest request)
+    {
+        var game = new Game
+        {
+            Id = new Cuid2().ToString(),
+            Slug = request.Slug,
+            Name = request.Name,
+            Description = request.Description,
+            IsFeatured = request.IsFeatured,
+            CreatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified)
+        };
+
+        context.Games.Add(game);
+
+        foreach (var imageUrl in request.ImageUrls)
+        {
+            var gameImage = new GameImage
+            {
+                Id = new Cuid2().ToString(),
+                GameId = game.Id,
+                ImageUrl = imageUrl
+            };
+
+            context.GameImages.Add(gameImage);
+        }
+
+        foreach (var tagId in request.TagIds)
+        {
+            var gameTag = new GameTag
+            {
+                Id = new Cuid2().ToString(),
+                GameId = game.Id,
+                TagId = tagId
+            };
+
+            context.GameTags.Add(gameTag);
+        }
+
+        await context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetGameById), new { id = game.Id }, game);
+    }
+
+    public record CreateGameRequest(
+        string Slug,
+        string Name,
+        string Description,
+        string[] ImageUrls,
+        string[] TagIds,
+        bool IsFeatured);
 }
