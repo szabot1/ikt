@@ -269,7 +269,6 @@ type CreateGameInputs = {
   slug: string;
   name: string;
   description: string;
-  isFeatured: boolean;
 };
 
 const CreateGameModal = ({ children }: { children: React.ReactNode }) => {
@@ -299,11 +298,14 @@ const CreateGameModal = ({ children }: { children: React.ReactNode }) => {
   ) => {
     setIsSubmitting(true);
 
+    let elem = document.getElementById("isFeatured") as HTMLInputElement;
+    let isFeatured = elem.checked;
+
     createGame(
       data.slug,
       data.name,
       data.description,
-      data.isFeatured,
+      isFeatured,
       imageUrls,
       selectedTags
     ).then((error) => {
@@ -376,7 +378,7 @@ const CreateGameModal = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <div className="flex flex-row items-center gap-2 w-full">
-            <Checkbox id="isFeatured" {...register("isFeatured")} />
+            <Checkbox id="isFeatured" />
 
             <label htmlFor="isFeatured" className="leading-none">
               Featured
