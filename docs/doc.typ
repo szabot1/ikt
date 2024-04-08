@@ -315,12 +315,12 @@
 
   A regisztráció eléréséhez elősször látogassuk meg az oldalt az alábbi linken.A főoldal elérésével, az oldalon a jobb felső sarokban a register szöveg megnyomása során elérjük a következő oldalt amit az alábbi képen láthatunk:
 
-  #image("img/registerpage.png", height: 35%, width: 65%, fit: "stretch")
+  #align(center, [#image("img/registerpage.png", height: 35%, width: 65%, fit: "stretch")])
 
   A regisztrációs oldalon az adataink kitöltésével tudunk beregisztrálni az oldalra.Az email address résznél a saját egyénileg használt email fiókunkat kell megadni.A username résznél egy egyedileg választott felhasználó nevet adhatunk meg amit az oldalon való bejelentkezés során mindenki megtekinthet.
   A password részeket egyedileg választott jelszavunkat adhatjuk meg, ami fontos hogy semmilyen körülmények között se adjuk meg másoknak a jelszavunkat.
 
-  #image("img/fillregisterpage.png", height: 35%, width: 65%, fit: "stretch")
+  #align(center, [#image("img/fillregisterpage.png", height: 35%, width: 65%, fit: "stretch")])
 
   Amint kitöltöttük az adatainkkal a regisztrációs formátumot, abban az esetben nyomjunk rá a *Continue* gombra.
 
@@ -328,12 +328,12 @@
 
   Amint a *Continue* gombra rányomtunk, a következő oldalt fogja behozni nekünk.
 
-  #image("img/registeremailverify.png", height: 35%, width: 65%, fit: "stretch")
+  #align(center, [#image("img/registeremailverify.png", height: 35%, width: 65%, fit: "stretch")])
 
   Az oldalon a megadott email címünkre érkezett kóddal tudjuk megerősíteni a regisztrációnkat.
   A következő email-t fogjuk kapni a megadott email címünkre.
 
-  #image("img/verifyemail.png", height: 31%, width: 100%, fit: "stretch")
+  #align(center, [#image("img/verifyemail.png", height: 31%, width: 100%, fit: "stretch")])
 
   Az emailre kapott kódot írjuk vagy illeszük be az Email code részbe majd nyomjunk rá a *Continue* gombra.
   Ezek után az oldal átdob a bejelentkezés menüpontra, ahonnan már betudunk jelentkezni a létrehozott accountunkba.
@@ -352,13 +352,13 @@
 
   A bejelentkezés lehetősége az oldal főoldalán található a jobb felső sarokban, még a regisztráció előtt. Kattintsunk a Sign in gombra, és a következő oldalon találjuk magunkat, ahol lehetőségünk van bejelentkezni vagy létrehozni egy fiókot az oldalon. Ez az elrendezés segíti a felhasználókat egyszerűen és gyorsan hozzáférni a fiókjukhoz vagy regisztrálni az oldalon.
 
-  #image("img/signinpage.png", height: 30%, width: 70%, fit: "stretch")
+  #align(center, [#image("img/signinpage.png", height: 30%, width: 70%, fit: "stretch")])
 
   Az oldalon az Email address résznél adjuk meg a regisztrációnál használt email címünket a bejelentkezési oldalon. A megadott jelszóval pedig lépjünk be a Continue gomb segítségével. Ha még nem regisztráltunk fiókot, kattintsunk a világos zöld Register here szövegre. Ez a folyamat segít biztosítani, hogy könnyen hozzáférjünk az oldalhoz, és lehetőségünk legyen regisztrálni, ha még nem tettük meg.
   
   A sikeres bejelentkezést követően a felhasználó neve és az avatárja megjelenik a jobb felső sarokban. Ez a funkció segít az azonosításban és a felhasználói élmény személyre szabásában, lehetővé téve, hogy könnyen és gyorsan hozzáférjünk a fiókunkhoz és az ehhez kapcsolódó funkciókhoz az oldalon.
 
-  #image("img/loggedin.png", height: 32%, width: 110%, fit: "stretch")
+  #align(center, [#image("img/loggedin.png", height: 32%, width: 110%, fit: "stretch")])
 ]
 
 #[
@@ -374,11 +374,11 @@
 
   Ha a felhasználó nevére kattintunk, további funkciókat érhetünk el. Az első pontban megtekinthetjük a profilunk oldalát, ahol információkat tekinthetünk meg rólunk és beállíthatunk linkeket a profilunkhoz. A második menüpontban különböző beállításokat tehetünk a felhasználói fiókkal kapcsolatban, melyek elérhetők a Settings menüpont alatt. A harmadik menüpont segítségével pedig kijelentkezhetünk a felhasználói fiókból, amennyiben szükséges. Ezek a lehetőségek segítenek a felhasználónak teljes körűen kezelni és testre szabni az online jelenlétét és fiókját a platformon.
 
-  #image("img/Profilebar.png", height: 20%, width: 40%, fit: "stretch")
+  #align(center, [#image("img/Profilebar.png", height: 20%, width: 40%, fit: "stretch")])
   
   === Profile rész
 
-  #image("img/profilepage.png", height: 25%, width: 40%, fit: "stretch")
+  #align(center, [#image("img/profilepage.png", height: 25%, width: 40%, fit: "stretch")])
 
   *Szintlépés*
 
@@ -406,13 +406,13 @@
 
   === Settings
 
-  #image("img/accountsettingspage.png", height: 20%, width: 110%, fit: "stretch")
+  #align(center, [#image("img/accountsettingspage.png", height: 20%, width: 110%, fit: "stretch")])
 
   Az oldal Settings menüpontja alatt két fontos beállítás érhető el. Az első menüpont segítségével lehetőségünk van véglegesen törölni a felhasználói fiókot, melyhez a Delete account gombot kell használnunk. A második menüpontban pedig lehetőségünk van beállítani fizetési adatainkat az oldalon, hogy későbbi vásárlásaink során automatikus és gyors fizetést biztosíthassunk. Ezek a beállítási lehetőségek segítenek biztosítani az oldalon való zavartalan és testreszabott felhasználói élményt mindenki számára.
 
   == Seller Dashboard
 
-  #image("img/sellerdashboard.png", height: 20%, width: 110%, fit: "stretch")
+  #align(center, [#image("img/sellerdashboard.png", height: 20%, width: 110%, fit: "stretch")])
 
   A Seller Dashboard megoszlása két diszkrét részre teremt strukturált és hatékony tájékozódást az eladók számára. Az első rész, melyet a Profile szekció képvisel, olyan mélységes betekintést nyújt az eladói profilba, amely lehetővé teszi az átfogó és precíz személyes beállításokat. E rész integritását és funkcionalitását tovább erősíti az Offer részleg, mely az ajánlatok és termékek központja.
 
@@ -436,7 +436,7 @@
 
   === Seller Dashboard eladás
 
-  #image("img/addoffer.png", height: 30%, width: 60%, fit: "stretch")
+  #align(center, [#image("img/addoffer.png", height: 30%, width: 60%, fit: "stretch")])
 
   A Seller Dashboardon, az Offer részleg belül, a plusz jelre való kattintással érjük el a következő moduláris egységet, melyben árucikkeinket eladásra bocsátani lehetőség nyílik. Ebben az interaktív térben számos lehetőség áll rendelkezésre az eladás folyamatának gördülékeny kezelésére.
 
@@ -448,7 +448,7 @@
 
   A sikeres játékajánlat létrehozását követően az oldal jobb alsó sarkában felbukkanó szöveges üzenettel találkozhatunk, mely a tranzakció sikeres rögzítését és az eljárás eredményes lezárását igazolja. Ez a felugró szöveg, mintegy virtuális pecsét, megerősíti az eladó által végrehajtott tevékenység sikerét, egyúttal biztosítva a felhasználót az elkötelezettség és a stabilitás érzésében.
 
-  #image("img/offercreated.png", height: 10%, width: 60%, fit: "stretch")
+  #align(center, [#image("img/offercreated.png", height: 10%, width: 60%, fit: "stretch")])
 ]
 
 #[
@@ -466,9 +466,9 @@
 
   Ehhez a felfedezéshez csak annyit kell tenned, hogy a doboz ikonra kattintasz, amelyet a képernyőn láthatsz. Ez a kattintás vezet el az "add stock/restock" részhez, ahol lehetőséged nyílik új készletet hozzáadni vagy újabb kulcspárokat betenni a kifogyott készletedbe. Ez a dinamikus és gyors reakció lehetőséget biztosít arra, hogy folyamatosan kielégítsd a keresletet és maximalizáld az eladási potenciált, így folyamatosan növelve a sikeres tranzakciók számát és az üzleti lehetőségek hatékonyságát.
 
-  #image("img/randomoffer.png", height: 5%, width: 100%, fit: "stretch")
+  #align(center, [#image("img/randomoffer.png", height: 5%, width: 100%, fit: "stretch")])
 
-  #image("img/addstock.png", height: 30%, width: 60%, fit: "stretch")
+  #align(center, [#image("img/addstock.png", height: 30%, width: 60%, fit: "stretch")])
   
   A Seller Dashboard "add stock" része egyszerű és hatékony működésű. Csak egyszerűen írd be a megfelelő kulcspárokat a jól látható mezőbe, majd az "add stock" gomb megnyomásával azok azonnal hozzá lesznek adva az ajánlathoz. Ez az egyszerű és intuitív felület lehetővé teszi, hogy gyorsan és hatékonyan frissítsd a készleted, minimalizálva ezzel az időveszteséget és maximalizálva az eladási lehetőségeket.
   
@@ -498,11 +498,11 @@
 
   *Vehető kulcspár*
 
-  #image("img/available offers.png", height: 15%, width: 100%, fit: "stretch")
+  #align(center, [#image("img/available offers.png", height: 15%, width: 100%, fit: "stretch")])
 
   *Nincs eladásra kínált kulcspár*
 
-  #image("img/nooffers.png", height: 16%, width: 100%, fit: "stretch")
+  #align(center, [#image("img/nooffers.png", height: 16%, width: 100%, fit: "stretch")])
 
   *Vehető kulcspár esetén*
 
@@ -524,7 +524,7 @@
 
   === Fizetési instrukciók
 
-  #image("img/Stripe.png", height: 60%, width: 80%, fit: "stretch")
+  #align(center, [#image("img/Stripe.png", height: 60%, width: 80%, fit: "stretch")])
 
   Miután rákattintottunk a vásárlás gombra, megjelenik a Stripe fizetési ablaka. Ide kell beírnunk a bankkártya adatainkat, mint például a számot, a lejárati dátumot és a háromjegyű biztonsági kódot. Emellett lehetőség van megadni a nevet és akár a telefonszámunkat is, bár ez opcionális. Amikor mindent kitöltöttünk, egyszerűen csak megnyomjuk a fizetés gombot, és a tranzakció lezárul.
 ]
