@@ -92,7 +92,7 @@ function Settings() {
               href="mailto:account-support@02c09f8b.net"
               target="_blank"
               rel="noreferrer"
-              className="text-green-500 hover:underline transition-all duration-200 hover:text-green-400"
+              className="text-cyan-500 hover:underline transition-all duration-200 hover:text-cyan-400"
             >
               contact support
             </a>

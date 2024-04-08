@@ -89,7 +89,7 @@ function SignIn() {
         <title>Sign In</title>
       </Helmet>
 
-      <div className="px-12 py-6 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-3/12">
+      <div className="px-12 py-6 border-2 border-green-700 rounded-lg w-10/12 md:w-6/12 lg:w-[29%]">
         <h1 className="text-2xl mb-6">Sign In</h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

@@ -54,7 +54,7 @@ export default function GameList({ title, isLoaded, games }: Props) {
             <TableBody>
               {games.map((game) => (
                 <TableRow
-                  className="hover:bg-transparent cursor-pointer hover:text-green-500 border-none"
+                  className="hover:bg-transparent cursor-pointer hover:text-cyan-500 border-none"
                   key={game.id}
                   onClick={() => {
                     navigate({

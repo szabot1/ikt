@@ -49,7 +49,7 @@ function Search() {
             name="search"
             defaultValue={q}
             placeholder="Search for a game..."
-            className="w-full h-16 rounded-xl bg-transparent border-2 border-zinc-700 focus:border-green-700 px-6 py-4 ring-0 focus:ring-0 outline-none focus:outline-none transition-all duration-100"
+            className="w-full h-16 rounded-xl bg-transparent border-2 border-zinc-700 focus:border-cyan-700 px-6 py-4 ring-0 focus:ring-0 outline-none focus:outline-none transition-all duration-100"
           />
         </form>
       </div>
@@ -95,7 +95,7 @@ function SearchItem({ game }: SearchItemProps) {
       </div>
 
       <div className="w-2/12 flex justify-end items-center">
-        <span className="text-green-500 group-hover:text-green-400 transition-all duration-200">
+        <span className="text-cyan-500 group-hover:text-cyan-400 transition-all duration-200">
           {offerCount} offer{offerCount === 1 ? "" : "s"}
         </span>
       </div>

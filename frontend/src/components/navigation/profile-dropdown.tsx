@@ -29,7 +29,7 @@ export default function ProfileDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="cursor-pointer text-zinc-100 hover:text-green-500 transition-all duration-100 flex flex-row gap-2 justify-center items-center">
+        <button className="cursor-pointer text-zinc-100 hover:text-cyan-500 transition-all duration-150 flex flex-row gap-2 justify-center items-center">
           <p>{userInfo.username}</p>
           <img
             src={`https://secure.gravatar.com/avatar/${md5(userInfo.email)}`}
@@ -47,7 +47,7 @@ export default function ProfileDropdown() {
             });
           }}
         >
-          <span className="text-zinc-100 group-hover:text-green-500 transition-all duration-100">
+          <span className="text-zinc-100 group-hover:text-cyan-500 transition-all duration-100">
             Profile
           </span>
         </DropdownMenuItem>
@@ -59,7 +59,7 @@ export default function ProfileDropdown() {
             });
           }}
         >
-          <span className="text-zinc-100 group-hover:text-green-500 transition-all duration-100">
+          <span className="text-zinc-100 group-hover:text-cyan-500 transition-all duration-100">
             Settings
           </span>
         </DropdownMenuItem>

@@ -92,7 +92,8 @@ public class BillingController : ControllerBase
                 { "userId", user.Id },
                 { "offerId", offer.Id },
                 { "stockId", stock.Id }
-            }
+            },
+            ExpiresAt = DateTime.UtcNow.AddHours(1)
         };
 
         var session = await _checkoutSessionService.CreateAsync(options);

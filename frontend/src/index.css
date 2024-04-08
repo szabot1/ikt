@@ -22,4 +22,14 @@
   --green-700: theme("colors.green.700");
   --green-800: theme("colors.green.800");
   --green-900: theme("colors.green.900");
+
+  --cyan-100: theme("colors.cyan.100");
+  --cyan-200: theme("colors.cyan.200");
+  --cyan-300: theme("colors.cyan.300");
+  --cyan-400: theme("colors.cyan.400");
+  --cyan-500: theme("colors.cyan.500");
+  --cyan-600: theme("colors.cyan.600");
+  --cyan-700: theme("colors.cyan.700");
+  --cyan-800: theme("colors.cyan.800");
+  --cyan-900: theme("colors.cyan.900");
 }

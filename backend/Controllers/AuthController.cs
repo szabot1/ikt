@@ -40,6 +40,42 @@ public class AuthController : ControllerBase
         HasSpecial("Password")
     };
 
+    private const string EmailCodeTemplate = """
+<div
+  style="
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  "
+>
+  <h1 style="color: #333333; text-align: center">Email Verification Code</h1>
+  <div
+    style="
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      margin: 20px auto;
+      max-width: 200px;
+    "
+  >
+    {code}
+  </div>
+  <p style="text-align: center; color: #666666">
+    Please use the above code to verify your email address and complete your
+    registration on Game Key Store.
+  </p>
+  <p style="text-align: center; color: #666666">
+    If you didn't request this verification code, please ignore this email.
+  </p>
+</div>
+""";
+
     private static readonly CustomerService _customerService = new();
 
     private readonly JwtConfig _jwtConfig;
@@ -164,7 +200,7 @@ public class AuthController : ControllerBase
             });
         }
 
-        if (request.EmailCode == "")
+        if (request.EmailCode?.Length == 0)
         {
             // If no code is provided, send a new email
 
@@ -180,13 +216,8 @@ public class AuthController : ControllerBase
                 await Utils.Email.SendEmailAsync(
                     _emailConfig,
                     request.Email,
-                    "Game Key Store Email Verification",
-                    $@"<h1>Hello!</h1>
-                <p>Someone (hopefully you) has requested to register an account on our store.</p>
-                <p>If this was you, please use the following code to verify your email address:</p>
-                <h2>{WebUtility.HtmlEncode(token.Token)}</h2>
-                <p>If this wasn't you, please ignore this email.</p>
-                ",
+                    "Game Key Store - Email Verification Code",
+                    EmailCodeTemplate.Replace("{code}", WebUtility.HtmlEncode(token.Token)),
                     Utils.Email.EmailType.Accounts);
 
                 context.EmailTokens.RemoveRange(context.EmailTokens.Where(t => t.Email == request.Email));
@@ -206,7 +237,6 @@ public class AuthController : ControllerBase
                     { "server", new List<string> { e.Message } }
                 }
                 });
-
             }
         }
 
@@ -245,12 +275,11 @@ public class AuthController : ControllerBase
             {
                 Email = request.Email,
                 Description = "IKT Project Customer",
-                Name = request.Username
-            };
-
-            customerOptions.Metadata = new Dictionary<string, string>
+                Name = request.Username,
+                Metadata = new Dictionary<string, string>
             {
                 { "user_id", userId }
+            }
             };
 
             var requestOptions = new RequestOptions

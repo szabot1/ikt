@@ -36,7 +36,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { Loader, MoreHorizontal } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = new FileRoute("/admin/users").createRoute({
@@ -65,6 +65,7 @@ function Admin() {
 const roleStyles: Record<string, [string, string]> = {
   support: ["Support", "!bg-blue-500 !text-blue-100"],
   admin: ["Admin", "!bg-red-500 !text-red-100"],
+  user: ["User", "!bg-green-500 !text-green-100"],
 };
 
 function Inner() {
@@ -109,7 +110,7 @@ function Inner() {
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 float-right">
                 <span className="sr-only">Open menu</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
@@ -173,7 +174,11 @@ function Inner() {
   });
 
   if (isLoading || !data) {
-    return null;
+    return (
+      <div className="flex items-center justify-center w-full h-full grow">
+        <Loader className="h-4 w-4 animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -183,6 +188,10 @@ function Inner() {
       </Helmet>
 
       <div className="px-6 py-3 w-11/12 md:w-10/12 lg:w-8/12">
+        <div className="flex flex-row justify-between mb-4">
+          <h1 className="text-xl font-semibold">Users</h1>
+        </div>
+
         <div className="border-2 border-zinc-700 rounded-lg">
           <Table className="border-zinc-700">
             <TableHeader className="border-zinc-700">

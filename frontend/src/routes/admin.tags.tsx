@@ -1,12 +1,22 @@
 import { AdminRoute } from "@/components/auth/protected";
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -19,7 +29,7 @@ import { toast } from "@/components/ui/use-toast";
 import ErrorPage from "@/error-page";
 import { localDate } from "@/lib/date";
 import { adminTagsQuery, deleteTag } from "@/lib/query/admin";
-import { type Tag } from "@/lib/query/tags";
+import { createTag, type Tag } from "@/lib/query/tags";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FileRoute, redirect } from "@tanstack/react-router";
 import {
@@ -31,8 +41,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { Loader, MoreHorizontal, Plus, Tag as TagIcon } from "lucide-react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { type SubmitHandler, useForm } from "react-hook-form";
 
 export const Route = new FileRoute("/admin/tags").createRoute({
   component: Admin,
@@ -85,7 +97,7 @@ function Inner() {
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button variant="ghost" className="h-8 w-8 p-0 float-right">
                 <span className="sr-only">Open menu</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
@@ -132,7 +144,11 @@ function Inner() {
   });
 
   if (isLoading || !data) {
-    return null;
+    return (
+      <div className="flex items-center justify-center w-full h-full grow">
+        <Loader className="h-4 w-4 animate-spin" />
+      </div>
+    );
   }
 
   return (
@@ -142,6 +158,14 @@ function Inner() {
       </Helmet>
 
       <div className="px-6 py-3 w-11/12 md:w-10/12 lg:w-8/12">
+        <div className="flex flex-row justify-between mb-4">
+          <h1 className="text-xl font-semibold">Tags</h1>
+
+          <CreateTagModal>
+            <Plus className="h-5 w-5 cursor-pointer" />
+          </CreateTagModal>
+        </div>
+
         <div className="border-2 border-zinc-700 rounded-lg">
           <Table className="border-zinc-700">
             <TableHeader className="border-zinc-700">
@@ -214,3 +238,82 @@ function Inner() {
     </section>
   );
 }
+
+type CreateTagInputs = {
+  name: string;
+};
+
+const CreateTagModal = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = useQueryClient();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [open, setOpen] = useState(false);
+
+  const { register, handleSubmit } = useForm<CreateTagInputs>();
+
+  const onSubmit: SubmitHandler<CreateTagInputs> = (data: CreateTagInputs) => {
+    setIsSubmitting(true);
+
+    createTag(data.name).then((error) => {
+      if (error == null) {
+        toast({ title: "Tag created successfully" });
+
+        setIsSubmitting(false);
+        setOpen(false);
+
+        queryClient.invalidateQueries(adminTagsQuery);
+      } else {
+        toast({
+          title: "An error occurred while creating the tag",
+          description: error + ". Please try again.",
+        });
+
+        setIsSubmitting(false);
+      }
+    });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Create tag</DialogTitle>
+          <DialogDescription>
+            Enter the details of the new tag. Click the create button when
+            you're done.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form
+          id="edit-profile-form"
+          className="grid gap-4 py-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="flex flex-row items-center justify-center gap-2 w-full">
+            <TagIcon className="w-6 h-6" />
+
+            <Input
+              type="text"
+              placeholder="Name"
+              {...register("name", { required: true })}
+            />
+          </div>
+        </form>
+
+        <DialogFooter>
+          <Button
+            type="submit"
+            form="edit-profile-form"
+            disabled={isSubmitting}
+            className="flex flex-row items-center gap-2"
+          >
+            {isSubmitting && <Loader className="h-4 w-4 animate-spin" />}
+            <span>Create tag</span>
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
