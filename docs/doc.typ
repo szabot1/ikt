@@ -370,7 +370,7 @@
     header: align(right + horizon, title)
   )
 
-  == User Guid
+  == Felhasználói profil
 
   Ha a felhasználó nevére kattintunk, további funkciókat érhetünk el. Az első pontban megtekinthetjük a profilunk oldalát, ahol információkat tekinthetünk meg rólunk és beállíthatunk linkeket a profilunkhoz. A második menüpontban különböző beállításokat tehetünk a felhasználói fiókkal kapcsolatban, melyek elérhetők a Settings menüpont alatt. A harmadik menüpont segítségével pedig kijelentkezhetünk a felhasználói fiókból, amennyiben szükséges. Ezek a lehetőségek segítenek a felhasználónak teljes körűen kezelni és testre szabni az online jelenlétét és fiókját a platformon.
 
