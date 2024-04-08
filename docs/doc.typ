@@ -311,16 +311,175 @@
     #heading(title)
   ])
 
-  == Bevezetés
-  #lorem(10)
+  == Regisztráció
+  A regisztráció eléréséhez elősször látogassuk meg az oldalt az alábbi linken.A főoldal elérésével, az oldalon a jobb felső sarokban a register szöveg megnyomása során elérjük a következő oldalt amit az alábbi képen láthatunk:
+  #image("img/registerpage.png", height: 35% ,width: 65%,fit: "stretch")
+  A regisztrációs oldalon az adataink kitöltésével tudunk beregisztrálni az oldalra.Az email address résznél a saját egyénileg használt email fiókunkat kell megadni.A username résznél egy egyedileg választott felhasználó nevet adhatunk meg amit az oldalon való bejelentkezés során mindenki megtekinthet.
+  A password részeket egyedileg választott jelszavunkat adhatjuk meg, ami fontos hogy semmilyen körülmények között se adjuk meg másoknak a jelszavunkat.
+  #image("img/fillregisterpage.png", height: 35% ,width: 65%,fit: "stretch")
+  Amint kitöltöttük az adatainkkal a regisztrációs formátumot, abban az esetben nyomjunk rá a *Continue* gombra.
+  === Regisztráció megerősítése emailben.
+  Amint a *Continue* gombra rányomtunk, a következő oldalt fogja behozni nekünk.
+  #image("img/registeremailverify.png", height: 35% ,width: 65%,fit: "stretch")
+  Az oldalon a megadott email címünkre érkezett kóddal tudjuk megerősíteni a regisztrációnkat.
+  A következő email-t fogjuk kapni a megadott email címünkre.
+  #image("img/verifyemail.png", height: 31% ,width: 100%,fit: "stretch")
+  Az emailre kapott kódot írjuk vagy illeszük be az Email code részbe majd nyomjunk rá a *Continue* gombra.
+  Ezek után az oldal átdob a bejelentkezés menüpontra, ahonnan már betudunk jelentkezni a létrehozott accountunkba.
 ]
 
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  == Bejelentkezés
+  A bejelentkezés lehetősége az oldal főoldalán található a jobb felső sarokban, még a regisztráció előtt. Kattintsunk a Sign in gombra, és a következő oldalon találjuk magunkat, ahol lehetőségünk van bejelentkezni vagy létrehozni egy fiókot az oldalon. Ez az elrendezés segíti a felhasználókat egyszerűen és gyorsan hozzáférni a fiókjukhoz vagy regisztrálni az oldalon.
+  #image("img/signinpage.png", height: 30% ,width: 70%,fit: "stretch")
+  Az oldalon az Email address résznél adjuk meg a regisztrációnál használt email címünket a bejelentkezési oldalon. A megadott jelszóval pedig lépjünk be a Continue gomb segítségével. Ha még nem regisztráltunk fiókot, kattintsunk a világos zöld Register here szövegre. Ez a folyamat segít biztosítani, hogy könnyen hozzáférjünk az oldalhoz, és lehetőségünk legyen regisztrálni, ha még nem tettük meg.
+  
+  A sikeres bejelentkezést követően a felhasználó neve és az avatárja megjelenik a jobb felső sarokban. Ez a funkció segít az azonosításban és a felhasználói élmény személyre szabásában, lehetővé téve, hogy könnyen és gyorsan hozzáférjünk a fiókunkhoz és az ehhez kapcsolódó funkciókhoz az oldalon.
+  #image("img/loggedin.png", height: 32% ,width: 110%,fit: "stretch")
+
+]
+
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  == User Guid
+Ha a felhasználó nevére kattintunk, további funkciókat érhetünk el. Az első pontban megtekinthetjük a profilunk oldalát, ahol információkat tekinthetünk meg rólunk és beállíthatunk linkeket a profilunkhoz. A második menüpontban különböző beállításokat tehetünk a felhasználói fiókkal kapcsolatban, melyek elérhetők a Settings menüpont alatt. A harmadik menüpont segítségével pedig kijelentkezhetünk a felhasználói fiókból, amennyiben szükséges. Ezek a lehetőségek segítenek a felhasználónak teljes körűen kezelni és testre szabni az online jelenlétét és fiókját a platformon.
+  #image("img/Profilebar.png", height: 20% ,width: 40%,fit: "stretch")
+  === Profile rész
+
+  #image("img/profilepage.png", height: 25% ,width: 40%,fit: "stretch")
+
+  *Szintlépés*
+
+  A vásárlásokhoz kapcsolódó szintlépések lehetőséget adnak arra, hogy a vásárlások révén megszerezz magasabb szinteket a felhasználói profilodban, ami további előnyöket és funkciókat jelenthet számodra.
+      Vásárolj termékeket vagy szolgáltatásokat az alkalmazásunkban a szokásos módon.
+    Minél több vásárlást hajtasz végre, annál több pontot vagy "szintet" szerezhetsz.
+    A vásárlások után ellenőrizd a profilodat, hogy lássad, elérted-e az új szintet, és milyen előnyökkel jár ez a szintlépés.
+
+    *Social Link beszúrása*
+
+    Ahhoz, hogy a közösségi kapcsolatokat hozzáadhassuk a felhasználóhoz, először kattintsunk a képen látható ceruza ikonra, majd ott a megfelelő mezők kitöltésével tudunk különböző külső közösségi fiókokat hozzáadni a felhasználó profiljához. Ezáltal lehetőségünk van bővíteni a kapcsolati hálónkat és jobban összekapcsolódni más felhasználókkal a közösségi platformokon keresztül.
+
+]
+
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Settings
+    #image("img/accountsettingspage.png", height: 20% ,width: 110%,fit: "stretch")
+  Az oldal Settings menüpontja alatt két fontos beállítás érhető el. Az első menüpont segítségével lehetőségünk van véglegesen törölni a felhasználói fiókot, melyhez a Delete account gombot kell használnunk. A második menüpontban pedig lehetőségünk van beállítani fizetési adatainkat az oldalon, hogy későbbi vásárlásaink során automatikus és gyors fizetést biztosíthassunk. Ezek a beállítási lehetőségek segítenek biztosítani az oldalon való zavartalan és testreszabott felhasználói élményt mindenki számára.
+
+  == Seller Dashboard
+  #image("img/sellerdashboard.png", height: 20% ,width: 110%,fit: "stretch")
+  A Seller Dashboard megoszlása két diszkrét részre teremt strukturált és hatékony tájékozódást az eladók számára. Az első rész, melyet a Profile szekció képvisel, olyan mélységes betekintést nyújt az eladói profilba, amely lehetővé teszi az átfogó és precíz személyes beállításokat. E rész integritását és funkcionalitását tovább erősíti az Offer részleg, mely az ajánlatok és termékek központja.
+=== Seller Profile részleg
+A Profile szakasz magában foglalja az eladó teljes bemutatását, ahol finomított és testre szabott beállításokat végezhet a Profil menü ceruza ikonjának finom megérintésével. Ez az elérhetőség a Profil részletek gondos kezelését, valamint az azokhoz való hozzáférést biztosítja. Az avatár alatt, a személyes azonosításában rejlő biztonsági rétegek között, a seller statuszát ragyogja fel, amely megkülönbözteti az Unverified és a Verified státuszt, jelentősége pedig a megbízhatóság és a hitelesség kiemelésében rejlik.
+=== Seller Offer részleg
+Az Offer részleg pedig a dinamikus termékkínálat és az üzleti lehetőségek színtere. A + gombra kattintva hozzáadhatja újabb árucikkeit az ajánlott termékek piacához, ezáltal növelve a kínálat és a potenciális üzleti értékét. A jelenleg kínált termékek pedig egy áttekinthető listán jelennek meg, amely lehetőséget nyújt a könnyű navigációra és a kínálatban való eligazodásra a next és previous navigációs opciókkal. Ezzel egyidejűleg támogatva az üzleti stratégiák finomhangolását és a piaci jelenlét hatékony kezelését.
+  
+]
+
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Seller Dashboard eladás
+#image("img/addoffer.png", height: 30% ,width: 60%,fit: "stretch")
+A Seller Dashboardon, az Offer részleg belül, a plusz jelre való kattintással érjük el a következő moduláris egységet, melyben árucikkeinket eladásra bocsátani lehetőség nyílik. Ebben az interaktív térben számos lehetőség áll rendelkezésre az eladás folyamatának gördülékeny kezelésére.
+
+Először is, a Select a game legördülő menüjéből kiválasztjuk az eladásra szánt játékot, lehetővé téve a specifikus termék kijelölését és az eladói kínálat pontos meghatározását. Ezután, a Select a delivery type lehetőségében kiválasztjuk azt a szállítási típust, amely a vevő számára elérhetővé válik (például: Steam kulcs), biztosítva ezzel a tranzakció folyamatának személyre szabott és az elvárásoknak megfelelő kiszolgálását.
+
+A végén, az utolsó sorban megadhatjuk az eladott árucikk árát, lehetővé téve a piaci versenyképesség fenntartását és az áralku számára megfelelő alapot. Ezt követően, végső lépésként, a Create offer gombra kattintva rögzíthetjük az ajánlatot, elősegítve ezzel a tranzakció zökkenőmentes lebonyolítását és az üzleti lehetőség gyors és hatékony kiaknázását.
+
+*Sikeres ajánlat esetén*
+
+A sikeres játékajánlat létrehozását követően az oldal jobb alsó sarkában felbukkanó szöveges üzenettel találkozhatunk, mely a tranzakció sikeres rögzítését és az eljárás eredményes lezárását igazolja. Ez a felugró szöveg, mintegy virtuális pecsét, megerősíti az eladó által végrehajtott tevékenység sikerét, egyúttal biztosítva a felhasználót az elkötelezettség és a stabilitás érzésében.
+#image("img/offercreated.png", height: 10% ,width: 60%,fit: "stretch")
+]
+
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Seller Dashboard Add Stock
+  Amikor árucikkeid kifogytak, a rendszer azonnal alternatív megoldásokat kínál számodra. A következő ajánlások egy új dimenziót nyitnak meg az eladási potenciálodban.
+
+Ehhez a felfedezéshez csak annyit kell tenned, hogy a doboz ikonra kattintasz, amelyet a képernyőn láthatsz. Ez a kattintás vezet el az "add stock/restock" részhez, ahol lehetőséged nyílik új készletet hozzáadni vagy újabb kulcspárokat betenni a kifogyott készletedbe. Ez a dinamikus és gyors reakció lehetőséget biztosít arra, hogy folyamatosan kielégítsd a keresletet és maximalizáld az eladási potenciált, így folyamatosan növelve a sikeres tranzakciók számát és az üzleti lehetőségek hatékonyságát.
+  #image("img/randomoffer.png", height: 5% ,width: 100%,fit: "stretch")
+  #image("img/addstock.png", height: 30% ,width: 60%,fit: "stretch")
+  A Seller Dashboard "add stock" része egyszerű és hatékony működésű. Csak egyszerűen írd be a megfelelő kulcspárokat a jól látható mezőbe, majd az "add stock" gomb megnyomásával azok azonnal hozzá lesznek adva az ajánlathoz. Ez az egyszerű és intuitív felület lehetővé teszi, hogy gyorsan és hatékonyan frissítsd a készleted, minimalizálva ezzel az időveszteséget és maximalizálva az eladási lehetőségeket.
+  == Alapvető funkciók az oldalon
+  === Searchbar
+  A kereső sávot, más néven Searchbart, a weboldal Search Games menüpontja alatt helyezték el, ahol könnyedén elérhetővé válik a keresés funkció. Amikor ezt a menüpontot választjuk, az oldal egy új ablakot nyit meg, amely lehetőséget biztosít arra, hogy szabadon böngésszünk és kutassunk az elérhető játékkulcsok között.
+
+A kereső sávba írva a kívánt termék nevét vagy kulcsszavait, lehetőségünk van megtalálni a megfelelő játékot vagy terméket. Miután befejeztük a gépelést, egyszerűen nyomjunk entert, és az oldal azonnal megjeleníti a releváns találatokat. Ezután csak ki kell választanunk a keresett játékot a listából, és további részletekért rá kell kattintanunk a megfelelő szövegre.
+]
+
+#[
+#let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Játék vásárlás
+  Miután megtaláltuk a keresett játékot és rákattintottunk, két különböző helyzettel találhatjuk szembe magunkat. Az első esetben, amennyiben a kiválasztott játékhoz elérhető Steam kulcs van eladó, ezt azonnal láthatjuk. A második esetben pedig azt tapasztaljuk, hogy a megvásárolni kívánt játékhoz nincs elérhető kulcspár eladó.
+
+Ez a megosztott élmény lehetővé teszi számunkra, hogy áttekintsük az eladásra kínált játékok aktuális állapotát és azok elérhetőségét. Így könnyedén dönthetünk arról, hogy melyik játékot választjuk, és szükség esetén azonnal megvásárolhatjuk vagy további lépéseket tehetünk annak érdekében, hogy megszerezzük a kívánt játékot.
+
+*Vehető kulcspár*
+  #image("img/available offers.png", height: 15% ,width: 100%,fit: "stretch")
+  *Nincs eladásra kínált kulcspár*
+  #image("img/nooffers.png", height: 16% ,width: 100%,fit: "stretch")
+*Vehető kulcspár esetén*
+
+Amennyiben döntünk a kulcs vásárlása mellett, az első képen látható, hogy az eladó neve és státusza, mely lehet Verified vagy Unverified Seller, egyaránt feltűnik. E mellett az árat is láthatjuk, mely dollárban értelmezendő.
+
+Az eladó státusza és az ár alapján választhatunk a számunkra megfelelő ajánlat közül, figyelembe véve a megbízhatóságot és az ár-érték arányt. Miután kiválasztottuk az ideális ajánlatot, egyszerűen kattintsunk a "Purchase" gombra az offer mellett, és így folytathatjuk a vásárlási folyamatot.
+
+Ez a folyamat biztosítja számunkra, hogy tudatos döntéseket hozzunk az ajánlatok között, miközben egyszerűen és hatékonyan folytathatjuk az eladóval való kommunikációt és a vásárlási tranzakciót.
+
+]
+
+#[
+#let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Fizetési instrukciók
+  #image("img/Stripe.png", height: 60% ,width: 80%,fit: "stretch")
+  Miután rákattintottunk a vásárlás gombra, megjelenik a Stripe fizetési ablaka. Ide kell beírnunk a bankkártya adatainkat, mint például a számot, a lejárati dátumot és a háromjegyű biztonsági kódot. Emellett lehetőség van megadni a nevet és akár a telefonszámunkat is, bár ez opcionális. Amikor mindent kitöltöttünk, egyszerűen csak megnyomjuk a fizetés gombot, és a tranzakció lezárul.
+]
+
 #pagebreak()
 #pagebreak()
 #pagebreak()
