@@ -537,13 +537,86 @@
   #align(center, [#image("img/Stripe.png", height: 60%, width: 80%, fit: "stretch")])
 
   Miután rákattintottunk a vásárlás gombra, megjelenik a Stripe fizetési ablaka. Ide kell beírnunk a bankkártya adatainkat, mint például a számot, a lejárati dátumot és a háromjegyű biztonsági kódot. Emellett lehetőség van megadni a nevet és akár a telefonszámunkat is, bár ez opcionális. Amikor mindent kitöltöttünk, egyszerűen csak megnyomjuk a fizetés gombot, és a tranzakció lezárul.
+
+  == Admin felület
+  Ahhoz, hogy hozzáférjünk az adminisztrációs felülethez, először is tekintsünk egy legördülő menüt a megadott képen. Ebben a menüben sötét kék betűszínnel kiemelve található az „admin” felirat. Fontos megjegyezni, hogy amennyiben nem rendelkezünk adminisztrátori jogosultsággal, ez a lehetőség sajnos nem lesz elérhető számunkra.
+
+Az adminisztrációs funkció egy magasabb szintű jogosultságot képvisel az oldalon, mely kizárólag az adminisztrátori jogosultsággal rendelkező felhasználóknak engedélyezett. Az adminisztrátorok különböző kulcsfontosságú beállításokat, kezelési feladatokat, valamint a platform szélesebb körű irányítását képesek ellátni. Ilyen lehetőségeik közé tartozik például a felhasználók kezelése, a tartalmak moderálása vagy akár a platform biztonságának felügyelete.
 ]
 
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
-#pagebreak()
+#[
+#let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  *Instrukciós kép legördülő adminmenü eléréshez:*
+   #align(center, [#image("img/dropdownadmin.png", height: 25%, width: 25%, fit: "stretch")])
+=== Statistics oldal 
+#align(center, [#image("img/staticpage.png", height: 30%, width: 100%, fit: "stretch")])
+Az oldalunk rendelkezik különböző statisztikai adatokkal, melyeket a felhasználók nemcsak megtekinthetnek, hanem hasznosíthatnak is. Amennyiben az oldalon valamelyik statisztikai fülre kattintunk, eljuthatunk az adott statisztika részleteihez és adataihoz. Ez a funkció különösen hasznos lehet mobil eszközökön, ahol a navigációs sáv nem mindig látható vagy könnyen hozzáférhető.
+
+Az oldalunk által nyújtott statisztikai adatok lehetővé teszik számunkra, hogy mélyebben megértsük az oldal teljesítményét, a felhasználói viselkedést és más fontos trendeket. Ezek az adatok segíthetnek nekünk abban, hogy jobban megértsük az oldalunkat használó közönség igényeit és szokásait, valamint segíthetnek abban is, hogy optimalizáljuk az oldalunkat és fejlesszük annak felhasználói élményét.
+
+   - *Tags*: Az oldalon lévő "tags" számának megjelenítése.
+  -  *Games*: Az oldalon található játékok számának megjelenítése.
+  -  *Sellers*: Az oldalhoz kötött eladók számának megjelenítése.
+  -  *Offers*: Az oldalon található ajánlatok számának megjelenítése.
+  -  *Users*: Az oldalon regisztrált felhasználók számának megjelenítése.
+
+]
+
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Users page
+
+#align(center, [#image("img/Adminuserspage.png", height: 30%, width: 100%, fit: "stretch")])
+
+  Az "users" oldalon, amelyhez adminisztrátori jogosultsággal rendelkezünk, kivételes lehetőséget kapunk a felhasználók részletes adatainak megtekintésére és kezelésére. Itt láthatjuk az egyes felhasználók email címét, nevét, regisztrációs dátumát és jogosultsági körét. Emellett az adminisztrátori funkciók is elérhetőek a három egyvonalban lévő pontra kattintva, melyek segítségével további műveleteket végezhetünk a felhasználókkal kapcsolatban.
+
+Ezek az adminisztrátori funkciók lehetővé teszik számunkra, hogy hatékonyan kezeljük és szabályozzuk a felhasználók profiljait. Ilyen funkciók közé tartozik például a sellerek hozzáadása vagy eltávolítása a felhasználó profiljából, valamint az azonosító másolása. Ezek a funkciók lehetővé teszik számunkra, hogy rugalmasan és gyorsan reagáljunk a felhasználók igényeire és a platform változó követelményeire.
+
+=== Tags page
+
+#align(center, [#image("img/Admintagspage.png", height: 30%, width: 100%, fit: "stretch")])
+Az "Tags" oldal egy különleges teret kínál számunkra, ahol a játékokhoz rendelt címkéket személyre szabhatjuk és kezelhetjük az adminisztrátori funkciók segítségével. Ez a helyszín lehetőséget biztosít számunkra, hogy finomhangoljuk a játékokhoz rendelt címkéket, megújítsuk azokat, és akár új címkéket is létrehozzunk az adott játékokhoz.
+]
+
+#[
+  #let title = [
+    Felhasználói dokumentáció
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+  === Games page
+  #align(center, [#image("img/Admingamespage.png", height: 30%, width: 100%, fit: "stretch")])
+
+  Az "Games" oldal egy kulcsfontosságú része az adminisztrációs felületnek, ahol az adminisztrátorok a weboldalon elérhető játékokkal kapcsolatos funkciókat és adatokat kezelhetik. Ez az oldal lehetőséget kínál az egyes játékok részletes szerkesztésére és új játékok hozzáadására az adminisztrátori jogosultságok keretében.
+
+*A játékokat a következő adatokkal listázzuk:*
+
+    - *Slug:* Ez egy ember által olvasható azonosító, amely egyedi azonosítót jelent a játékok számára.
+    - *Name:* A játék neve, amely segít az azonosításban és a felhasználók számára való könnyebb azonosításban.
+    - *Created at:* Ez a dátum jelzi, hogy mikor lett létrehozva az adott játék az oldalon.
+    - *Active:* Ez a mező azt mutatja, hogy az adott játék aktív-e vagy sem a boltban. Ha aktív, akkor a felhasználók számára látható és megvásárolható.
+    - *Featured:* Ez a jelző azt mutatja, hogy a játék kiemelt-e vagy sem az oldalon. A kiemelt játékok általában előnyt élveznek a promóciókban és a keresési eredményekben.
+  #align(center, [#image("img/AdminCreateGames.png", height: 30%, width: 60%, fit: "stretch")])
+
+  Amikor az oldalon a "plusz" gombra kattintunk, megjelenik a "create game" funkció, amely egy speciális modális ablakot hoz elő. Ebben a modális ablakban lehetőségünk van új játék létrehozására, ahol az előzőleg felsorolt adatokat tölthetjük ki. Emellett további funkcionalitások is elérhetőek, mint például tagok hozzáadása, leírások feltöltése és képek feltöltése.
+
+A "Create" gomb megnyomásával lehetőségünk van az új játék hozzáadására az oldalhoz. Ez a folyamat egy komplex művelet, amely magában foglalja az adatok kitöltését és a képek, leírások hozzáadását, így biztosítva a játék teljes körű megjelenését és hozzáférhetőségét az oldalon.
+
+]
 
 #[
   Linkek
