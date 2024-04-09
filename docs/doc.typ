@@ -442,7 +442,7 @@
     header: align(right + horizon, title)
   )
 
-  === Seller Dashboard eladás
+  === Eladó profil
 
   A Seller Dashboardon, az Offer részleg belül, a plusz jelre való kattintással érjük el a következő modális ablakot, melyben árucikkeinket eladásra bocsátani lehetőség nyílik.
 
@@ -470,7 +470,7 @@
     header: align(right + horizon, title)
   )
 
-  === Seller Dashboard Add Stock
+  === Eladó profilon stock hozzáadása
 
   A doboz ikonra kattintva elérhetünk két lehetőséget: add stock, amivel új készletet tudunk felvinni, valamint clear stock, amivel a már feltöltött készletet tudjuk törölni.
 
@@ -557,7 +557,7 @@
 
    #align(center, [#image("img/dropdownadmin.png", height: 25%, width: 25%, fit: "stretch")])
 
-  === Statistics oldal 
+  === Statisztika oldal 
   
   #align(center, [#image("img/staticpage.png", height: 30%, width: 100%, fit: "stretch")])
 
@@ -581,7 +581,7 @@
     header: align(right + horizon, title)
   )
 
-  === Users page
+  === Felhasználók oldal
 
   #align(center, [#image("img/Adminuserspage.png", height: 30%, width: 100%, fit: "stretch")])
 
@@ -589,7 +589,7 @@
 
   Ezek az adminisztrátori funkciók lehetővé teszik számunkra, hogy hatékonyan kezeljük és szabályozzuk a felhasználók profiljait. Ilyen funkciók közé tartozik például a sellerek hozzáadása vagy eltávolítása a felhasználó profiljából, valamint az azonosító másolása. Ezek a funkciók lehetővé teszik számunkra, hogy rugalmasan és gyorsan reagáljunk a felhasználók igényeire és a platform változó követelményeire.
 
-  === Tags page
+  === Tagek oldal
 
   #align(center, [#image("img/Admintagspage.png", height: 30%, width: 100%, fit: "stretch")])
   
@@ -605,7 +605,7 @@
     header: align(right + horizon, title)
   )
 
-  === Games page
+  === Játékok oldal
 
   #align(center, [#image("img/Admingamespage.png", height: 30%, width: 100%, fit: "stretch")])
 
