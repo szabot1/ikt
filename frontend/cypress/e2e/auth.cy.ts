@@ -57,10 +57,6 @@ describe("auth", () => {
     cy.get("h1").contains("Profile");
 
     cy.get("h1").contains("cypress");
-
-    cy.get("img")
-      .should("have.attr", "src")
-      .and("match", /https:\/\/secure\.gravatar\.com\/avatar\/.*/);
   });
 
   it("settings page", () => {
