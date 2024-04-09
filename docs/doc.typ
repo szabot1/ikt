@@ -326,7 +326,7 @@
 
   Amint kitöltöttük az adatainkkal a regisztrációs oldalt, nyomjunk rá a *Continue* gombra.
 
-  === Regisztráció megerősítése emailben.
+  === Regisztráció megerősítése emailben
 
   Amint a *Continue* gombra rányomtunk, a következő oldalt fogja behozni nekünk:
 
@@ -385,7 +385,7 @@
 
   #align(center, [#image("img/Profilebar.png", height: 20%, width: 40%, fit: "stretch")])
   
-  === Profile rész
+  === Profil
 
   #align(center, [#image("img/profilepage.png", height: 25%, width: 40%, fit: "stretch")])
 
@@ -424,11 +424,11 @@
 
   A Seller Dashboard két egyszerű részre van bontva. Az első rész, melyet a Profile szekció képvisel, lehetővé teszi az eladó profil személre szabását, míg a második rész a Seller Offer, ahol az eladó termékeinek és ajánlatainak kezelése történik.
 
-  === Profil részleg
+  === Profil rész
 
   A Profile szakasz magában foglalja az eladó teljes bemutatását, ahol testre szabott beállításokat végezhet a Profil menü ceruza ikonjára való kattintással. A szakaszban láthatjuk a profilképünket, a nevünket, valamint hogy hitelesített eladók vagyunk-e.
 
-  === Ajánlat részleg
+  === Ajánlatok rész
 
   A plusz gombra kattintva újabb árúcikk létrehozására van lehetőségünk. A jelenleg kínált termékek pedig egy áttekinthető listán jelennek meg, amely lehetőséget nyújt a könnyű navigációra és a kínálatban való eligazodásra a next és previous navigációs opciókkal.
 ]
@@ -442,7 +442,7 @@
     header: align(right + horizon, title)
   )
 
-  === Eladó profil
+  === Ajánlat létrehozása
 
   A Seller Dashboardon, az Offer részleg belül, a plusz jelre való kattintással érjük el a következő modális ablakot, melyben árucikkeinket eladásra bocsátani lehetőség nyílik.
 
@@ -454,7 +454,7 @@
   
   Ezt követően, végső lépésként, a Create offer gombra kattintva rögzíthetjük az ajánlatot.
 
-  *Sikeres ajánlat esetén*
+  *Sikeres létrehozás*
 
   A sikeres játékajánlat létrehozását követően az oldal jobb alsó sarkában felbukkanó szöveges üzenettel találkozhatunk, mely az ajánlat sikeres rögzítését és az eljárás eredményes lezárását igazolja.
 
@@ -470,7 +470,7 @@
     header: align(right + horizon, title)
   )
 
-  === Eladó profilon stock hozzáadása
+  === Stock hozzáadása
 
   A doboz ikonra kattintva elérhetünk két lehetőséget: add stock, amivel új készletet tudunk felvinni, valamint clear stock, amivel a már feltöltött készletet tudjuk törölni.
 
@@ -484,7 +484,7 @@
   
   == Alapvető funkciók az oldalon
   
-  === Searchbar
+  === Keresés
 
   A kereső sávot, más néven Searchbart, a weboldal Search Games menüpontja alatt találhatjuk, ahol könnyedén elérhetővé válik a keresés funkció. Amikor ezt a menüpontot választjuk, az oldal egy új ablakot nyit meg, amely lehetőséget biztosít arra, hogy szabadon böngésszünk és kutassunk az elérhető játékkulcsok között.
 
@@ -506,15 +506,15 @@
 
   Ez a megosztott élmény lehetővé teszi számunkra, hogy áttekintsük az eladásra kínált játékok aktuális állapotát és azok elérhetőségét. Így könnyedén dönthetünk arról, hogy melyik játékot választjuk, és szükség esetén azonnal megvásárolhatjuk vagy további lépéseket tehetünk annak érdekében, hogy megszerezzük a kívánt játékot.
 
-  *Vehető kulcs*
+  *Elérhető ajánlatok*
 
   #align(center, [#image("img/available offers.png", height: 15%, width: 100%, fit: "stretch")])
 
-  *Nincs eladásra kínált kulcs*
+  *Ajánlatok hiánya*
 
   #align(center, [#image("img/nooffers.png", height: 16%, width: 100%, fit: "stretch")])
 
-  *Vehető kulcs esetén*
+  *Vásárlás*
 
   Amennyiben döntünk a kulcs vásárlása mellett, az első képen látható, hogy az eladó neve és státusza, mely lehet Verified vagy Unverified Seller, egyaránt feltűnik. E mellett az árat is láthatjuk, mely dollárban értelmezendő.
 
@@ -539,6 +539,7 @@
   Miután rákattintottunk a vásárlás gombra, megjelenik a Stripe fizetési ablaka. Ide kell beírnunk a bankkártya adatainkat, mint például a számot, a lejárati dátumot és a háromjegyű biztonsági kódot. Emellett lehetőség van megadni a nevet és akár a telefonszámunkat is, bár ez opcionális. Amikor mindent kitöltöttünk, egyszerűen csak megnyomjuk a fizetés gombot, és a tranzakció lezárul.
 
   == Admin felület
+
   Ahhoz, hogy hozzáférjünk az adminisztrációs felülethez, először is tekintsünk egy legördülő menüt a megadott képen. Ebben a menüben sötét kék betűszínnel kiemelve található az „admin” felirat. Fontos megjegyezni, hogy amennyiben nem rendelkezünk adminisztrátori jogosultsággal, ez a lehetőség sajnos nem lesz elérhető számunkra.
 
   Az adminisztrációs funkció egy magasabb szintű jogosultságot képvisel az oldalon, mely kizárólag az adminisztrátori jogosultsággal rendelkező felhasználóknak engedélyezett. Az adminisztrátorok különböző kulcsfontosságú beállításokat, kezelési feladatokat, valamint a platform szélesebb körű irányítását képesek ellátni. Ilyen lehetőségeik közé tartozik például a felhasználók kezelése, a tartalmak moderálása vagy akár a platform biztonságának felügyelete.
@@ -607,7 +608,7 @@
 
   === Játékok oldal
 
-  #align(center, [#image("img/Admingamespage.png", height: 30%, width: 100%, fit: "stretch")])
+  #align(center, [#image("img/Admingamespage.png", height: 25%, width: 90%, fit: "stretch")])
 
   Az "Games" oldal egy kulcsfontosságú része az adminisztrációs felületnek, ahol az adminisztrátorok a weboldalon elérhető játékokkal kapcsolatos funkciókat és adatokat kezelhetik. Ez az oldal lehetőséget kínál az egyes játékok részletes szerkesztésére és új játékok hozzáadására az adminisztrátori jogosultságok keretében.
 
@@ -619,11 +620,11 @@
   - *Active:* Ez a mező azt mutatja, hogy az adott játék aktív-e vagy sem a boltban. Ha aktív, akkor a felhasználók számára látható és megvásárolható.
   - *Featured:* Ez a jelző azt mutatja, hogy a játék kiemelt-e vagy sem az oldalon. A kiemelt játékok általában előnyt élveznek a promóciókban és a keresési eredményekben.
 
-  #align(center, [#image("img/AdminCreateGames.png", height: 30%, width: 60%, fit: "stretch")])
+  #align(center, [#image("img/AdminCreateGames.png", height: 30%, width: 50%, fit: "stretch")])
 
-  Amikor az oldalon a "plusz" gombra kattintunk, megjelenik a "create game" funkció, amely egy speciális modális ablakot hoz elő. Ebben a modális ablakban lehetőségünk van új játék létrehozására, ahol az előzőleg felsorolt adatokat tölthetjük ki. Emellett további funkcionalitások is elérhetőek, mint például tagok hozzáadása, leírások feltöltése és képek feltöltése.
+  Amikor az oldalon a "plusz" gombra kattintunk, megjelenik a "create game" funkció, amely egy speciális modális ablakot hoz elő. Ebben a modális ablakban lehetőségünk van új játék létrehozására, ahol az előzőleg felsorolt adatokat tölthetjük ki. Emellett további funkcionalitások is elérhetőek, mint például tagek hozzáadása, leírás megadása és képek feltöltése.
 
-  A "Create game" gomb megnyomásával lehetőségünk van az új játék hozzáadására az oldalhoz. Ez a folyamat egy komplex művelet, amely magában foglalja az adatok kitöltését és a képek, leírások hozzáadását, így biztosítva a játék teljes körű megjelenését és hozzáférhetőségét az oldalon.
+  A "Create game" gomb megnyomásával lehetőségünk van az új játék hozzáadására az oldalhoz.
 ]
 
 #[
