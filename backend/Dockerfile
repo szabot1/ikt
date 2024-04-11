@@ -14,6 +14,8 @@ RUN dotnet restore
 
 # Copy everything else and build
 COPY . .
+# Remove .sln file, only used to run tests locally
+RUN rm *.sln
 RUN dotnet publish \
     --runtime alpine-x64 \
     --self-contained true \
