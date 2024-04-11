@@ -4,7 +4,7 @@ public static class Search
 {
     public static double Similarity(string source, string target)
     {
-        var score = FuzzySharp.Fuzz.WeightedRatio(source, target);
+        var score = FuzzySharp.Fuzz.WeightedRatio(source.ToLower(), target.ToLower());
         return score / 100.0;
         // var distance = CalculateDistance(source, target);
         // return 1 - (double)distance / Math.Max(source.Length, target.Length);

@@ -1,12 +1,23 @@
+using Microsoft.Extensions.Primitives;
 using System.Diagnostics.CodeAnalysis;
 
 namespace backend.Utils;
 
 public static class CSRF
 {
+    private static string? FirstOrNull(IDictionary<string, StringValues> data, string key)
+    {
+        if (data.ContainsKey(key))
+        {
+            return data[key];
+        }
+
+        return null;
+    }
+
     public static bool IsInvalidCSRF(IHeaderDictionary headers, string method)
     {
-        var secFetchSite = headers["Sec-Fetch-Site"].FirstOrDefault();
+        var secFetchSite = FirstOrNull(headers, "Sec-Fetch-Site");
 
         if (secFetchSite == null)
         {
@@ -18,8 +29,8 @@ public static class CSRF
             return false;
         }
 
-        var secFetchMode = headers["Sec-Fetch-Mode"].FirstOrDefault();
-        var secFetchDest = headers["Sec-Fetch-Dest"].FirstOrDefault();
+        var secFetchMode = FirstOrNull(headers, "Sec-Fetch-Mode");
+        var secFetchDest = FirstOrNull(headers, "Sec-Fetch-Dest");
 
 #pragma warning disable RCS1073
         if (secFetchMode == "navigate" && method == "GET" && secFetchDest != "object" && secFetchDest != "embed")
@@ -28,7 +39,7 @@ public static class CSRF
         }
 #pragma warning restore RCS1073
 
-        var origin = headers["Origin"].FirstOrDefault();
+        var origin = FirstOrNull(headers, "Origin");
 
         if (origin == null)
         {
@@ -40,7 +51,7 @@ public static class CSRF
             return true;
         }
 
-        var referer = headers["Referer"].FirstOrDefault();
+        var referer = FirstOrNull(headers, "Referer");
 
         if (referer == null)
         {
