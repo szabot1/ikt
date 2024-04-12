@@ -221,7 +221,7 @@
 
 #[
   #let title = [
-    GitHub, JWT
+    GitHub, Deploy platformok
   ]
 
   #set page(
