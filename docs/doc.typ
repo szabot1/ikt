@@ -350,7 +350,43 @@
     header: align(right + horizon, title)
   )
 
+  == Backend unit tesztek
+
+  #align(center, [
+    #figure(
+      image("img/unittest.png", height: 40%, width: 55%, fit: "stretch"),
+      numbering: none,
+      caption: "Backend unit tesztek"
+    )
+  ])
+
   == Lighthouse teljesítmény
+
+  A performance értéke az LCP (Large Contentful Paint) miatt 98/100, mivel a játék képeket a Steam CDN-ről töltjük be, ami nem azonnal történik meg.
+
+  #align(center, [
+    #figure(
+      image("img/lighthouse.png", height: 25%, width: 85%, fit: "stretch"),
+      numbering: none,
+      caption: "Lighthouse teljesítmény"
+    )
+  ])
+
+  == Frontend end-to-end tesztek
+
+  #align(center, [
+    #figure(
+      grid(
+        columns: 3,
+        gutter: 2mm,
+        [#image("img/e2etestauth.png", height: 80pt)],
+        [#image("img/e2etestnavigation.png", height: 80pt)],
+        [#image("img/e2etestsearch.png", height: 80pt)],
+      ),
+      numbering: none,
+      caption: "Frontend end-to-end tesztek"
+    )
+  ])
 ]
 
 // User documentation
