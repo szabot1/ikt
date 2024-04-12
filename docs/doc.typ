@@ -138,11 +138,13 @@
   == Bevezetés
   A fejlesztői környezetünk a modern webes alkalmazások építésére fókuszál, ötvözve a megbízható technológiákat és a legújabb trendeket a front- és backend fejlesztés terén. A backend részleg alapját a Visual Studio biztosítja, amely ASP.NET technológiával van párosítva, így erős és skálázható szerveroldali logikát kínálunk. A Visual Studio Code-ot választottuk a React alapú frontend fejlesztésére, mely gyors és interaktív felhasználói felületek készítését teszi lehetővé.
 
-  Az adatkezelés terén a PostgreSQL-t részesítjük előnyben a MySQL-lel szemben, amely robusztus és megbízható adatbáziskezelő rendszerként szolgál projektjeink számára. Jobban megfelel a komplex adatstruktúrák kezelésére, jobb tranzakciókezelést és fejlettebb adattípusokat kínál. Például a PostgreSQL támogatja a JSON adattípust, amely lehetővé teszi a rugalmas és strukturálatlan adatok hatékony tárolását és lekérdezését, míg a MySQL-ben ez kevésbé intuitív.
-
   A .NET keretrendszert használjuk a backend fejlesztéséhez, amely széles körű funkcionalitást és teljesítményt kínál, míg az ASP.NET és annak modern változata, az ASP.NET Core, különösen alkalmasak webes API-k és alkalmazások fejlesztésére.
 
   A frontend területén a Vite szolgál fejlesztői szerverként, amely rendkívül gyors újratöltést és hatékony modulbetöltést kínál a React projektekben. A TypeScript az előnyben részesített nyelv, mivel szigorúbb típusellenőrzést és jobb fejlesztői élményt nyújt, mint a JavaScript. A Reactot a Tailwind CSS-sel párosítjuk, amely egy modern CSS keretrendszer, preferálva azt a Bootstrap helyett az egyedi és reszponzív design megvalósításához.
+
+  Az adatkezelés terén a PostgreSQL-t részesítjük előnyben a MySQL-lel szemben, amely robusztus és megbízható adatbáziskezelő rendszerként szolgál projektjeink számára. Jobban megfelel a komplex adatstruktúrák kezelésére, jobb tranzakciókezelést és fejlettebb adattípusokat kínál. Például a PostgreSQL támogatja a JSON adattípust, amely lehetővé teszi a rugalmas és strukturálatlan adatok hatékony tárolását és lekérdezését, míg a MySQL-ben ez kevésbé intuitív.
+
+  #align(center, [#image("db.png", height: 50%, width: 90%, fit: "stretch")])
 ]
 
 #[
@@ -176,7 +178,7 @@
   )
   == Visual Studio Code
 
-  A Visual Studio Code (VS Code) az egyik legelőnyösebb fejlesztői környezet a React alapú frontend projektekhez. Ennek a könnyű, mégis erőteljes forráskód-szerkesztőnek a kiválasztása elsősorban a JavaScript és TypeScript, két olyan nyelv támogatása miatt történt, amelyek létfontosságúak a React fejlesztésben. A VS Code különösen hasznos funkciókat kínál a React fejlesztők számára, mint például az intelligens kódkiegészítés, a komponensek közötti gyors navigáció és az integrált hibakeresés, ami jelentősen felgyorsítja a fejlesztési folyamatot és javítja a kód minőségét.
+  A Visual Studio Code (VS Code) az egyik legelőnyösebb fejlesztői környezet a React alapú frontend projektekhez. Ennek a könnyű, mégis erőteljes forráskód-szerkesztőnek a kiválasztása elsősorban a TypeScript támogatása miatt történt, ami létfontosságú a React fejlesztésben. A VS Code különösen hasznos funkciókat kínál a React fejlesztők számára, mint például az intelligens kódkiegészítés, a komponensek közötti gyors navigáció és a beépített hibakeresés, ami jelentősen felgyorsítja a fejlesztési folyamatot és javítja a kód minőségét.
 
   A fejlesztői környezetünk további testreszabását és optimalizálását számos, kifejezetten a React és a modern webfejlesztési munkafolyamatokhoz tervezett VS Code kiterjesztés segíti. Ezek közé tartoznak a linter-ek és kódformázók, mint például az ESLint és a Prettier, amelyek segítenek fenntartani a kódbázis olvashatóságát. Emellett a React specifikus kiterjesztések, mint a React Code Snippets, tovább egyszerűsítik a gyakori minták és komponensek kódolását. Ezek a kiterjesztések jelentősen hozzájárulnak a fejlesztési hatékonysághoz.
 ]
@@ -199,7 +201,7 @@
   )
   == .NET
   
-  A .NET keretrendszer egy átfogó fejlesztési platform a Microsofttól, amely lehetővé teszi a fejlesztők számára, hogy különféle típusú alkalmazásokat hozzanak létre, beleértve a webes, asztali, mobil-, játék-, és IoT-alkalmazásokat. A platform nyelvfüggetlen, ami azt jelenti, hogy támogatja a különböző programozási nyelveket, mint például a C\#, F\# és Visual Basic. A .NET keretrendszer különösen erős a vállalati szintű webalkalmazások fejlesztésében, köszönhetően az ASP.NET-nek, egy modell-nézet-vezérlő (MVC) architektúrát alkalmazó keretrendszernek, amely lehetővé teszi a dinamikus weboldalak és szolgáltatások kifejlesztését.
+  A .NET keretrendszer egy fejlesztési platform a Microsofttól, amely lehetővé teszi a fejlesztők számára, hogy különféle típusú alkalmazásokat hozzanak létre, beleértve a webes, asztali, mobil-, és játék-alkalmazásokat. A .NET keretrendszer különösen erős a vállalati szintű webalkalmazások fejlesztésében, köszönhetően az ASP.NET-nek, amely lehetővé teszi a dinamikus weboldalak és szolgáltatások kifejlesztését.
 
   Mi a C\# nyelvet részesítjük előnyben a .NET keretrendszer használatakor, mivel ez a nyelv kifejezetten a .NET-hez lett tervezve. A C\# egy objektumorientált programozási nyelv, amely erős típusosságot, memória kezelést, és lehetővé teszi a fejlesztők számára, hogy biztonságos, hatékony, és könnyen karbantartható kódot írjanak. A C\# nyelv szintaxisa egyszerű és könnyen érthető, ami gyorsítja a fejlesztési folyamatot.
 
@@ -214,7 +216,7 @@
   
   Az ASP.NET egy erőteljes webfejlesztési keretrendszer a Microsofttól, amely lehetővé teszi a fejlesztők számára, hogy dinamikus weboldalakat, alkalmazásokat és szolgáltatásokat hozzanak létre. Az ASP.NET Core, az ASP.NET modern, keresztplatformos, nagy teljesítményű változata, kifejezetten arra tervezték, hogy könnyen kezelhető és skálázható webalkalmazásokat lehetővé tegyen a .NET Core futtatási környezeten. Az ASP.NET Core kínálja az ASP.NET összes előnyét, miközben további előnyöket biztosít, mint például a keresztplatformos támogatás, a könnyebb konfiguráció, valamint a jobb teljesítmény.
 
-  Mi az ASP.NET Core-t részesítjük előnyben webfejlesztési projektünkben, különösen az Entity Framework Core integrációjával együtt, ami egy erőteljes és rugalmas objektum-relációs leképező (ORM) keretrendszer. Az Entity Framework Core lehetővé teszi számunkra, hogy adatmodelljeinket közvetlenül C\# osztályokban definiáljuk, és az adatbázisműveleteket magas szintű API-k segítségével hajtsuk végre, anélkül, hogy közvetlenül SQL kódot kellene írnunk. Ez nemcsak a fejlesztési folyamatot gyorsítja fel, hanem javítja az alkalmazás karbantarthatóságát is, mivel a kódbázis egyszerűbb és tisztább marad.
+  Mi az ASP.NET Core-t részesítjük előnyben webfejlesztési projektünkben, különösen az Entity Framework Core integrációjával együtt, ami egy erőteljes és rugalmas ORM keretrendszer. Az Entity Framework Core lehetővé teszi számunkra, hogy adatmodelljeinket közvetlenül C\# osztályokban definiáljuk, és az adatbázisműveleteket magas szintű API-k segítségével hajtsuk végre, anélkül, hogy közvetlenül SQL kódot kellene írnunk. Ez nemcsak a fejlesztési folyamatot gyorsítja fel, hanem javítja az alkalmazás karbantarthatóságát is, mivel a kódbázis egyszerűbb és tisztább marad.
 ]
 
 #[
@@ -243,14 +245,23 @@
     grid(
       columns: 1,
       gutter: 2mm,
-      [#image("img/jwt.png", height: 45pt)],
+      [#image("img/cf.png", height: 85pt)],
     ),
   )
-  == JWT
+  == Cloudflare Pages
 
-  Projektünkben JWT-t használunk a felhasználók hitelesítésére, ami lehetővé teszi számunkra, hogy biztonságos és hatékony hozzáférést biztosítsunk az alkalmazásainkhoz. Egy JWT három részből áll: a fejlécből (header), az adatokból (payload), és az aláírásból (signature), amelyek pontokkal vannak elválasztva egymástól. A fejléc tartalmazza a token típusát, például JWT, és az aláíráshoz használt algoritmust, például HMAC SHA256 vagy RSA.
+  A Cloudflare Pages egy statikus weboldalak tárolására és telepítésére szolgáló platform, amely kifejezetten a modern webfejlesztési keretrendszerek igényeihez igazodik, mint például a React. A Cloudflare globális CDN-jének köszönhetően a Pages szupergyors betöltési sebességet biztosít világszerte, javítva ezzel a felhasználói élményt. Az automatizált telepítési folyamatok, mint a push eseményekre reagáló automatikus build-ek és deploy-ok, egyszerűsítik a fejlesztési ciklusokat.
 
-  Projektünkben a JWT frissítéséhez egy refresh tokent használunk, amely lehetővé teszi a felhasználók számára, hogy új hitelesítési tokent kérjenek anélkül, hogy újra be kelljen jelentkezniük. Ha a frontend alkalmazás egy nem engedélyezett (HTTP 401) választ kap, automatikusan használja a refresh tokent egy új JWT kéréséhez. Ez a megközelítés javítja a felhasználói élményt, mivel a felhasználóknak nem kell gyakran újra bejelentkezniük, miközben fenntartja a rendszer biztonságát azáltal, hogy rendszeresen frissíti a hitelesítési tokeneket.
+  #figure(
+    grid(
+      columns: 1,
+      gutter: 2mm,
+      [#image("img/flyio.png", height: 25pt)],
+    ),
+  )
+  == Fly.io
+
+  A Fly.io egy alkalmazás-telepítési platform, amely a fejlesztőknek lehetőséget biztosít arra, hogy alkalmazásunkat egy docker konténerben futtassuk. A platform különösen alkalmas dinamikus backend szolgáltatások, mint API-k és mikroszolgáltatások hostingjára. A GitHub Actions integrációjának köszönhetően a fejlesztők konfigurálhatják az alkalmazásaik automatikus telepítését és frissítését válaszul a kódbázisban történő változásokra.
 ]
 
 #[
@@ -274,7 +285,7 @@
   
   A Vite és a TypeScript kombinációja jelentősen felgyorsítja és optimalizálja a frontend fejlesztési folyamatot projektünkben.
   
-  A Vite, egy modern építőeszköz, amely a JavaScript modulok natív ES import export szintaxisát használja a böngészőkben, lehetővé teszi az alkalmazások villámgyors indítását és frissítését fejlesztési időben. Ez ellentétben áll a hagyományosabb eszközökkel, mint például a Create-React-App (CRA), amely hajlamos lehet lassabb indítási időkre és frissítésekre, különösen nagyobb méretű projektjeinknél. A Vite által nyújtott azonnali modulfrissítés (HMR) és a konfiguráció nélküli indulás tovább csökkenti a fejlesztési ciklusokat, lehetővé téve a fejlesztők számára, hogy gyorsabban iteráljanak és teszteljenek.
+  A Vite, egy modern építőeszköz, amely a JavaScript modulok natív ES import export szintaxisát használja a böngészőkben, lehetővé teszi az alkalmazások villámgyors indítását és frissítését fejlesztési időben. Ez ellentétben áll a hagyományosabb eszközökkel, mint például a Create-React-App (CRA), amely hajlamos lehet lassabb indítási időkre és frissítésekre, különösen nagyobb méretű projektjeinknél. A Vite által nyújtott azonnali modulfrissítés (HMR) csökkenti a fejlesztési ciklusokat, gyorsítja az iterációt és a tesztelést.
 
   A TypeScript, egy JavaScriptre épülő nyelv, statikus típusellenőrzést ad hozzá a dinamikus JavaScript nyelvhez. A projektünkben a TypeScriptet preferáljuk a JavaScripttel szemben, mivel a statikus típusellenőrzés javítja a kódbiztonságot, elősegíti a hibák korai szakaszban történő azonosítását, és növeli a fejlesztési folyamat hatékonyságát. A TypeScript támogatása az intelligens kódkiegészítéshez, refaktoráláshoz és a jobb kódértelmezéshez vezet, ami csökkenti a fejlesztési időt és javítja a kódbázis olvashatóságát és karbantarthatóságát.
 
@@ -295,6 +306,51 @@
   A Bootstrap-tel szemben, amely előre meghatározott stílusú komponenseket kínál, a Tailwind CSS egy "utility-first" megközelítést alkalmaz, ami azt jelenti, hogy kis, újrafelhasználható stílusosztályokat biztosít, amelyeket közvetlenül a HTML elemekhez rendelhetünk. Ez a megközelítés nagyobb mértékű testreszabhatóságot és finomhangolást tesz lehetővé, anélkül, hogy aggódnunk kéne a felesleges CSS kód vagy stílusütközések miatt. Ezenkívül a Tailwind CSS segítségével könnyen létrehozhatók reszponzív designok, mivel a keretrendszer "mobile-first" megközelítést követ és rendelkezik számos reszponzív segédosztállyal.
 
   Egy másik fontos szempont, amiért a Tailwind CSS-t preferáljuk a Bootstrap-pel szemben, az a teljesítmény. A Tailwind lehetővé teszi, hogy csak azokat a stílusokat építsük be, amelyeket ténylegesen használunk, csökkentve ezzel az alkalmazásunk végső CSS méretét.
+]
+
+// Project showcase
+#[
+  #let title = [
+    Projekt bemutatása
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  #align(center, text(17pt)[
+    #heading(title)
+  ])
+
+  == UI kimenetek
+
+  #align(center, [
+    #figure(
+      image("img/desktop.png", height: 35%, width: 90%, fit: "stretch"),
+      numbering: none,
+      caption: "Desktop felhasználói felület"
+    )
+  ])
+
+  #align(center, [
+    #figure(
+      image("img/mobile.png", height: 50%, width: 40%, fit: "stretch"),
+      numbering: none,
+      caption: "Mobil felhasználói felület"
+    )
+  ])
+]
+
+#[
+  #let title = [
+    Projekt bemutatása
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  == Lighthouse teljesítmény
 ]
 
 // User documentation
@@ -625,8 +681,4 @@
   Amikor az oldalon a "plusz" gombra kattintunk, megjelenik a "create game" funkció, amely egy speciális modális ablakot hoz elő. Ebben a modális ablakban lehetőségünk van új játék létrehozására, ahol az előzőleg felsorolt adatokat tölthetjük ki. Emellett további funkcionalitások is elérhetőek, mint például tagek hozzáadása, leírás megadása és képek feltöltése.
 
   A "Create game" gomb megnyomásával lehetőségünk van az új játék hozzáadására az oldalhoz.
-]
-
-#[
-  Linkek
 ]

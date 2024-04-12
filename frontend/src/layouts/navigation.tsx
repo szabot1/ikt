@@ -11,7 +11,7 @@ export default function MainNavigation() {
       <div className="flex flex-row gap-6 place-items-center justify-center">
         <Link to="/" className="font-semibold text-lg">
           <img
-            src="/assets/logo.webp"
+            src="/assets/logo-40.webp"
             alt="Game Key Store"
             className="h-10 w-10"
           />
