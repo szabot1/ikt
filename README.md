@@ -10,7 +10,7 @@
 [Dokumentáció megtekintése](docs/doc.pdf)
 
 ## Backend tesztek
-[Backend teszt mappa megtekintése](backend_tests/)
+[Backend teszt mappa megtekintése](backend_tests/) \
 ![Backend teszt eredmények](docs/img/unittest.png)
 
 ## Frontend tesztek
