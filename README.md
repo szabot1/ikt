@@ -4,7 +4,7 @@
 ![Adatbázismodell-diagram](docs/db.png)
 
 ## Adatbázis export
-[Adatbázis export letöltése](docs/db.png)
+[Adatbázis export letöltése](db/dump.sql)
 
 ## Dokumentáció
 [Dokumentáció megtekintése](docs/doc.pdf)
