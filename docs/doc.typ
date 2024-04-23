@@ -718,3 +718,30 @@
 
   A "Create game" gomb megnyomásával lehetőségünk van az új játék hozzáadására az oldalhoz.
 ]
+
+#[
+  #let title = [
+    Irodalomjegyzék
+  ]
+
+  #set page(
+    header: align(right + horizon, title)
+  )
+
+  + Téma: Visual Studio, webcím: #link("https://visualstudio.microsoft.com/")[https://visualstudio.microsoft.com/], letöltés dátuma: 2024. 02. 09
+  + Téma: Visual Studio Code, webcím: #link("https://code.visualstudio.com/")[https://code.visualstudio.com/], letöltés dátuma: 2024. 02. 09
+  + Téma: .NET, webcím: #link("https://dotnet.microsoft.com/")[https://dotnet.microsoft.com/], letöltés dátuma: 2024. 02. 09
+  + Téma: C\#, webcím: #link("https://docs.microsoft.com/en-us/dotnet/csharp/")[https://docs.microsoft.com/en-us/dotnet/csharp/], letöltés dátuma: 2024. 02. 09
+  + Téma: Cloudflare, webcím: #link("https://www.cloudflare.com/")[https://www.cloudflare.com/], letöltés dátuma: 2024. 02. 14
+  + Téma: Fly.io, webcím: #link("https://fly.io/")[https://fly.io/], letöltés dátuma: 2024. 02. 14
+  + Téma: Vite, webcím: #link("https://vitejs.dev/")[https://vitejs.dev/], letöltés dátuma: 2024. 02. 14
+  + Téma: React, webcím: #link("https://reactjs.org/")[https://reactjs.org/], letöltés dátuma: 2024. 02. 14
+  + Téma: Tailwind CSS, webcím: #link("https://tailwindcss.com/")[https://tailwindcss.com/], letöltés dátuma: 2024. 02. 14
+  + Téma: Steam, webcím: #link("https://store.steampowered.com/")[https://store.steampowered.com/], letöltés dátuma: 2024. 02. 21
+  + Téma: Stripe, webcím: #link("https://stripe.com/")[https://stripe.com/], letöltés dátuma: 2024. 02. 21
+  + Téma: Docker, webcím: #link("https://www.docker.com/")[https://www.docker.com/], letöltés dátuma: 2024. 02. 21
+  + Téma: Lighthouse, webcím: #link("https://developers.google.com/web/tools/lighthouse")[https://developers.google.com/web/tools/lighthouse], letöltés dátuma: 2024. 02. 21
+  + Téma: Cypress, webcím: #link("https://www.cypress.io/")[https://www.cypress.io/], letöltés dátuma: 2024. 04. 15
+  + Téma: NUnit, webcím: #link("https://nunit.org/")[https://nunit.org/], letöltés dátuma: 2024. 04. 15
+  + Téma: Swagger, webcím: #link("https://swagger.io/")[https://swagger.io/], letöltés dátuma: 2024. 04. 15
+]
